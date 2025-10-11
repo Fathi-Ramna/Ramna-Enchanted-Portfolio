@@ -1,0 +1,594 @@
+/* =================================================================
+   ANIMATIONS.CSS — ALL KEYFRAME ANIMATIONS
+   Hero effects, cursor spells, particles, form interactions
+   ================================================================= */
+
+/* =================================================================
+   HERO SECTION ANIMATIONS — Title & Content Entrance
+   ================================================================= */
+
+/* Hero Title Entrance — Subtle magical fade-in with scale */
+@keyframes hero-title-entrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.98);
+        filter: blur(4px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Title Glitch — ULTRA-FAST 0.16s glitch effect that repeats every 8s
+   Creates brief distortion with skew, hue-rotate, and text-shadow */
+@keyframes title-glitch {
+    0% {
+        transform: skewX(0deg);
+        filter: hue-rotate(0deg);
+    }
+
+    /* Peak distortion at 0.25% of animation (first few milliseconds) */
+    0.25% {
+        transform: skewX(24deg);
+        filter: hue-rotate(20deg);
+        text-shadow:
+            -2px 0 rgba(197, 165, 107, 0.8),
+            /* Gold offset left */
+            2px 0 rgba(126, 186, 148, 0.8),
+            /* Emerald offset right */
+            0 6px 32px rgba(0, 0, 0, .6);
+        /* Deep shadow */
+    }
+
+    /* Oscillating distortion decreases each step */
+    0.5% {
+        transform: skewX(-18deg);
+        filter: hue-rotate(-20deg);
+    }
+
+    0.75% {
+        transform: skewX(12deg);
+        filter: hue-rotate(15deg);
+    }
+
+    1% {
+        transform: skewX(-8deg);
+        filter: hue-rotate(-10deg);
+    }
+
+    1.25% {
+        transform: skewX(4deg);
+        filter: hue-rotate(5deg);
+    }
+
+    1.5% {
+        transform: skewX(-2deg);
+        filter: hue-rotate(-5deg);
+    }
+
+    1.75% {
+        transform: skewX(1deg);
+        filter: hue-rotate(2deg);
+    }
+
+    /* Returns to normal state, holds until next cycle */
+    2%,
+    100% {
+        transform: skewX(0deg);
+        filter: hue-rotate(0deg);
+        text-shadow:
+            0 6px 32px rgba(0, 0, 0, .6),
+            0 0 40px rgba(197, 165, 107, 0.4);
+    }
+}
+
+/* Title Float Hover — Gentle up-down floating on hover only */
+@keyframes title-float-hover {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Hero Subtitle Entrance — Slides up with elastic bounce */
+@keyframes hero-subtitle-entrance {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Tagline Entrance — Same as subtitle, different delay in HTML */
+@keyframes hero-tagline-entrance {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero CTAs Entrance — Buttons slide up last */
+@keyframes hero-ctas-entrance {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Indicator Bob — Gentle bounce to draw attention downward */
+@keyframes bob {
+
+    0%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    50% {
+        transform: translate(-50%, -8px);
+    }
+}
+
+/* =================================================================
+   AMBIENT PARTICLE ANIMATIONS — Floating Background Magic
+   ================================================================= */
+
+/* Float Particle — Rises upward with random horizontal drift
+   Uses CSS variables --tx and --ty set inline per particle */
+@keyframes float-particle {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1);
+        opacity: 0;
+    }
+}
+
+/* Particles Float — Vertical floating for static particles
+   Used in footer and other ambient areas */
+@keyframes particles-float {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* =================================================================
+   DECORATIVE ELEMENT ANIMATIONS — Serpents, Vials, Icons
+   ================================================================= */
+
+/* Serpent Breathe — Slow pulsing for serpent decorations
+   Creates atmospheric "breathing" effect */
+@keyframes serpent-breathe {
+
+    0%,
+    100% {
+        opacity: .28;
+        filter: blur(6px);
+    }
+
+    50% {
+        opacity: .35;
+        filter: blur(8px);
+    }
+}
+
+/* Serpent Glow — Text glow pulsing for serpent icons */
+@keyframes serpent-glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 12px rgba(197, 165, 107, 0.4);
+        transform: scale(1);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(197, 165, 107, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+/* =================================================================
+   POTION VIAL ANIMATIONS — Skills Section Effects
+   ================================================================= */
+
+/* Vial Float — Gentle 3D rotation and vertical movement
+   Creates realistic floating potion bottle effect */
+@keyframes vial-float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotateY(-5deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotateY(5deg);
+    }
+}
+
+/* Liquid Shimmer — Subtle brightness variation in potion liquid */
+@keyframes liquid-shimmer {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.2);
+    }
+}
+
+/* Surface Ripple — Liquid surface undulation effect
+   Applied to the top edge of potion liquid */
+@keyframes surface-ripple {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scaleX(0.95);
+    }
+}
+
+/* Bubble Rise — Rising bubbles inside potion vials
+   Uses --drift variable for horizontal movement */
+@keyframes bubble-rise {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(0) scale(0.8);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(var(--drift)) scale(1);
+    }
+}
+
+/* =================================================================
+   STEAM & VAPOR EFFECTS — Potion Vial Hover Effects
+   ================================================================= */
+
+/* Steam Rise — Rising steam particles from vial top
+   Uses --drift for horizontal movement, --rotation for spin */
+@keyframes steam-rise {
+    0% {
+        bottom: 0;
+        transform: translateX(-50%) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        bottom: 100px;
+        transform: translateX(calc(-50% + var(--drift))) scale(1.8) rotate(var(--rotation));
+        opacity: 0;
+    }
+}
+
+/* Vapor Flow — Wispy vapor effect above vials
+   Stretches vertically as it rises */
+@keyframes vapor-flow {
+    0% {
+        transform: translateX(-50%) scaleY(0.5) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.6;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateX(calc(-50% + var(--drift))) scaleY(1.5) rotate(var(--rotation));
+        opacity: 0;
+    }
+}
+
+/* Sparkle Float — Tiny sparkle particles in steam
+   Rises above vial with drift */
+@keyframes sparkle-float {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        transform: translateX(-50%) scale(0);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 0.6;
+    }
+
+    100% {
+        bottom: 90px;
+        opacity: 0;
+        transform: translateX(calc(-50% + var(--drift))) scale(1);
+    }
+}
+
+/* =================================================================
+   CURSOR WAND SPELL ANIMATIONS — Lumos & Magical Effects
+   ================================================================= */
+
+/* Lumos Expand — Main Lumos light burst on click
+   Expands radially from cursor position */
+@keyframes lumos-expand {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* Spark Fly — Radiating particles from Lumos burst
+   Uses --tx and --ty for directional movement */
+@keyframes spark-fly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0.3);
+        opacity: 0;
+    }
+}
+
+/* Trail Fade — Serpent trail bubbles that follow cursor movement
+   Grows and fades out over time */
+@keyframes trail-fade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Wand Aura Pulse — Subtle glow at wand tip
+   Expands from small to larger radius */
+@keyframes wand-aura-pulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Rune Rise — Ancient runes floating up on hover
+   Rotates during ascent using --rotation variable */
+@keyframes rune-rise {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-60px) rotate(var(--rotation));
+        opacity: 0;
+    }
+}
+
+/* Float Up — Generic upward float with horizontal drift
+   Used for ambient magic particles */
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120px) translateX(var(--drift));
+        opacity: 0;
+    }
+}
+
+/* =================================================================
+   CONTACT FORM ANIMATIONS — Owl, Success, Sparkles
+   ================================================================= */
+
+/* Fly Cycle — Owl wing flapping sprite animation
+   Steps through 10 frames of sprite sheet */
+@keyframes fly-cycle {
+    100% {
+        background-position: -900px 0;
+    }
+}
+
+/* Fly Right Once — Owl flight path across screen
+   Creates elegant arc trajectory from left to right */
+@keyframes fly-right-once {
+    0% {
+        transform: translateY(0vh) translateX(-10vw) scale(0.4);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    25% {
+        transform: translateY(-4vh) translateX(25vw) scale(0.5);
+    }
+
+    50% {
+        transform: translateY(1vh) translateX(55vw) scale(0.6);
+    }
+
+    75% {
+        transform: translateY(-2vh) translateX(85vw) scale(0.5);
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-1vh) translateX(115vw) scale(0.4);
+        opacity: 0;
+    }
+}
+
+/* Success Pop — Success modal entrance with elastic bounce */
+@keyframes success-pop {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Icon Bounce — Success icon bounce effect */
+@keyframes icon-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Particle Burst — Explosion particles on form submit
+   Uses --tx and --ty for directional spread */
+@keyframes particle-burst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Sparkle Rise — Sparkle particles rising from submit button
+   Uses --start-x, --start-y, --end-x, --end-y for trajectory */
+@keyframes sparkle-rise {
+    0% {
+        transform: translate(var(--start-x), var(--start-y)) scale(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--end-x), var(--end-y)) scale(1);
+        opacity: 0;
+    }
+}
+
+/* =================================================================
+   MISCELLANEOUS ANIMATIONS — Hearts, Rings, etc.
+   ================================================================= */
+
+/* Heart Pulse — Pulsing heart icon in footer copyright */
+@keyframes heart-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}

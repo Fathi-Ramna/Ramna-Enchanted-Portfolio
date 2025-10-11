@@ -1,0 +1,296 @@
+/* =================================================================
+   RAVENCLAW THEME — HOUSE OF WISDOM & WIT
+   Midnight blue and bronze color scheme
+   Designed for dark nighttime backgrounds with moderate overlays
+   ================================================================= */
+
+/* Theme Selector
+   Applies Ravenclaw color scheme when .theme-ravenclaw class
+   is added to body element by JavaScript */
+.theme-ravenclaw {
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE PRIMARY COLORS — Midnight Blue Foundation
+       Deep, scholarly blues representing intellect and wisdom
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Midnight blue - primary house color for major UI elements */
+    --house-primary: #0E1A40;
+
+    /* Azure blue - used for highlights and lighter accents */
+    --house-tertiary: #2C4A7C;
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE ACCENT COLORS — Blue Variations with Transparency
+       Used for layered backgrounds, glows, and atmospheric effects
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-accent-dark: rgba(14, 26, 64, 0.9);
+    /* Deepest midnight blue for shadows */
+    --house-accent-medium: rgba(34, 47, 91, 0.8);
+    /* Mid-tone blue for depth */
+    --house-accent-light: rgba(44, 74, 124, 0.6);
+    /* Lighter azure for glows */
+
+    /* ═════════════════════════════════════════════════════════════
+       WAND MAGIC COLORS — Dark Midnight Blue Spell Effects
+       Used for cursor trails, runes, and magical particle effects
+       Maintains intellectual, mysterious atmosphere
+       ═════════════════════════════════════════════════════════════ */
+
+    --wand-magic-color-1: rgba(34, 47, 91, 0.85);
+    /* Primary spell color */
+    --wand-magic-color-2: rgba(24, 35, 70, 0.75);
+    /* Secondary spell shade */
+    --wand-magic-color-3: rgba(34, 47, 91, 0.5);
+    /* Faded spell trails */
+    --wand-magic-glow: rgba(34, 47, 91, 0.7);
+    /* Spell glow aura */
+
+    /* ═════════════════════════════════════════════════════════════
+       HERO CTA BUTTONS — Secondary Button Styling
+       Primary buttons use universal gold; these define secondary style
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-cta-secondary-bg: rgba(14, 26, 64, 0.35);
+    /* Default background */
+    --hero-cta-secondary-hover-bg: rgba(14, 26, 64, 0.55);
+    /* Hover state darkens */
+
+    /* ═════════════════════════════════════════════════════════════
+       ATMOSPHERIC OVERLAYS — Section Background Tints
+       Radial gradients that add house color to section backgrounds
+       Each section has a unique glow to create visual variety
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glow-1: rgba(44, 74, 124, .32);
+    /* Hero section glow - azure blue */
+    --house-glow-2: rgba(34, 47, 91, .24);
+    /* Hero secondary glow - deep blue */
+    --house-glow-3: rgba(58, 96, 152, .38);
+    /* About section glow - bright azure */
+    --house-glow-4: rgba(44, 74, 124, .36);
+    /* Skills section glow */
+    --house-glow-5: rgba(58, 96, 152, .34);
+    /* Projects section glow */
+    --house-glow-6: rgba(44, 74, 124, .34);
+    /* Contact section glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       RADIAL GRADIENT COLORS — Circular UI Elements
+       Used in buttons, social links, and orb-style components
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-radial-1: rgba(34, 47, 91, 0.4);
+    /* Center highlight */
+    --house-radial-2: rgba(14, 18, 35, 0.6);
+    /* Outer shadow */
+
+    /* ═════════════════════════════════════════════════════════════
+       BACKGROUND IMAGES — AI-Generated Ravenclaw Chambers
+       Each section has a unique atmospheric background image
+       Ravenclaw backgrounds feature night scenes and scholarly spaces
+       ═════════════════════════════════════════════════════════════ */
+
+    --bg-hero: url('../images/background/ravenclaw_common_room.png');
+    --bg-about: url('../images/background/ravenclaw_scholars_private_study.png');
+    --bg-skills: url('../images/background/ravenclaw_potions_classroom.png');
+    --bg-projects: url('../images/background/ravenclaw_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/ravenclaw_the_owlery.png');
+
+    /* ═════════════════════════════════════════════════════════════
+       SECTION OVERLAY ADJUSTMENTS — Darkness Level Control
+       Dark overlays that ensure text readability over backgrounds
+       Ravenclaw uses MODERATE overlays for nighttime scenes
+       Balanced darkness maintains atmospheric depth
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-overlay: rgba(0, 0, 0, 0.30);
+    /* Medium darkening for common room */
+    --about-overlay: rgba(0, 0, 0, 0.35);
+    /* Slightly darker for study */
+    --skills-overlay: rgba(0, 0, 0, 0.20);
+    /* Light darkening for classroom */
+    --projects-overlay: rgba(0, 0, 0, 0.15);
+    /* Minimal for artifacts */
+    --contact-overlay: rgba(0, 0, 0, 0.30);
+    /* Medium for owlery */
+
+    /* ═════════════════════════════════════════════════════════════
+       GLASS/CARD EFFECTS — Glassmorphism Backgrounds
+       Frosted glass appearance for cards, panels, and containers
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glass-1: rgba(14, 20, 42, .42);
+    /* Standard glass (lighter) */
+    --house-glass-2: rgba(10, 14, 28, .28);
+    /* Subtle glass (more transparent) */
+    --house-glass-3: rgba(16, 22, 45, .65);
+    /* Strong glass (sidebar) */
+    --house-glass-4: rgba(18, 26, 52, .55);
+    /* Medium glass (sidebar inner) */
+
+    /* ═════════════════════════════════════════════════════════════
+       SIDEBAR/UI ELEMENTS — Interface Component Backgrounds
+       Used for navigation, controls, and interactive elements
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-ui-bg-1: rgba(14, 18, 38, .34);
+    /* Primary UI background */
+    --house-ui-bg-2: rgba(16, 22, 45, .26);
+    /* Secondary UI background */
+
+    /* ═════════════════════════════════════════════════════════════
+       VIAL LABEL BACKGROUNDS — Potion Skill Card Labels
+       The percentage indicators below each skill potion vial
+       ═════════════════════════════════════════════════════════════ */
+
+    --vial-label-bg: rgba(8, 10, 18, 0.85);
+    /* Default state */
+    --vial-label-hover-bg: rgba(16, 22, 45, 0.95);
+    /* Hover state (lighter) */
+
+    /* ═════════════════════════════════════════════════════════════
+       BUTTON/ORB BACKGROUNDS — Circular Interactive Elements
+       Used for nav buttons, social links, and orb-style controls
+       Creates depth with dual-color radial gradients
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Nav dock buttons */
+    --house-button-1: #1A2F5A;
+    /* Nav button inner (lighter) */
+    --house-button-2: #0D1628;
+    /* Nav button outer (darker) */
+
+    /* Sidebar social links */
+    --house-button-3: #203A6F;
+    /* Social link inner */
+    --house-button-4: #0F1A32;
+    /* Social link outer */
+
+    /* Theme switcher artifact */
+    --house-button-5: #1C3564;
+    /* Artifact toggle inner */
+    --house-button-6: #0B1420;
+    /* Artifact toggle outer */
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE BADGE COLORS — Fixed Bottom-Right House Indicator
+       The small badge showing current house selection
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-badge-bg: rgba(14, 26, 64, 0.4);
+    /* Background tint */
+    --house-badge-border: rgba(197, 165, 107, 0.3);
+    /* Gold border */
+    --house-badge-glow: rgba(44, 74, 124, 0.3);
+    /* Azure blue glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       POTION VIAL COLORS — Skill Card Liquid Gradients
+       Three-layer gradient creates realistic potion appearance
+       Deep blue tones representing wisdom and intellect
+       ═════════════════════════════════════════════════════════════ */
+
+    --potion-color-1: rgba(58, 96, 152, 0.9);
+    /* Top - bright azure */
+    --potion-color-2: rgba(44, 74, 124, 0.95);
+    /* Middle - mid azure */
+    --potion-color-3: rgba(34, 47, 91, 1);
+    /* Bottom - deep midnight blue */
+
+    /* ═════════════════════════════════════════════════════════════
+       THEME COIN BACKGROUNDS — House Selector Panel
+       The artifact panel that opens when clicking house switcher
+       ═════════════════════════════════════════════════════════════ */
+
+    --coin-bg-1: rgba(26, 47, 90, 0.6);
+    /* Coin default top */
+    --coin-bg-2: rgba(13, 22, 40, 0.6);
+    /* Coin default bottom */
+    --coin-hover-bg: rgba(197, 165, 107, 0.18);
+    /* Gold hover overlay */
+
+    /* ═════════════════════════════════════════════════════════════
+       SUCCESS MODAL COLORS — Contact Form Success Message
+       The modal that appears after successfully sending a message
+       ═════════════════════════════════════════════════════════════ */
+
+    --modal-bg-1: rgba(16, 22, 45, 0.75);
+    /* Modal top gradient */
+    --modal-bg-2: rgba(22, 32, 60, 0.65);
+    /* Modal bottom gradient */
+
+    /* ═════════════════════════════════════════════════════════════
+       FOOTER BACKGROUND — Bottom Section Styling
+       Multi-layer gradient creates depth and atmospheric transition
+       ═════════════════════════════════════════════════════════════ */
+
+    --footer-radial-glow: rgba(14, 26, 64, 0.25);
+    /* Top radial accent */
+    --footer-gradient-start: rgba(3, 5, 8, 0.98);
+    /* Gradient top color */
+    --footer-gradient-end: rgba(2, 3, 6, 1);
+    /* Gradient bottom (darkest) */
+    --footer-top-vignette: rgba(5, 8, 15, 0.35);
+    /* Top fade overlay */
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* Ravenclaw Theme Considerations:
+   
+   1. INTELLECTUAL ATMOSPHERE
+      - Midnight blues evoke late-night study sessions
+      - Azure accents suggest starlight and wisdom
+      - Darker tones maintain focus and concentration
+   
+   2. COLOR PALETTE
+      - Deep midnight blue (14, 26, 64) as foundation
+      - Azure blue (44, 74, 124) for energy/highlights
+      - Bright azure (58, 96, 152) for magical effects
+   
+   3. OVERLAY STRATEGY
+      - Night scenes require moderate overlays (0.15-0.35)
+      - Hero/Contact use stronger overlays (0.30)
+      - Skills/Projects lighter (0.15-0.20) to show detail
+      - About moderate (0.35) for intimate study feel
+   
+   4. GLASS MORPHISM
+      - Very dark blue glass (14-18 RGB values)
+      - Creates "starlit window" effect
+      - Maintains premium frosted appearance
+   
+   5. WAND EFFECTS
+      - Deep blue spell colors (34, 47, 91)
+      - Prevents overwhelming brightness
+      - Mysterious, intellectual magical trails
+   
+   6. POTION VIALS
+      - Azure to midnight gradient suggests "liquid wisdom"
+      - Three-layer depth creates realistic potion look
+      - Brightest layer (58, 96, 152) catches light
+   
+   7. BUTTON GRADIENTS
+      - All buttons use dark blue radial gradients
+      - Inner colors slightly lighter (1A-20 hex range)
+      - Outer colors very dark (0B-0F hex range)
+      - Creates dimensional orb effect
+   
+   8. SCHOLARLY AESTHETIC
+      - Every design choice reflects wisdom/wit
+      - Dark, focused atmosphere aids concentration
+      - Professional yet mystical appearance
+   
+   9. NIGHTTIME OPTIMIZATION
+      - Works beautifully in dark environments
+      - Blue light is easier on eyes for long reading
+      - Similar darkness level to Slytherin theme
+   
+   10. CONTRAST MANAGEMENT
+       - Gold text stands out brilliantly against blue
+       - Higher contrast than warm-toned themes
+       - Excellent readability for text-heavy content
+*/

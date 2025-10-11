@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ================================================================= -->
+  <!-- DOCUMENT METADATA & SETUP -->
+  <!-- ================================================================= -->
+  <!-- Defines character set and viewport for responsive design -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO & Social Sharing Metadata -->
+  <meta name="description" content="Fathima Ramna - Data Science Specialist | Machine Learning & AI Portfolio">
+  <meta name="keywords" content="data science, machine learning, AI, portfolio">
+  <meta property="og:title" content="Fathima Ramna - Data Science Portfolio">
+  <meta property="og:description" content="Professional portfolio showcasing data science projects and expertise">
+  <title>Fathima Ramna - Data Science Portfolio</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon/r-logo.png">
+
+  <!-- ================================================================= -->
+  <!-- STYLESHEETS & FONTS -->
+  <!-- ================================================================= -->
+  <!-- Google Fonts for premium typography -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Old+London&family=UnifrakturMaguntia&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="assets/css/base.css"> <!-- Base styles, variables, and resets -->
+  <!-- House Themes (Slytherin is default) -->
+  <link rel="stylesheet" href="assets/css/themes/slytherin.css">
+  <link rel="stylesheet" href="assets/css/themes/gryffindor.css">
+  <link rel="stylesheet" href="assets/css/themes/ravenclaw.css">
+  <link rel="stylesheet" href="assets/css/themes/hufflepuff.css">
+  <!-- Component & Layout Styles -->
+  <link rel="stylesheet" href="assets/css/layout.css"> <!-- Sidebar, nav, etc. -->
+  <link rel="stylesheet" href="assets/css/animations.css"> <!-- All @keyframes -->
+  <link rel="stylesheet" href="assets/css/cursor.css"> <!-- Wand cursor styling -->
+  <link rel="stylesheet" href="assets/css/sections.css"> <!-- Hero, About, Skills, etc. -->
+
+  <!-- ================================================================= -->
+  <!-- DEFERRED JAVASCRIPTS -->
+  <!-- ================================================================= -->
+  <!-- Scripts are deferred to load after the page content, improving performance -->
+  <script src="assets/js/cursor.js" defer></script> <!-- Wand cursor logic -->
+  <script src="assets/js/navigation.js" defer></script> <!-- Smooth scrolling, sidebar logic -->
+  <script src="assets/js/particles.js" defer></script> <!-- Ambient particle effects -->
+  <script src="assets/js/form.js" defer></script> <!-- Contact form enhancements -->
+  <script src="assets/js/theme-switcher.js" defer></script> <!-- House theme logic -->
+
+</head>
+
+<body>
+  <!-- ================================================================= -->
+  <!-- NAVIGATION DOCK -->
+  <!-- A fixed navigation bar at the top of the screen for quick section access. -->
+  <!-- ================================================================= -->
+  <nav class="nav-dock">
+    <div class="nav-buttons">
+      <button class="nav-button" onclick="scrollToSection('hero')" aria-label="Home" data-tooltip="Home"><i
+          class="fas fa-home"></i></button>
+      <button class="nav-button" onclick="scrollToSection('about')" aria-label="About" data-tooltip="About"><i
+          class="fas fa-user"></i></button>
+      <button class="nav-button" onclick="scrollToSection('skills')" aria-label="Skills" data-tooltip="Skills"><i
+          class="fas fa-wand-magic-sparkles"></i></button>
+      <button class="nav-button" onclick="scrollToSection('projects')" aria-label="Projects" data-tooltip="Projects"><i
+          class="fas fa-flask"></i></button>
+      <button class="nav-button" onclick="scrollToSection('contact')" aria-label="Contact" data-tooltip="Contact"><i
+          class="fas fa-scroll"></i></button>
+    </div>
+  </nav>
+
+  <!-- ================================================================= -->
+  <!-- SIDEBAR DRAWER -->
+  <!-- A slide-out panel from the left containing profile information and social links. -->
+  <!-- ================================================================= -->
+  <aside class="sidebar-drawer" id="sidebarDrawer">
+    <!-- Handle to toggle the sidebar's visibility -->
+    <div class="sidebar-handle" onclick="toggleSidebar()">
+      <img src="https://img.icons8.com/?size=100&id=57991&format=png&color=C5A56B" alt="Toggle sidebar"
+        style="width: 30px; height: 30px; filter: drop-shadow(0 0 6px rgba(197, 165, 107, 0.4));" />
+    </div>
+    <!-- Main sidebar content card -->
+    <div class="premium-sidebar-card">
+      <div class="profile-ring">
+        <div class="profile-image" aria-hidden="true"></div>
+      </div>
+      <h1 class="profile-name">Fathima Ramna</h1>
+      <p class="profile-title">Data Science Specialist</p>
+      <div class="profile-divider"></div>
+      <div class="profile-quote">"True insight comes from seeing the patterns that others cannot see."</div>
+
+      <!-- Resume Download Button -->
+      <a href="assets/files/Fathima_Ramna_Resume.pdf" target="_blank" rel="noopener noreferrer"
+        class="cv-download-button">
+        <span>Download Resume</span>
+        <img src="https://img.icons8.com/?size=100&id=Xltg8kWtEKRo&format=png&color=C5A56B" alt="Download"
+          class="cv-icon" />
+      </a>
+
+      <!-- Social Media Links -->
+      <div class="social-links">
+        <a class="social-link" href="https://github.com/Fathi-Ramna" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub" data-tooltip="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/fathima-ramna-643785355/" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn" data-tooltip="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a class="social-link" href="https://x.com/fathi_ramna" target="_blank" rel="noopener noreferrer"
+          aria-label="X (Twitter)" data-tooltip="X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a class="social-link" href="mailto:ramnarazeek@gmail.com" aria-label="Email" data-tooltip="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <!-- House Emblem at the bottom of the sidebar -->
+      <div class="house-emblem">
+        <i class="fas fa-snake"></i>
+        <span class="house-emblem-prefix">belongs to</span>
+        <span class="house-emblem-label">House Slytherin</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================================================================= -->
+  <!-- THEME ARTIFACT (House Switcher) -->
+  <!-- A fixed component in the top-right for changing the website's house theme. -->
+  <!-- ================================================================= -->
+  <div class="theme-artifact">
+    <!-- Toggle button to open the theme selection panel -->
+    <button class="artifact-toggle" id="artifactToggle" aria-label="Toggle house artifact"><img class="artifact-icon"
+        src="https://img.icons8.com/?size=100&amp;id=105953&amp;format=png&amp;color=C5A56B" alt="House selector icon"
+        loading="lazy"></button>
+    <!-- Panel containing the house selection "coins" -->
+    <div class="artifact-panel" id="artifactPanel" role="menu" aria-label="Choose your house">
+      <div class="coin" onclick="changeTheme('slytherin')" role="menuitem">
+        <div class="crest"><img class="crest-icon"
+            src="https://img.icons8.com/?size=100&amp;id=KHzbbdfBj3PC&amp;format=png&amp;color=0C3B2E"
+            alt="Slytherin crest" loading="lazy"></div>
+        <div><strong>Slytherin</strong><br><small>cunning & ambition</small></div>
+      </div>
+      <div class="coin" onclick="changeTheme('gryffindor')" role="menuitem">
+        <div class="crest crest-gryffindor"><img class="crest-icon"
+            src="https://img.icons8.com/?size=100&amp;id=tFRiEf3LNBq1&amp;format=png&amp;color=4A0000"
+            alt="Gryffindor crest" loading="lazy"></div>
+        <div><strong>Gryffindor</strong><br><small>courage & bravery</small></div>
+      </div>
+      <div class="coin" onclick="changeTheme('ravenclaw')" role="menuitem">
+        <div class="crest crest-ravenclaw"><img class="crest-icon"
+            src="https://img.icons8.com/?size=100&amp;id=laHLFSZYAL7R&amp;format=png&amp;color=0E1A40"
+            alt="Ravenclaw crest" loading="lazy"></div>
+        <div><strong>Ravenclaw</strong><br><small>wisdom & wit</small></div>
+      </div>
+      <div class="coin" onclick="changeTheme('hufflepuff')" role="menuitem">
+        <div class="crest crest-hufflepuff"><img class="crest-icon"
+            src="https://img.icons8.com/?size=100&amp;id=P0cRkx5QSpbK&amp;format=png&amp;color=372E29"
+            alt="Hufflepuff crest" loading="lazy"></div>
+        <div><strong>Hufflepuff</strong><br><small>loyalty & dedication</small></div>
+      </div>
+    </div>
+  </div>
+  <!-- House Badge that shows the currently active theme -->
+  <div class="house-badge" id="houseBadge">
+    <img src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Slytherin crest"
+      style="width: 20px; height: 20px; object-fit: contain;">
+    <span>House Slytherin</span>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- HERO SECTION -->
+  <!-- The main landing view with the portfolio owner's name and title. -->
+  <!-- ================================================================= -->
+  <section id="hero" class="hero">
+    <div class="hero-serpent" aria-hidden="true"></div> <!-- Decorative background element -->
+    <div class="hero-content">
+      <h1 class="hero-title display-sly">FATHIMA RAMNA</h1>
+      <p class="hero-subtitle">DATA SCIENCE SPECIALIST</p>
+      <p class="hero-tagline">Transforming raw data into strategic insights through the art of advanced analytics and
+        machine learning...</p>
+      <!-- Call-to-Action Buttons -->
+      <div class="hero-ctas">
+        <a href="#projects" class="hero-cta hero-cta-primary" onclick="scrollToSection('projects'); return false;">
+          <img src="https://img.icons8.com/?size=100&id=ohneEqDoUaE8&format=png&color=C5A56B" alt="View Work"
+            class="cta-icon" />
+          View My Work
+        </a>
+        <a href="#contact" class="hero-cta hero-cta-secondary" onclick="scrollToSection('contact'); return false;">
+          <img src="https://img.icons8.com/?size=100&id=xGUZ15gQQ60G&format=png&color=C5A56B" alt="Get in Touch"
+            class="cta-icon" />
+          Get in Touch
+        </a>
+      </div>
+    </div>
+    <!-- Animated scroll-down indicator -->
+    <div class="scroll-indicator" onclick="scrollToSection('about')"><i class="fas fa-chevron-down"></i></div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- ABOUT SECTION -->
+  <!-- A section detailing the professional summary and expertise. -->
+  <!-- ================================================================= -->
+  <section id="about" class="content-section about-section scroll-reveal">
+    <div class="section-content">
+      <div class="section-header">
+        <h2 class="section-title">About me</h2>
+        <p class="section-subtitle">Turning complexity into clarity</p>
+      </div>
+      <!-- An "illuminated" card that contains the main statement -->
+      <div class="about-illuminated-card">
+        <div class="illuminated-statement">
+          <p class="statement-text">
+            I transform complexity into clarity, leveraging
+            <span class="glow-word" data-word="machine learning">machine learning</span>,
+            <span class="glow-word" data-word="neural networks">deep neural networks</span>, and
+            <span class="glow-word" data-word="analytics">advanced analytics</span> to
+            uncover <span class="glow-word" data-word="hidden patterns">hidden patterns</span> and deliver <span
+              class="glow-word" data-word="data-driven solutions">data-driven solutions</span>.
+          </p>
+          <p class="statement-signature">— Fathima Ramna</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- SKILLS SECTION -->
+  <!-- Displays technical skills using animated "potion vial" cards. -->
+  <!-- ================================================================= -->
+  <section id="skills" class="content-section skills-section scroll-reveal">
+    <div class="section-content">
+      <div class="section-header">
+        <h2 class="section-title">Technical Skills</h2>
+        <p class="section-subtitle">Technical expertise & proficiency</p>
+      </div>
+      <div class="skills-grid">
+        <!-- Skill Card: Machine Learning -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-brain skill-icon"></i>
+              <h3 class="skill-name">Machine Learning</h3>
+            </div>
+            <p class="skill-description">Building predictive models and neural architectures that adapt to complex
+              datasets, uncovering actionable patterns.</p>
+          </div>
+          <!-- Animated Potion Vial representing mastery level -->
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 50%;">
+                  <!-- Animated bubbles -->
+                  <div class="vial-bubble" style="--duration: 3.2s; --delay: 0s; left: 30%; --drift: 8px;"></div>
+                  <div class="vial-bubble" style="--duration: 2.8s; --delay: 0.8s; left: 55%; --drift: -6px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.5s; --delay: 1.6s; left: 42%; --drift: 10px;"></div>
+                </div>
+              </div>
+              <!-- Steam effects that appear on hover -->
+              <div class="vial-steam-container">
+                <div class="steam-particle" style="--duration: 3s; --delay: 0s; --drift: -15px; --rotation: -20deg;">
+                </div>
+                <div class="steam-particle" style="--duration: 3.5s; --delay: 0.5s; --drift: 15px; --rotation: 20deg;">
+                </div>
+                <div class="steam-particle" style="--duration: 3.2s; --delay: 1s; --drift: -10px; --rotation: -15deg;">
+                </div>
+                <div class="steam-particle" style="--duration: 3.8s; --delay: 1.5s; --drift: 10px; --rotation: 15deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4s; --delay: 0.2s; --drift: -8px; --rotation: -10deg;"></div>
+                <div class="vapor-wisp" style="--duration: 4.5s; --delay: 1.2s; --drift: 8px; --rotation: 10deg;"></div>
+                <div class="steam-sparkle" style="--duration: 2.8s; --delay: 0.3s; left: 45%; --drift: -12px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.2s; --delay: 1.1s; left: 55%; --drift: 12px;"></div>
+                <div class="steam-sparkle" style="--duration: 3s; --delay: 1.8s; left: 50%; --drift: -8px;"></div>
+              </div>
+              <div class="vial-label">50% Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card: Data Visualization -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-chart-line skill-icon"></i>
+              <h3 class="skill-name">Data Visualization</h3>
+            </div>
+            <p class="skill-description">Creating compelling visual narratives that transform data into clear,
+              actionable insights.</p>
+          </div>
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 90%;">
+                  <div class="vial-bubble" style="--duration: 2.9s; --delay: 0.3s; left: 35%; --drift: -7px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.3s; --delay: 1.1s; left: 50%; --drift: 9px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.1s; --delay: 1.9s; left: 40%; --drift: -5px;"></div>
+                </div>
+              </div>
+              <div class="vial-steam-container">
+                <div class="steam-particle"
+                  style="--duration: 3.1s; --delay: 0.1s; --drift: -12px; --rotation: -18deg;"></div>
+                <div class="steam-particle" style="--duration: 3.6s; --delay: 0.6s; --drift: 13px; --rotation: 18deg;">
+                </div>
+                <div class="steam-particle" style="--duration: 3.3s; --delay: 1.1s; --drift: -9px; --rotation: -14deg;">
+                </div>
+                <div class="steam-particle" style="--duration: 3.9s; --delay: 1.6s; --drift: 11px; --rotation: 16deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.1s; --delay: 0.3s; --drift: -7px; --rotation: -12deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.6s; --delay: 1.3s; --drift: 9px; --rotation: 12deg;"></div>
+                <div class="steam-sparkle" style="--duration: 2.9s; --delay: 0.4s; left: 43%; --drift: -11px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.3s; --delay: 1.2s; left: 57%; --drift: 13px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.1s; --delay: 1.9s; left: 48%; --drift: -9px;"></div>
+              </div>
+              <div class="vial-label">90% Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card: Python & R -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-code skill-icon"></i>
+              <h3 class="skill-name">Python & R</h3>
+            </div>
+            <p class="skill-description">Advanced programming for data manipulation, statistical analysis, and
+              automation.</p>
+          </div>
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 70%;">
+                  <div class="vial-bubble" style="--duration: 3.0s; --delay: 0.5s; left: 38%; --drift: 7px;"></div>
+                  <div class="vial-bubble" style="--duration: 2.7s; --delay: 1.3s; left: 52%; --drift: -8px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.4s; --delay: 2.1s; left: 45%; --drift: 6px;"></div>
+                </div>
+              </div>
+              <div class="vial-steam-container">
+                <div class="steam-particle"
+                  style="--duration: 3.2s; --delay: 0.2s; --drift: -14px; --rotation: -22deg;"></div>
+                <div class="steam-particle" style="--duration: 3.7s; --delay: 0.7s; --drift: 16px; --rotation: 22deg;">
+                </div>
+                <div class="steam-particle"
+                  style="--duration: 3.4s; --delay: 1.2s; --drift: -11px; --rotation: -17deg;"></div>
+                <div class="steam-particle" style="--duration: 4s; --delay: 1.7s; --drift: 13px; --rotation: 19deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.2s; --delay: 0.4s; --drift: -9px; --rotation: -13deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.7s; --delay: 1.4s; --drift: 10px; --rotation: 13deg;">
+                </div>
+                <div class="steam-sparkle" style="--duration: 3s; --delay: 0.5s; left: 44%; --drift: -13px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.4s; --delay: 1.3s; left: 56%; --drift: 14px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.2s; --delay: 2s; left: 49%; --drift: -10px;"></div>
+              </div>
+              <div class="vial-label">70% Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card: Databases -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-database skill-icon"></i>
+              <h3 class="skill-name">Databases</h3>
+            </div>
+            <p class="skill-description">Efficient SQL querying and data management across relational and NoSQL systems.
+            </p>
+          </div>
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 80%;">
+                  <div class="vial-bubble" style="--duration: 3.1s; --delay: 0.2s; left: 33%; --drift: -6px;"></div>
+                  <div class="vial-bubble" style="--duration: 2.9s; --delay: 1.0s; left: 48%; --drift: 8px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.3s; --delay: 1.8s; left: 41%; --drift: -7px;"></div>
+                </div>
+              </div>
+              <div class="vial-steam-container">
+                <div class="steam-particle"
+                  style="--duration: 3.3s; --delay: 0.3s; --drift: -13px; --rotation: -19deg;"></div>
+                <div class="steam-particle" style="--duration: 3.8s; --delay: 0.8s; --drift: 14px; --rotation: 19deg;">
+                </div>
+                <div class="steam-particle"
+                  style="--duration: 3.5s; --delay: 1.3s; --drift: -10px; --rotation: -16deg;"></div>
+                <div class="steam-particle" style="--duration: 4.1s; --delay: 1.8s; --drift: 12px; --rotation: 18deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.3s; --delay: 0.5s; --drift: -8px; --rotation: -11deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.8s; --delay: 1.5s; --drift: 7px; --rotation: 11deg;"></div>
+                <div class="steam-sparkle" style="--duration: 3.1s; --delay: 0.6s; left: 46%; --drift: -12px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.5s; --delay: 1.4s; left: 54%; --drift: 11px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.3s; --delay: 2.1s; left: 51%; --drift: -9px;"></div>
+              </div>
+              <div class="vial-label">80% Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card: Deep Learning -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-project-diagram skill-icon"></i>
+              <h3 class="skill-name">Deep Learning</h3>
+            </div>
+            <p class="skill-description">Developing neural network architectures for computer vision, NLP, and
+              predictive modeling.</p>
+          </div>
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 5%;">
+                  <div class="vial-bubble" style="--duration: 3.2s; --delay: 0.4s; left: 36%; --drift: 9px;"></div>
+                  <div class="vial-bubble" style="--duration: 2.8s; --delay: 1.2s; left: 51%; --drift: -7px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.0s; --delay: 2.0s; left: 43%; --drift: 8px;"></div>
+                </div>
+              </div>
+              <div class="vial-steam-container">
+                <div class="steam-particle"
+                  style="--duration: 3.4s; --delay: 0.4s; --drift: -16px; --rotation: -21deg;"></div>
+                <div class="steam-particle" style="--duration: 3.9s; --delay: 0.9s; --drift: 17px; --rotation: 21deg;">
+                </div>
+                <div class="steam-particle"
+                  style="--duration: 3.6s; --delay: 1.4s; --drift: -12px; --rotation: -18deg;"></div>
+                <div class="steam-particle" style="--duration: 4.2s; --delay: 1.9s; --drift: 14px; --rotation: 20deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.4s; --delay: 0.6s; --drift: -10px; --rotation: -14deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.9s; --delay: 1.6s; --drift: 11px; --rotation: 14deg;">
+                </div>
+                <div class="steam-sparkle" style="--duration: 3.2s; --delay: 0.7s; left: 42%; --drift: -14px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.6s; --delay: 1.5s; left: 58%; --drift: 15px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.4s; --delay: 2.2s; left: 47%; --drift: -11px;"></div>
+              </div>
+              <div class="vial-label">5% Mastery</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card: Cloud -->
+        <div class="skill-card">
+          <div class="skill-content">
+            <div class="skill-header">
+              <i class="fas fa-cloud skill-icon"></i>
+              <h3 class="skill-name">Cloud</h3>
+            </div>
+            <p class="skill-description">Deploying scalable data solutions on cloud platforms for enterprise
+              applications.</p>
+          </div>
+          <div class="potion-vial-container">
+            <div class="potion-vial">
+              <div class="vial-glass">
+                <div class="vial-liquid" style="--fill-percent: 0%;">
+                  <div class="vial-bubble" style="--duration: 2.9s; --delay: 0.6s; left: 34%; --drift: -8px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.1s; --delay: 1.4s; left: 49%; --drift: 7px;"></div>
+                  <div class="vial-bubble" style="--duration: 3.3s; --delay: 2.2s; left: 42%; --drift: -6px;"></div>
+                </div>
+              </div>
+              <div class="vial-steam-container">
+                <div class="steam-particle"
+                  style="--duration: 3.5s; --delay: 0.5s; --drift: -15px; --rotation: -23deg;"></div>
+                <div class="steam-particle" style="--duration: 4s; --delay: 1s; --drift: 18px; --rotation: 23deg;">
+                </div>
+                <div class="steam-particle"
+                  style="--duration: 3.7s; --delay: 1.5s; --drift: -13px; --rotation: -19deg;"></div>
+                <div class="steam-particle" style="--duration: 4.3s; --delay: 2s; --drift: 15px; --rotation: 21deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 4.5s; --delay: 0.7s; --drift: -11px; --rotation: -15deg;">
+                </div>
+                <div class="vapor-wisp" style="--duration: 5s; --delay: 1.7s; --drift: 12px; --rotation: 15deg;"></div>
+                <div class="steam-sparkle" style="--duration: 3.3s; --delay: 0.8s; left: 41%; --drift: -15px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.7s; --delay: 1.6s; left: 59%; --drift: 16px;"></div>
+                <div class="steam-sparkle" style="--duration: 3.5s; --delay: 2.3s; left: 46%; --drift: -12px;"></div>
+              </div>
+              <div class="vial-label">0% Mastery</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- PROJECTS SECTION -->
+  <!-- A grid of featured projects with image-reveal hover effects. -->
+  <!-- ================================================================= -->
+  <section id="projects" class="content-section projects-section scroll-reveal">
+    <div class="section-content">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Selected work & case studies</p>
+      </div>
+      <div class="projects-grid">
+        <!-- Project Card 1: Predictive Analytics -->
+        <div class="project-card">
+          <!-- Hidden image that reveals on hover -->
+          <div class="project-image-reveal">
+            <!-- USER CUSTOMIZATION: Replace this with your own project image -->
+            <!-- Create a folder: /assets/images/projects/ -->
+            <!-- Save your image as: project-1.png (or update the path below) -->
+            <img class="project-image" src="assets/images/projects/project-1.png"
+              alt="Predictive Analytics Dashboard" />
+          </div>
+
+          <!-- Always visible content -->
+          <div class="project-content">
+            <h3 class="project-title">Predictive Analytics Platform</h3>
+            <p class="project-description">Developed a machine learning system that forecasts customer behavior with 94%
+              accuracy, enabling businesses to optimize strategies and anticipate market trends.</p>
+
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">TensorFlow</span>
+              <span class="project-tag">Scikit-learn</span>
+            </div>
+
+            <div class="project-links">
+              <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 2: Real-Time Analytics Dashboard -->
+        <div class="project-card">
+          <div class="project-image-reveal">
+            <!-- USER CUSTOMIZATION: Replace this with your own project image -->
+            <!-- Save your image as: project-2.png (or update the path below) -->
+            <img class="project-image" src="assets/images/projects/project-2.png"
+              alt="Interactive Analytics Dashboard" />
+          </div>
+
+          <div class="project-content">
+            <h3 class="project-title">Real-Time Analytics Dashboard</h3>
+            <p class="project-description">Built an interactive platform delivering live business insights through
+              dynamic visualizations and predictive metrics, supporting data-driven decision making.</p>
+
+            <div class="project-tags">
+              <span class="project-tag">Tableau</span>
+              <span class="project-tag">SQL</span>
+              <span class="project-tag">Power BI</span>
+            </div>
+
+            <div class="project-links">
+              <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-chart-bar"></i> View Dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Card 3: NLP Sentiment Analysis Engine -->
+        <div class="project-card">
+          <div class="project-image-reveal">
+            <!-- USER CUSTOMIZATION: Replace this with your own project image -->
+            <!-- Save your image as: project-3.png (or update the path below) -->
+            <img class="project-image" src="assets/images/projects/project-3.png" alt="Natural Language Processing" />
+          </div>
+
+          <div class="project-content">
+            <h3 class="project-title">NLP Sentiment Analysis Engine</h3>
+            <p class="project-description">Created an advanced sentiment analysis system that processes thousands of
+              customer reviews using state-of-the-art natural language processing techniques.</p>
+
+            <div class="project-tags">
+              <span class="project-tag">NLP</span>
+              <span class="project-tag">BERT</span>
+              <span class="project-tag">PyTorch</span>
+            </div>
+
+            <div class="project-links">
+              <a class="project-link" href="#" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> View Code
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- CONTACT SECTION -->
+  <!-- An interactive contact form with validation and magical submission effects. -->
+  <!-- ================================================================= -->
+  <section id="contact" class="content-section contact-section scroll-reveal">
+    <div class="section-content">
+      <div class="section-header">
+        <h2 class="section-title">Send an Owl</h2>
+        <p class="section-subtitle">Let's create something remarkable</p>
+      </div>
+      <div class="contact-container">
+        <form id="contactForm">
+          <!-- Row for Name and Email fields -->
+          <div class="form-row">
+            <div class="form-group">
+              <input class="form-input" id="name" type="text" required placeholder=" ">
+              <label class="form-label" for="name">Your Name</label>
+              <img class="validation-icon valid-icon"
+                src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
+              <img class="validation-icon invalid-icon"
+                src="https://img.icons8.com/?size=100&id=0ny63oDHuHzk&format=png&color=FF6B6B" alt="Invalid" />
+            </div>
+
+            <div class="form-group">
+              <input class="form-input" id="email" type="email" required placeholder=" ">
+              <label class="form-label" for="email">Your Email</label>
+              <img class="validation-icon valid-icon"
+                src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
+              <img class="validation-icon invalid-icon"
+                src="https://img.icons8.com/?size=100&id=0ny63oDHuHzk&format=png&color=FF6B6B" alt="Invalid" />
+            </div>
+          </div>
+
+          <!-- Message Textarea -->
+          <div class="form-group">
+            <textarea class="form-textarea" id="message" required placeholder=" " maxlength="1000"></textarea>
+            <label class="form-label" for="message">Your Message</label>
+            <img class="validation-icon valid-icon"
+              src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
+            <img class="validation-icon invalid-icon"
+              src="https://img.icons8.com/?size=100&id=0ny63oDHuHzk&format=png&color=FF6B6B" alt="Invalid" />
+            <div class="char-counter" id="charCounter">0 / 1000</div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="submit-container">
+            <button class="submit-button" type="submit">
+              <img class="submit-icon" src="https://img.icons8.com/?size=100&id=36449&format=png&color=C5A56B"
+                alt="Send owl" />
+              <span id="submitText">Send an Owl</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================= -->
+  <!-- FOOTER -->
+  <!-- The final section containing contact info, social links, and copyright. -->
+  <!-- ================================================================= -->
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Decorative Divider -->
+      <div class="footer-divider">
+        <i class="fas fa-snake footer-serpent"></i>
+      </div>
+
+      <!-- Main Footer Grid -->
+      <div class="footer-grid">
+        <!-- Brand Section -->
+        <div class="footer-brand">
+          <h3 class="footer-logo">Fathima Ramna</h3>
+          <p class="footer-tagline">"True insight comes from seeing the patterns that others cannot see."</p>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="footer-section">
+          <h4 class="footer-title">Reach Out</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Colombo, Sri Lanka</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:ramnarazeek@gmail.com"
+              style="color: inherit; text-decoration: none;">ramnarazeek@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-globe"></i>
+            <span>Available for collaborations</span>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="footer-section">
+          <h4 class="footer-title">Connect</h4>
+          <div class="footer-social-links">
+            <a href="https://github.com/Fathi-Ramna" target="_blank" rel="noopener noreferrer"
+              class="footer-social-link" aria-label="GitHub" data-tooltip="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/fathima-ramna-643785355/" target="_blank" rel="noopener noreferrer"
+              class="footer-social-link" aria-label="LinkedIn" data-tooltip="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:ramnarazeek@gmail.com" class="footer-social-link" aria-label="Email" data-tooltip="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://x.com/fathi_ramna" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+              aria-label="X (Twitter)" data-tooltip="X">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Kaggle" data-tooltip="Kaggle">
+              <i class="fab fa-kaggle"></i>
+            </a>
+          </div>
+          <p style="color: var(--silver); font-size: 0.95rem; margin-top: 1.2rem; opacity: 0.8; font-style: italic;">
+            Let's collaborate on something remarkable
+          </p>
+        </div>
+      </div>
+
+      <!-- Bottom Bar with Copyright -->
+      <div class="footer-bottom">
+        <div class="footer-copyright">
+          <span>© 2025 Fathima Ramna</span>
+          <span>•</span>
+          <span>Crafted with</span>
+          <i class="fas fa-heart footer-heart"></i>
+          <span>and precision</span>
+        </div>
+        <div class="footer-credits">
+          <a href="#" class="footer-credit-link">Privacy Policy</a>
+          <a href="#" class="footer-credit-link">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- WAND CURSOR -->
+  <!-- ================================================================= -->
+  <!-- This div is the container for the custom wand cursor. Its position is updated by cursor.js. -->
+  <!-- It contains either an SVG or an IMG tag for the wand's appearance. -->
+  <!-- To switch between wands, comment out one and uncomment the other. -->
+  <div class="custom-wand-cursor" aria-hidden="true">
+    <!-- WAND OPTION 1: PNG Image (Currently Active) -->
+    <!-- This is a high-resolution PNG of a wand. It's simpler and has a more realistic texture. -->
+    <img src="wand1.png" alt="Magic Wand Cursor">
+
+    <!-- WAND OPTION 2: SVG (Scalable Vector Graphics) -->
+    <!-- This wand is drawn with code. It's lightweight and scales perfectly, but is more stylized. -->
+    <!-- To use the SVG version, comment out the <img> tag above and uncomment the <svg> block below. -->
+    <!-- Also, remember to adjust the size and transform-origin in assets/css/cursor.css -->
+    <!-- and the wandOriginX/Y variables in assets/js/cursor.js. -->
+    <!--
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="wandWoodGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#2C1F1A; stop-opacity:1" />
+          <stop offset="20%" style="stop-color:#4E3629; stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#6B4A38; stop-opacity:1" />
+          <stop offset="80%" style="stop-color:#4E3629; stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#2C1F1A; stop-opacity:1" />
+        </linearGradient>
+
+        <radialGradient id="silverMetalGradient">
+          <stop offset="0%" style="stop-color: #E0E4E0;" />
+          <stop offset="100%" style="stop-color: #78827C;" />
+        </radialGradient>
+
+        <filter id="tipGlow">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
+        </filter>
+      </defs>
+
+      <path d="M 30 2 L 28 38" stroke="url(#wandWoodGradient)" stroke-width="4.5" stroke-linecap="round" />
+      <path d="M 28 38 Q 26 48, 29 56" stroke="url(#wandWoodGradient)" stroke-width="6" stroke-linecap="round" />
+      <path d="M 28 36 C 22 42, 34 48, 28 54" stroke="var(--silver)" stroke-width="2.5" stroke-linecap="round"
+        fill="none" />
+      <circle cx="29" cy="56" r="4" fill="url(#silverMetalGradient)" />
+      <circle cx="29" cy="56" r="4" fill="var(--silver)" fill-opacity="0.5" />
+      <circle cx="30" cy="2" r="3" fill="var(--gold)" filter="url(#tipGlow)" opacity="0.8" />
+      <circle cx="30" cy="2" r="2" fill="var(--gold)" />
+      <circle cx="30.5" cy="1.5" r="0.8" fill="white" opacity="0.7" />
+    </svg>
+    -->
+  </div>
+</body>
+
+</html>

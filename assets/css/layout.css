@@ -1,0 +1,953 @@
+/* =================================================================
+   LAYOUT.CSS — STRUCTURAL COMPONENTS & NAVIGATION
+   Navigation dock, sidebar, theme switcher, sections framework
+   ================================================================= */
+
+/* =================================================================
+   NAV DOCK — Floating Top Navigation with Enchanted Orbs
+   Fixed position top-center navigation with glass morphism
+   ================================================================= */
+
+.nav-dock {
+    /* Positioning */
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Center horizontally */
+    z-index: var(--z-nav);
+    /* Above content, below sidebar */
+
+    /* Glassmorphism effect */
+    background: rgba(11, 15, 13, .5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* Safari support */
+
+    /* Styling */
+    border: 1px solid rgba(197, 165, 107, .35);
+    border-radius: 40px;
+    /* Pill shape */
+    padding: 6px 12px;
+    box-shadow: var(--soft-glow);
+    /* Subtle gold glow */
+}
+
+/* Button container - horizontal flex layout */
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    /* Space between orbs */
+}
+
+/* Individual navigation button orbs */
+.nav-button {
+    /* Size and shape */
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    /* Perfect circle */
+
+    /* Layout */
+    position: relative;
+    cursor: pointer;
+
+    /* Styling */
+    color: var(--gold);
+    background: radial-gradient(45% 45% at 50% 35%,
+            var(--house-button-1) 0%,
+            var(--house-button-2) 100%);
+    /* Orb depth gradient */
+    border: 1px solid rgba(197, 165, 107, .35);
+
+    /* Smooth hover transitions */
+    transition: transform var(--t-med) ease,
+        box-shadow var(--t-med) ease;
+}
+
+/* Icon sizing */
+.nav-button i {
+    font-size: 1.1rem;
+}
+
+/* Hover glow effect - radial light overlay */
+.nav-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    /* Hidden by default */
+    background: radial-gradient(60% 60% at 50% 50%,
+            rgba(197, 165, 107, .18),
+            transparent 60%);
+    transition: opacity var(--t-med) ease;
+}
+
+/* Hover state - lifts and glows */
+.nav-button:hover {
+    transform: translateY(-3px);
+    /* Subtle lift */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .45);
+}
+
+.nav-button:hover::after {
+    opacity: 1;
+    /* Show glow overlay */
+}
+
+/* ═══ NAVIGATION BUTTON TOOLTIPS ═══ */
+/* Appears below button on hover, offset to avoid wand cursor */
+.nav-button::before {
+    content: attr(data-tooltip);
+    /* Uses data-tooltip attribute */
+
+    /* Positioning - appears below button */
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+
+    /* HORIZONTAL OFFSET ADJUSTMENT
+       This shifts tooltip away from wand cursor's typical position
+       Positive = right, Negative = left
+       Adjust this value (currently 35px) if tooltip overlaps cursor */
+    margin-left: 35px;
+
+    /* Transform for smooth appearance */
+    transform: translateX(-50%) translateY(-10px);
+    /* Start slightly above */
+
+    /* Styling */
+    background: rgba(8, 12, 10, 0.95);
+    border: 1px solid rgba(197, 165, 107, 0.4);
+    border-radius: 8px;
+    padding: 6px 12px;
+
+    /* Typography */
+    color: var(--gold);
+    font-size: 0.85rem;
+    font-family: 'Cinzel', serif;
+    white-space: nowrap;
+    /* Prevents line breaks */
+
+    /* Initial state - hidden */
+    opacity: 0;
+    pointer-events: none;
+    /* Doesn't block clicks */
+
+    /* Smooth transitions */
+    transition: all var(--t-med) ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+/* Tooltip visible state on hover */
+.nav-button:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    /* Slides to final position */
+}
+
+/* =================================================================
+   SIDEBAR DRAWER — Carved Cabinet Profile Panel
+   Slides in from left with profile info and social links
+   ================================================================= */
+
+.sidebar-drawer {
+    /* Positioning */
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(-100%);
+    /* Hidden off-screen left */
+
+    /* Animation */
+    transition: transform .6s cubic-bezier(.68, -.55, .265, 1.55);
+    /* Elastic ease */
+
+    /* Layering */
+    z-index: var(--z-sidebar);
+    width: 22rem;
+}
+
+/* Open state - slides into view */
+.sidebar-drawer.open {
+    transform: translateY(-50%) translateX(0);
+}
+
+/* ═══ SIDEBAR HANDLE — Pull Tab ═══ */
+/* The clickable tab that opens/closes the sidebar */
+.sidebar-handle {
+    /* Positioning - sticks out from right edge of sidebar */
+    position: absolute;
+    right: -2.6rem;
+    /* Width of handle */
+    top: 50%;
+    transform: translateY(-50%);
+
+    /* Size */
+    width: 2.6rem;
+    height: 6rem;
+
+    /* Interaction */
+    cursor: pointer;
+
+    /* Glassmorphism */
+    background: linear-gradient(135deg,
+            var(--house-glass-3) 0%,
+            var(--house-glass-4) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    /* Styling */
+    border: 1px solid rgba(197, 165, 107, .4);
+    border-left: none;
+    /* No border on attached edge */
+    border-radius: 0 14px 14px 0;
+    /* Round on right side only */
+
+    /* Layout - centers icon */
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+
+    /* Effects */
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .5),
+        inset 0 1px 0 rgba(255, 255, 255, .05);
+    /* Subtle inner highlight */
+    transition: all var(--t-med) ease;
+}
+
+/* Handle hover state */
+.sidebar-handle:hover {
+    background: linear-gradient(135deg,
+            var(--house-ui-bg-1) 0%,
+            var(--house-ui-bg-2) 100%);
+    border-color: rgba(197, 165, 107, .6);
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, .6),
+        inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+/* Icon glow effect on hover */
+.sidebar-handle img {
+    transition: filter 0.35s ease;
+}
+
+.sidebar-handle:hover img {
+    filter:
+        drop-shadow(0 0 15px rgba(197, 165, 107, 0.8))
+        /* Gold glow */
+        drop-shadow(0 0 25px rgba(126, 186, 148, 0.4))
+        /* Emerald glow */
+        brightness(1.12) saturate(1.15);
+}
+
+/* ═══ SIDEBAR CARD — Main Content Area ═══ */
+.premium-sidebar-card {
+    /* Layout */
+    margin: 0;
+    padding: 2rem 1.6rem;
+    border-radius: 0 20px 20px 0;
+    /* Round on right side only */
+
+    /* Glassmorphism with house tint */
+    border: 1px solid rgba(197, 165, 107, .4);
+    background: linear-gradient(135deg,
+            var(--house-glass-3) 20%,
+            var(--house-glass-4) 50%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    /* Effects */
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, .6),
+        /* Deep outer shadow */
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        /* Inner highlight */
+        0 0 40px rgba(12, 59, 46, 0.3);
+    /* House-colored glow */
+
+    /* Overflow for animations */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated border shimmer effect */
+.premium-sidebar-card::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    /* Extends beyond card edges */
+    border-radius: inherit;
+    padding: 2px;
+
+    /* Gradient that moves around border */
+    background: linear-gradient(135deg,
+            transparent 0%,
+            rgba(197, 165, 107, 0.4) 25%,
+            /* Gold */
+            rgba(126, 186, 148, 0.3) 50%,
+            /* Emerald */
+            rgba(197, 165, 107, 0.4) 75%,
+            /* Gold */
+            transparent 100%);
+
+    /* Mask to show only border */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    /* Animation */
+    animation: border-shimmer 4s linear infinite;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Border shimmer animation */
+@keyframes border-shimmer {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 200% 200%;
+    }
+}
+
+/* ═══ PROFILE IMAGE RING — Animated Outer Ring ═══ */
+.profile-ring {
+    /* Size and centering */
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 1rem;
+    border-radius: 999px;
+    /* Perfect circle */
+
+    /* Ring effect - padding creates space for gradient border */
+    padding: 2px;
+    background: linear-gradient(135deg,
+            rgba(197, 165, 107, 0.9) 0%,
+            /* Gold */
+            rgba(126, 186, 148, 0.6) 35%,
+            /* Emerald */
+            rgba(197, 165, 107, 0.9) 70%,
+            /* Gold */
+            rgba(176, 184, 178, 0.5) 100%);
+    /* Silver */
+
+    /* Layering and effects */
+    position: relative;
+    animation: ring-shimmer 6s linear infinite;
+    /* Color shift animation */
+    transition: transform 0.4s ease, filter 0.4s ease;
+    box-shadow:
+        0 0 20px rgba(197, 165, 107, 0.4),
+        inset 0 0 10px rgba(197, 165, 107, 0.2);
+}
+
+/* Ring shimmer animation - subtle hue rotation */
+@keyframes ring-shimmer {
+    0% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+
+    50% {
+        filter: hue-rotate(10deg) brightness(1.15);
+    }
+
+    100% {
+        filter: hue-rotate(0deg) brightness(1);
+    }
+}
+
+/* Ring hover state */
+.profile-ring:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 50px rgba(197, 165, 107, 0.6),
+        0 0 80px var(--house-accent-light),
+        inset 0 0 30px rgba(197, 165, 107, 0.3);
+}
+
+/* Rotating outer glow - spins around ring */
+.profile-ring::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    /* Extends beyond ring */
+    border-radius: inherit;
+
+    /* Conic gradient creates rotating effect */
+    background: conic-gradient(from 0deg,
+            transparent 0deg,
+            rgba(197, 165, 107, 0.4) 90deg,
+            transparent 180deg,
+            rgba(126, 186, 148, 0.3) 270deg,
+            transparent 360deg);
+
+    filter: blur(12px);
+    animation: ring-rotate 8s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Ring rotation animation */
+@keyframes ring-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Profile image inside ring */
+.profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+
+    /* Image with overlay gradient */
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.186) 0%,
+            rgba(0, 0, 0, 0.25) 100%),
+        url('../images/ramna.png') center/cover;
+
+    position: relative;
+    z-index: 1;
+    transition: background 0.4s ease;
+}
+
+/* Remove gradient overlay on hover */
+.profile-ring:hover .profile-image {
+    background: linear-gradient(180deg, transparent, transparent),
+        url('../images/ramna.png') center/cover;
+}
+
+/* ═══ PROFILE TEXT ELEMENTS ═══ */
+
+/* Name - large decorative font */
+.profile-name {
+    text-align: center;
+    font-family: 'Old London', 'Cinzel', 'UnifrakturMaguntia', serif;
+    font-size: 2.3rem;
+    color: var(--gold);
+    text-shadow: 0 0 12px rgba(0, 0, 0, .65);
+    letter-spacing: .02em;
+}
+
+/* Title - italic subtitle */
+.profile-title {
+    text-align: center;
+    color: #E2E5E2;
+    margin-top: .25rem;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* Decorative divider line */
+.profile-divider {
+    width: 110px;
+    height: 1px;
+    margin: 1rem auto 1.25rem;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(197, 165, 107, .55),
+            transparent);
+}
+
+/* Quote box */
+.profile-quote {
+    /* Styling */
+    background: rgba(0, 0, 0, .25);
+    border-left: 3px solid rgba(197, 165, 107, .55);
+    /* Gold accent */
+    padding: 1rem 1.2rem;
+    border-radius: 10px;
+
+    /* Typography */
+    color: var(--silver);
+    font-size: 1.05rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    line-height: 1.65;
+
+    /* Effects */
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: color 0.3s ease;
+}
+
+.profile-quote:hover {
+    color: #E2E5E2;
+    /* Brighter on hover */
+}
+
+/* ═══ CV DOWNLOAD BUTTON ═══ */
+.cv-download-button {
+    /* Layout */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin: 2.5rem auto 0;
+    padding: 0.75rem 1.5rem;
+    width: fit-content;
+
+    /* Styling */
+    border: 2px solid rgba(197, 165, 107, 0.4);
+    border-radius: 24px;
+    color: var(--gold);
+    text-decoration: none;
+
+    /* Typography */
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 550;
+    letter-spacing: 0.05em;
+
+    /* Animation and effects */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Hover glow effect */
+.cv-download-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%,
+            rgba(197, 166, 107, 0.122) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover state */
+.cv-download-button:hover {
+    transform: translateY(-3px);
+    border-color: rgba(197, 165, 107, 0.65);
+    background: linear-gradient(135deg,
+            rgba(197, 166, 107, 0.129) 0%,
+            rgba(183, 151, 95, 0.104) 100%);
+    box-shadow:
+        0 8px 15px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(197, 165, 107, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Download icon */
+.cv-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Icon slides right on hover */
+.cv-download-button:hover .cv-icon {
+    transform: translateX(4px);
+}
+
+/* Active/click state */
+.cv-download-button:active {
+    transform: translateY(-1px);
+}
+
+/* ═══ SOCIAL LINKS ═══ */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: .75rem;
+    margin-top: 1.1rem;
+}
+
+/* Individual social link orb */
+.social-link {
+    /* Size and shape */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    /* Layout */
+    display: grid;
+    place-items: center;
+
+    /* Styling */
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(197, 165, 107, .35);
+    background: radial-gradient(45% 45% at 50% 40%,
+            var(--house-button-3) 0%,
+            var(--house-button-4) 100%);
+
+    /* Animation */
+    transition: all var(--t-med) ease;
+    position: relative;
+    overflow: visible;
+    font-size: 1.1rem;
+}
+
+/* Inner glow overlay */
+.social-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 50%,
+            rgba(197, 165, 107, 0.2) 0%,
+            transparent 70%);
+    opacity: 0;
+    transition: opacity var(--t-med) ease;
+}
+
+/* Hover state - lifts and glows */
+.social-link:hover {
+    transform: translateY(-4px) scale(1.1);
+    border-color: rgba(197, 165, 107, .6);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 30px var(--house-accent-light);
+}
+
+.social-link:hover::before {
+    opacity: 1;
+}
+
+/* ═══ HOUSE EMBLEM — Serpent Icon with Text ═══ */
+.house-emblem {
+    margin-top: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Serpent icon */
+.house-emblem i {
+    color: var(--gold);
+    font-size: 3.2rem;
+    filter: drop-shadow(0 0 15px rgba(197, 165, 107, 0.5));
+    animation: serpent-breathe 4s ease-in-out infinite;
+    position: relative;
+}
+
+/* Breathing animation for serpent */
+@keyframes serpent-breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(197, 165, 107, 0.5));
+    }
+
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 25px rgba(197, 165, 107, 0.7));
+    }
+}
+
+/* Ensures icon renders properly */
+.house-emblem i::before {
+    position: relative;
+    z-index: 1;
+}
+
+/* "belongs to" text */
+.house-emblem-prefix {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: #E2E5E2;
+    font-style: italic;
+    opacity: 0.7;
+    margin-bottom: 0.2rem;
+}
+
+/* House name label */
+.house-emblem-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    text-shadow: 0 0 8px rgba(197, 165, 107, 0.3);
+}
+
+/* =================================================================
+   THEME ARTIFACT — House Switcher (Coins + Orb)
+   Fixed top-right house selection panel
+   ================================================================= */
+
+.theme-artifact {
+    position: fixed;
+    right: 1.2rem;
+    top: 1.2rem;
+    z-index: var(--z-customizer);
+}
+
+/* Toggle button - the orb that opens the panel */
+.artifact-toggle {
+    /* Size and shape */
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+
+    /* Styling */
+    border: 1px solid rgba(197, 165, 107, .4);
+    color: var(--gold);
+    background: radial-gradient(50% 50% at 50% 45%,
+            var(--house-button-5) 0%,
+            var(--house-button-6) 100%);
+
+    /* Layout */
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+
+    /* Effects */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+    transition: transform var(--t-med);
+}
+
+/* Icon inside toggle */
+.artifact-icon {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(197, 165, 107, .35));
+}
+
+/* Hover state - slight rotation and scale */
+.artifact-toggle:hover {
+    transform: rotate(8deg) scale(1.04);
+}
+
+/* ═══ ARTIFACT PANEL — House Selection Dropdown ═══ */
+.artifact-panel {
+    /* Positioning */
+    margin-top: .6rem;
+    margin-left: -160px;
+    /* Shifts panel to the left */
+
+    /* Glassmorphism */
+    background: rgba(8, 12, 10, .9);
+    border: 1px solid rgba(197, 165, 107, .35);
+    border-radius: 14px;
+    padding: .6rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    /* Hidden by default */
+    display: none;
+}
+
+/* Open state - shows panel */
+.artifact-panel.open {
+    display: block;
+}
+
+/* ═══ HOUSE COINS — Individual Selection Buttons ═══ */
+.coin {
+    /* Layout */
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: .6rem;
+    align-items: center;
+
+    /* Interaction */
+    cursor: pointer;
+
+    /* Styling */
+    padding: .6rem .7rem;
+    border-radius: 10px;
+    border: 1px solid rgba(197, 165, 107, .28);
+    color: var(--gold);
+    background: linear-gradient(180deg,
+            var(--coin-bg-1),
+            var(--coin-bg-2));
+
+    /* Animation */
+    transition: background var(--t-med),
+        transform var(--t-med);
+}
+
+/* Hover state */
+.coin:hover {
+    background: linear-gradient(180deg,
+            var(--coin-hover-bg),
+            var(--coin-bg-1));
+    transform: translateX(2px);
+}
+
+/* House crest icon container */
+.crest {
+    /* Size and shape */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+
+    /* Metallic gradient background */
+    background: conic-gradient(from 0deg,
+            #6e7f77,
+            #b5bdb8,
+            #6e7f77) border-box;
+
+    /* Layout */
+    display: grid;
+    place-items: center;
+    color: #0A1713;
+}
+
+/* Crest image */
+.crest-icon {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(197, 165, 107, .25));
+}
+
+/* House-specific icon glows */
+.crest-gryffindor .crest-icon {
+    filter: drop-shadow(0 0 6px rgba(116, 0, 1, 0.4));
+}
+
+.crest-ravenclaw .crest-icon {
+    filter: drop-shadow(0 0 6px rgba(14, 26, 64, 0.4));
+}
+
+.crest-hufflepuff .crest-icon {
+    filter: drop-shadow(0 0 6px rgba(238, 185, 57, 0.4));
+}
+
+/* House motto text */
+.coin small {
+    color: var(--silver);
+    opacity: .85;
+}
+
+/* =================================================================
+   HOUSE BADGE — Fixed Bottom-Right Indicator
+   Shows currently selected house with crest icon
+   ================================================================= */
+
+.house-badge {
+    /* Positioning */
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 50;
+    transition: bottom 0.3s ease;
+    /* Animated when footer appears */
+
+    /* Layout and sizing */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+
+    /* Glassmorphism appearance */
+    background: var(--house-badge-bg);
+    border: 1px solid var(--house-badge-border);
+    border-radius: 20px;
+
+    /* Typography */
+    color: var(--gold);
+    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+
+    /* Effects */
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 0 20px var(--house-badge-glow);
+    transition: all 0.3s ease;
+}
+
+/* Hover state - lifts and glows */
+.house-badge:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 16px rgba(0, 0, 0, 0.5),
+        0 0 30px var(--house-badge-glow);
+}
+
+/* Crest icon */
+.house-badge img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(197, 165, 107, 0.5));
+}
+
+/* House name text */
+.house-badge span {
+    line-height: 1;
+}
+
+/* =================================================================
+   CONTENT SECTIONS — Base Layout Framework
+   All sections (hero, about, skills, etc.) use this structure
+   ================================================================= */
+
+.content-section {
+    /* Layout */
+    position: relative;
+    min-height: 100vh;
+    /* Full viewport height minimum */
+    padding: 6rem 2rem;
+
+    /* Flexbox centering */
+    display: flex;
+    align-items: center;
+
+    /* Overflow for effects */
+    overflow: hidden;
+}
+
+/* Section content wrapper - constrains max width */
+.section-content {
+    position: relative;
+    z-index: 2;
+    /* Above background effects */
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Section header - title and subtitle */
+.section-header {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
+/* Section title - large decorative heading */
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.3rem, 6vw, 4.6rem);
+    /* Responsive sizing */
+    color: var(--gold);
+}
+
+/* Section subtitle - italic descriptor */
+.section-subtitle {
+    font-style: italic;
+    color: #E2E5E2;
+    font-size: 1.25rem;
+    line-height: 1.6;
+}

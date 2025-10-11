@@ -1,0 +1,284 @@
+/* =================================================================
+   CUSTOM FONTS
+   ================================================================= */
+
+/* Harry Potter Display Font
+   License: SIL Open Font License 1.1 (see assets/fonts/OFL.txt) 
+   Usage: Hero title and decorative headers */
+@font-face {
+    font-family: 'HarryPotter';
+    src: url('../fonts/HarryPotter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =================================================================
+   CORE THEME VARIABLES — PREMIUM SLYTHERIN FOUNDATION
+   ================================================================= */
+:root {
+    /* ═══ METALS & UNIVERSAL COLORS ═══ */
+    /* These remain constant across all house themes */
+    --gold: #C5A56B;
+    /* Antique gold - used for all text accents */
+    --silver: #B0B8B2;
+    /* Soft silver - used for secondary text */
+    --ink: #0b0f0d;
+    /* Near-black - used for deep shadows */
+
+    /* ═══ BASE BACKGROUND ═══ */
+    /* Deep dungeon darkness - foundation for all sections */
+    --bg: #070A08;
+
+    /* ═══ CARD BACKGROUNDS ═══ */
+    /* Glass morphism layers for UI elements */
+    --card: rgba(10, 18, 12, 0.78);
+    /* Standard card opacity */
+    --card-strong: rgba(10, 18, 12, 0.92);
+    /* High-emphasis cards */
+
+    /* ═══ VISUAL EFFECTS ═══ */
+    /* Pre-defined shadow and glow effects */
+    --soft-glow: 0 0 18px rgba(197, 165, 107, 0.25);
+    /* Subtle gold glow */
+    --smoke-glow: 0 20px 60px rgba(0, 0, 0, 0.65);
+    /* Deep shadow */
+    --ring-blur: blur(8px);
+    /* Frosted glass effect */
+
+    /* ═══ TRANSITION SPEEDS ═══ */
+    /* Consistent animation timing across the site */
+    --t-fast: .2s;
+    /* Quick interactions (button hover, icon changes) */
+    --t-med: .35s;
+    /* Standard transitions (card hover, menu open) */
+    --t-slow: .8s;
+    /* Dramatic effects (modal appearance, page transitions) */
+
+    /* ═══ Z-INDEX LAYERS ═══ */
+    /* Stacking order for UI elements - prevents overlap conflicts */
+    --z-bg: 0;
+    /* Background textures and patterns */
+    --z-fog: 1;
+    /* Atmospheric overlays */
+    --z-content: 10;
+    /* Main content sections */
+    --z-nav: 40;
+    /* Top navigation dock */
+    --z-sidebar: 45;
+    /* Sidebar drawer */
+    --z-customizer: 55;
+    /* Theme switcher artifact */
+    --z-cursor: 9999;
+    /* Custom wand cursor (always on top) */
+
+    /* ═══ HOUSE-SPECIFIC VARIABLES ═══ */
+    /* These are defined in individual theme files:
+       - themes/slytherin.css (default)
+       - themes/gryffindor.css
+       - themes/ravenclaw.css
+       - themes/hufflepuff.css */
+}
+
+/* =================================================================
+   GLOBAL RESET & BASE STYLES
+   ================================================================= */
+
+/* Universal box-sizing for consistent sizing calculations */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Full-height container for proper section alignment */
+html,
+body {
+    height: 100%;
+}
+
+/* Body foundation with premium typography and dark atmosphere */
+body {
+    /* Typography */
+    font-family: 'Cormorant Garamond', serif;
+    /* Elegant serif for body text */
+    color: #E8EAE7;
+    /* Soft white for readability */
+
+    /* Layout */
+    background: var(--bg);
+    /* Deep dungeon darkness */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+/* ═══ DUNGEON ATMOSPHERE OVERLAY ═══ */
+/* Creates the ambient fog and subtle color tints that give depth to the background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-bg);
+
+    /* Layered gradients create atmospheric depth */
+    background:
+        /* Top-left accent (adapts to house theme) */
+        radial-gradient(70% 60% at 15% 20%, var(--house-accent-medium) 0%, transparent 60%),
+        /* Bottom-right accent (adapts to house theme) */
+        radial-gradient(60% 50% at 85% 70%, var(--house-accent-dark) 0%, transparent 65%),
+        /* Base dungeon gradient (constant) */
+        linear-gradient(180deg, #060907 0%, #0A110D 60%, #060907 100%);
+
+    mix-blend-mode: normal;
+}
+
+/* =================================================================
+   TYPOGRAPHY HIERARCHY
+   ================================================================= */
+
+/* Premium serif headers with proper spacing */
+h1,
+h2,
+h3 {
+    font-family: 'Cinzel', serif;
+    /* Elegant all-caps serif */
+    letter-spacing: .02em;
+    /* Slight tracking for readability */
+}
+
+/* Special display style for hero title - uses blackletter font */
+.display-sly {
+    font-family: 'Old London', 'Cinzel', 'UnifrakturMaguntia', serif;
+    letter-spacing: .03em;
+}
+
+/* =================================================================
+   PREMIUM GOLD SCROLLBAR — UNIVERSAL ACROSS ALL THEMES
+   ================================================================= */
+
+/* This luxurious scrollbar maintains the gold aesthetic regardless of house theme,
+   providing a consistent premium feel throughout the experience */
+
+/* ═══ WEBKIT BROWSERS (Chrome, Safari, Edge, Brave) ═══ */
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+/* Track - the scrollbar background channel */
+::-webkit-scrollbar-track {
+    /* Dark dungeon gradient background */
+    background: linear-gradient(180deg,
+            rgba(7, 10, 8, 0.98),
+            rgba(10, 15, 12, 0.98));
+
+    /* Gold border on left edge */
+    border-left: 1px solid rgba(197, 165, 107, 0.2);
+
+    /* Inset shadow for depth */
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Thumb - the draggable scrollbar handle */
+::-webkit-scrollbar-thumb {
+    /* Multi-layer gold gradient for metallic appearance */
+    background: linear-gradient(180deg,
+            rgba(197, 165, 107, 0.95) 0%,
+            /* Top highlight */
+            rgba(183, 150, 95, 0.9) 20%,
+            /* Upper mid-tone */
+            rgba(169, 135, 82, 0.85) 50%,
+            /* Center (darkest) */
+            rgba(183, 150, 95, 0.9) 80%,
+            /* Lower mid-tone */
+            rgba(197, 165, 107, 0.95) 100%);
+    /* Bottom highlight */
+
+    /* Border and shape */
+    border: 2px solid rgba(197, 165, 107, 0.5);
+    border-radius: 10px;
+
+    /* Dimensional shadows - creates embossed metal effect */
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        /* Top highlight (metallic shine) */
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+        /* Bottom shadow (depth) */
+        0 0 15px rgba(197, 165, 107, 0.4);
+    /* Outer glow */
+}
+
+/* Thumb hover state - brightens and intensifies glow */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg,
+            rgba(197, 165, 107, 1) 0%,
+            rgba(220, 185, 125, 0.95) 20%,
+            rgba(197, 165, 107, 0.9) 50%,
+            rgba(220, 185, 125, 0.95) 80%,
+            rgba(197, 165, 107, 1) 100%);
+
+    /* Stronger border and enhanced glow */
+    border-color: rgba(197, 165, 107, 0.8);
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.4),
+        0 0 25px rgba(197, 165, 107, 0.6),
+        /* Brighter inner glow */
+        0 0 40px rgba(197, 165, 107, 0.3);
+    /* Extended outer glow */
+}
+
+/* Thumb active state - maximum brightness when clicking/dragging */
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg,
+            rgba(220, 185, 125, 1),
+            rgba(197, 165, 107, 1),
+            rgba(220, 185, 125, 1));
+}
+
+/* ═══ FIREFOX ═══ */
+/* Simpler scrollbar styling for Firefox browsers */
+* {
+    scrollbar-width: thin;
+    /* Thin scrollbar style */
+    scrollbar-color: rgba(197, 165, 107, 0.9) rgba(10, 15, 12, 0.98);
+    /* Thumb & track colors */
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* System Architecture:
+
+   1. CSS VARIABLE FOUNDATION (:root)
+      - This file establishes the entire design system using CSS variables.
+      - Universal colors (--gold, --silver) are defined here for consistency.
+      - House-specific variables are placeholders, intended to be
+        overridden by theme files (e.g., themes/slytherin.css).
+
+   2. THEME OVERRIDE SYSTEM
+      - The base styles provide a default (Slytherin) look.
+      - When a class like .theme-gryffindor is added to the <body>, the
+        corresponding theme file's variables take precedence, changing
+        the site's entire color scheme without altering component CSS.
+
+   3. ATMOSPHERIC LAYERING
+      - The body::before pseudo-element creates a fixed, site-wide
+        background overlay with multiple gradients.
+      - This adds depth and incorporates house accent colors subtly.
+
+   4. PREMIUM SCROLLBAR
+      - The scrollbar is intentionally styled with a universal gold theme.
+      - It remains consistent across all house themes to maintain a
+        luxurious, high-end feel throughout the user experience.
+      - Separate styles are provided for WebKit (Chrome, Safari) and
+        Firefox for cross-browser compatibility.
+
+   5. Z-INDEX MANAGEMENT
+      - A clear z-index hierarchy is defined with variables (--z-nav,
+        --z-sidebar, etc.).
+      - This prevents elements like the sidebar, nav dock, and cursor
+        from overlapping incorrectly.
+*/

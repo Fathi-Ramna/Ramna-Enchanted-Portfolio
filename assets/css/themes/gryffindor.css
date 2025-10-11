@@ -1,0 +1,265 @@
+/* =================================================================
+   GRYFFINDOR THEME — HOUSE OF COURAGE & BRAVERY
+   Crimson and gold color scheme with darker, less saturated reds
+   ================================================================= */
+
+/* Theme Selector
+   Applies Gryffindor color scheme when .theme-gryffindor class
+   is added to body element by JavaScript */
+.theme-gryffindor {
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE PRIMARY COLORS — Dark Crimson Foundation
+       Intentionally darker and less saturated than typical Gryffindor
+       to maintain sophisticated dungeon atmosphere
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Deep dark crimson - primary house color for major UI elements */
+    --house-primary: #4A0000;
+
+    /* Dark crimson - used for highlights and lighter accents */
+    --house-tertiary: #8B0000;
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE ACCENT COLORS — Crimson Variations with Transparency
+       More transparent than Slytherin to prevent overwhelming red
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-accent-dark: rgba(74, 0, 0, 0.7);
+    /* Deepest crimson for shadows */
+    --house-accent-medium: rgba(116, 0, 1, 0.5);
+    /* Mid-tone crimson for depth */
+    --house-accent-light: rgba(139, 0, 0, 0.35);
+    /* Lighter crimson for glows */
+
+    /* ═════════════════════════════════════════════════════════════
+       WAND MAGIC COLORS — Dark Blood Crimson Spell Effects
+       Reduced opacity to prevent overpowering cursor effects
+       ═════════════════════════════════════════════════════════════ */
+
+    --wand-magic-color-1: rgba(116, 0, 0, 0.478);
+    /* Primary spell color */
+    --wand-magic-color-2: rgba(103, 0, 0, 0.75);
+    /* Secondary spell shade */
+    --wand-magic-color-3: rgba(74, 0, 0, 0.5);
+    /* Faded spell trails */
+    --wand-magic-glow: rgba(74, 0, 0, 0.7);
+    /* Spell glow aura */
+
+    /* ═════════════════════════════════════════════════════════════
+       HERO CTA BUTTONS — Secondary Button Styling
+       Primary buttons use universal gold; these define secondary style
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-cta-secondary-bg: rgba(50, 8, 8, 0.4);
+    /* Default background */
+    --hero-cta-secondary-hover-bg: rgba(60, 10, 10, 0.55);
+    /* Hover state */
+
+    /* ═════════════════════════════════════════════════════════════
+       ATMOSPHERIC OVERLAYS — Section Background Tints
+       MUCH MORE SUBTLE than other themes to prevent red wash
+       Gryffindor backgrounds are bright/warm, so minimal tinting needed
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glow-1: rgba(139, 0, 0, .12);
+    /* Hero section glow - very subtle */
+    --house-glow-2: rgba(74, 0, 0, .08);
+    /* Hero secondary glow - minimal */
+    --house-glow-3: rgba(116, 0, 1, .15);
+    /* About section glow */
+    --house-glow-4: rgba(100, 4, 4, .10);
+    /* Skills section glow */
+    --house-glow-5: rgba(139, 0, 0, .12);
+    /* Projects section glow */
+    --house-glow-6: rgba(116, 0, 1, .10);
+    /* Contact section glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       RADIAL GRADIENT COLORS — Circular UI Elements
+       Darker values for better contrast against red backgrounds
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-radial-1: rgba(60, 0, 0, 0.35);
+    /* Center highlight */
+    --house-radial-2: rgba(30, 0, 0, 0.6);
+    /* Outer shadow */
+
+    /* ═════════════════════════════════════════════════════════════
+       BACKGROUND IMAGES — AI-Generated Gryffindor Chambers
+       Each section has a unique atmospheric background image
+       ═════════════════════════════════════════════════════════════ */
+
+    --bg-hero: url('../images/background/gryffindor_common_room.png');
+    --bg-about: url('../images/background/gryffindor_scholars_private_study.png');
+    --bg-skills: url('../images/background/gryffindor_potions_classroom.png');
+    --bg-projects: url('../images/background/gryffindor_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/gryffindor_the_owlery.png');
+
+    /* ═════════════════════════════════════════════════════════════
+       SECTION OVERLAY ADJUSTMENTS — Darkness Level Control
+       DARKER overlays to counteract bright red backgrounds
+       All sections use same value for consistency
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-overlay: rgba(0, 0, 0, 0.15);
+    /* Common room darkening */
+    --about-overlay: rgba(0, 0, 0, 0.15);
+    /* Study room darkening */
+    --skills-overlay: rgba(0, 0, 0, 0.15);
+    /* Potions classroom darkening */
+    --projects-overlay: rgba(0, 0, 0, 0.15);
+    /* Artifact chamber darkening */
+    --contact-overlay: rgba(0, 0, 0, 0.15);
+    /* Owlery darkening */
+
+    /* ═════════════════════════════════════════════════════════════
+       GLASS/CARD EFFECTS — Glassmorphism Backgrounds
+       Darker, less red to prevent overwhelming crimson appearance
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glass-1: rgba(40, 5, 5, .48);
+    /* Standard glass (darker) */
+    --house-glass-2: rgba(25, 3, 3, .32);
+    /* Subtle glass (more transparent) */
+    --house-glass-3: rgba(45, 8, 8, .65);
+    /* Strong glass (sidebar) */
+    --house-glass-4: rgba(50, 10, 10, .55);
+    /* Medium glass (sidebar inner) */
+
+    /* ═════════════════════════════════════════════════════════════
+       SIDEBAR/UI ELEMENTS — Interface Component Backgrounds
+       Used for navigation, controls, and interactive elements
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-ui-bg-1: rgba(35, 5, 5, .38);
+    /* Primary UI background */
+    --house-ui-bg-2: rgba(45, 8, 8, .28);
+    /* Secondary UI background */
+
+    /* ═════════════════════════════════════════════════════════════
+       VIAL LABEL BACKGROUNDS — Potion Skill Card Labels
+       The percentage indicators below each skill potion vial
+       ═════════════════════════════════════════════════════════════ */
+
+    --vial-label-bg: rgba(20, 5, 5, 0.88);
+    /* Default state */
+    --vial-label-hover-bg: rgba(45, 8, 8, 0.95);
+    /* Hover state (lighter) */
+
+    /* ═════════════════════════════════════════════════════════════
+       BUTTON/ORB BACKGROUNDS — Circular Interactive Elements
+       Darker crimson values for depth with radial gradients
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Nav dock buttons */
+    --house-button-1: #5A0000;
+    /* Nav button inner (lighter) */
+    --house-button-2: #2D0000;
+    /* Nav button outer (darker) */
+
+    /* Sidebar social links */
+    --house-button-3: #6A0000;
+    /* Social link inner */
+    --house-button-4: #320000;
+    /* Social link outer */
+
+    /* Theme switcher artifact */
+    --house-button-5: #600000;
+    /* Artifact toggle inner */
+    --house-button-6: #250000;
+    /* Artifact toggle outer */
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE BADGE COLORS — Fixed Bottom-Right House Indicator
+       The small badge showing current house selection
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-badge-bg: rgba(74, 0, 0, 0.4);
+    /* Background tint */
+    --house-badge-border: rgba(197, 165, 107, 0.3);
+    /* Gold border */
+    --house-badge-glow: rgba(139, 0, 0, 0.25);
+    /* Crimson glow - reduced opacity */
+
+    /* ═════════════════════════════════════════════════════════════
+       POTION VIAL COLORS — Skill Card Liquid Gradients
+       Less intense crimson to maintain elegance
+       Three-layer gradient creates realistic potion appearance
+       ═════════════════════════════════════════════════════════════ */
+
+    --potion-color-1: rgba(139, 0, 0, 0.85);
+    /* Top - light crimson */
+    --potion-color-2: rgba(116, 0, 1, 0.9);
+    /* Middle - mid crimson */
+    --potion-color-3: rgba(74, 0, 0, 1);
+    /* Bottom - deep crimson */
+
+    /* ═════════════════════════════════════════════════════════════
+       THEME COIN BACKGROUNDS — House Selector Panel
+       The artifact panel that opens when clicking house switcher
+       ═════════════════════════════════════════════════════════════ */
+
+    --coin-bg-1: rgba(40, 5, 5, 0.6);
+    /* Coin default top */
+    --coin-bg-2: rgba(25, 3, 3, 0.6);
+    /* Coin default bottom */
+    --coin-hover-bg: rgba(197, 165, 107, 0.18);
+    /* Gold hover overlay */
+
+    /* ═════════════════════════════════════════════════════════════
+       SUCCESS MODAL COLORS — Contact Form Success Message
+       The modal that appears after successfully sending a message
+       ═════════════════════════════════════════════════════════════ */
+
+    --modal-bg-1: rgba(45, 8, 8, 0.75);
+    /* Modal top gradient */
+    --modal-bg-2: rgba(60, 12, 12, 0.65);
+    /* Modal bottom gradient */
+
+    /* ═════════════════════════════════════════════════════════════
+       FOOTER BACKGROUND — Bottom Section Styling
+       Multi-layer gradient creates depth and atmospheric transition
+       ═════════════════════════════════════════════════════════════ */
+
+    --footer-radial-glow: rgba(116, 0, 1, 0.2);
+    /* Top radial accent - reduced */
+    --footer-gradient-start: rgba(8, 3, 3, 0.98);
+    /* Gradient top color */
+    --footer-gradient-end: rgba(5, 2, 2, 1);
+    /* Gradient bottom (darkest) */
+    --footer-top-vignette: rgba(15, 5, 5, 0.35);
+    /* Top fade overlay */
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* Gryffindor Theme Considerations:
+   
+   1. COLOR CHALLENGE
+      - Red/crimson can easily overwhelm a design
+      - Solution: Darker, less saturated values
+      - Much lower opacity on atmospheric glows
+   
+   2. OVERLAY STRATEGY
+      - Gryffindor backgrounds tend to be warmer/brighter
+      - Consistent 0.15 overlay across all sections
+      - Maintains readability without losing warmth
+   
+   3. GLASS EFFECTS
+      - Darker glass values (rgba 40-50 range vs 10-20)
+      - Prevents "red wash" on UI elements
+      - Maintains premium feel with transparency
+   
+   4. WAND EFFECTS
+      - Significantly reduced opacity (0.478 vs 0.85)
+      - Prevents cursor trail from being too intense
+      - Still visible but not distracting
+   
+   5. BALANCE WITH GOLD
+      - Universal gold remains dominant for text
+      - Red acts as accent, not primary color
+      - Creates sophisticated contrast vs typical Gryffindor
+*/

@@ -1,0 +1,323 @@
+/* =================================================================
+   CURSOR.CSS — CUSTOM WAND CURSOR & SPELL EFFECTS
+   Replaces default cursor with magical wand, includes Lumos, 
+   serpent trails, runes, and hover aura effects
+   ================================================================= */
+
+/* =================================================================
+   DEFAULT CURSOR OVERRIDE — Hide System Cursor
+   ================================================================= */
+
+/* Remove default cursor from all elements
+   This creates a blank canvas for our custom wand cursor */
+body,
+body *,
+a,
+button,
+input,
+textarea {
+    cursor: none !important;
+}
+
+/* =================================================================
+   CUSTOM WAND CURSOR — Base Styling & Positioning
+   ================================================================= */
+
+/* Main wand cursor container
+   CRITICAL: The transform-origin MUST be synchronized with the
+   JavaScript pivot point calculations (wandOriginX, wandOriginY)
+   in cursor.js.
+   - The container is 80x80px.
+   - The wand tip is at the top-center (x=40, y=0).
+   DO NOT change these values without updating cursor.js. */
+.custom-wand-cursor {
+    /* Positioning */
+    position: fixed;
+    pointer-events: none;
+    /* Allows clicking through cursor */
+    z-index: var(--z-cursor);
+    /* Always on top */
+
+    /* Size - increased for better visibility of the PNG wand */
+    width: 80px;
+    height: 80px;
+
+    /* Rotation and pivot */
+    transition: transform .2s ease-out;
+    transform-origin: 40px 0px;
+    /* CRITICAL: Matches wand tip at top-center of 80px container */
+    transform: rotate(-36deg);
+    /* Default angled position */
+}
+
+/* Style for the PNG wand image to ensure it scales correctly within the container */
+.custom-wand-cursor img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Scales image to fit without distortion */
+}
+
+
+/* =================================================================
+   MOBILE RESPONSIVENESS — Disable Custom Cursor
+   ================================================================= */
+
+/* On mobile/tablet, hide custom cursor and restore default
+   Touch interfaces don't need cursor styling */
+@media (max-width: 768px) {
+    .custom-wand-cursor {
+        display: none;
+    }
+
+    /* Restore default cursor on all elements */
+    body,
+    body *,
+    a,
+    button,
+    input,
+    textarea {
+        cursor: auto !important;
+    }
+}
+
+/* =================================================================
+   CURSOR STATE CLASSES — Interactive Transformations
+   ================================================================= */
+
+/* Hovering State — Straightens wand when over interactive elements
+   Applied by JavaScript when cursor enters buttons, links, cards, etc. */
+.custom-wand-cursor.hovering {
+    transform: rotate(0deg) scale(1.1);
+    /* Straightens and slightly enlarges */
+}
+
+/* Typing State — Angles wand right when in text inputs
+   Applied when focusing input fields or textareas */
+.custom-wand-cursor.typing {
+    transform: rotate(36deg);
+    /* Positive angle (opposite of default) */
+}
+
+/* =================================================================
+   LUMOS SPELL — CLICK EFFECTS
+   White-gold light burst with radiating sparks
+   ================================================================= */
+
+/* Lumos Burst — Main expanding light sphere on click
+   Creates dramatic wand-lighting effect */
+.lumos-burst {
+    /* Positioning */
+    position: fixed;
+    pointer-events: none;
+    /* Doesn't block clicks */
+    border-radius: 50%;
+    /* Perfect circle */
+
+    /* Gradient — White center fading to gold to house color */
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.85) 0%,
+            /* Bright white core */
+            rgba(255, 248, 220, 0.7) 20%,
+            /* Warm white */
+            rgba(197, 165, 107, 0.5) 45%,
+            /* Gold mid-layer */
+            var(--wand-magic-color-3) 70%,
+            /* House color */
+            transparent 100%);
+
+    /* Glow effects — Multiple shadow layers for depth */
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.6),
+        /* Inner white glow */
+        0 0 70px rgba(197, 165, 107, 0.4),
+        /* Gold mid glow */
+        0 0 100px var(--wand-magic-color-3);
+    /* House color outer glow */
+
+    /* Softening */
+    filter: blur(3px);
+
+    /* Animation */
+    animation: lumos-expand 1.2s ease-out forwards;
+    z-index: 9998;
+    /* Below cursor, above most content */
+}
+
+/* Lumos Sparks — Small radiating particles from burst
+   Created in radial pattern around click point */
+.lumos-spark {
+    /* Positioning */
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    /* Appearance — White to gold gradient */
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 1),
+            /* Bright white center */
+            rgba(197, 165, 107, 0.8));
+    /* Gold edge */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+
+    /* Animation — Flies outward using --tx and --ty variables */
+    animation: spark-fly 1s ease-out forwards;
+    z-index: 9998;
+}
+
+/* =================================================================
+   SERPENT TRAIL — MOVEMENT EFFECTS
+   Glowing bubbles that follow cursor movement
+   ================================================================= */
+
+/* Serpent Trail Bubbles — Persistent glowing path behind cursor
+   Creates mystical trail as wand moves through space */
+.serpent-trail {
+    /* Positioning */
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    border-radius: 50%;
+
+    /* Gradient — House color fading outward */
+    background: radial-gradient(circle,
+            var(--wand-magic-color-1) 0%,
+            /* Solid house color center */
+            rgba(197, 165, 107, 0.6) 40%,
+            /* Gold mid-layer */
+            transparent 70%);
+
+    /* Glow effects — Dual-layer shadow for depth */
+    box-shadow:
+        0 0 15px var(--wand-magic-glow),
+        /* Inner house color glow */
+        0 0 30px rgba(197, 165, 107, 0.5);
+    /* Outer gold glow */
+
+    /* Animation — Grows and fades out */
+    animation: trail-fade 0.8s ease-out forwards;
+    z-index: 9997;
+    /* Below Lumos effects */
+}
+
+/* =================================================================
+   WAND-TIP AURA — HOVER EFFECTS
+   Subtle pulsing glow on interactive elements
+   ================================================================= */
+
+/* Wand-Tip Aura — Gentle light that appears on hover
+   Replaces the old "Protego shield" concept with softer effect */
+.wand-tip-aura {
+    /* Positioning */
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    /* Gradient — White to gold to house color */
+    background: radial-gradient(circle,
+            rgba(255, 255, 255, 0.4) 0%,
+            /* White center */
+            rgba(197, 165, 107, 0.25) 40%,
+            /* Gold mid */
+            var(--wand-magic-color-3) 60%,
+            /* House color */
+            transparent 100%);
+
+    /* Glow */
+    box-shadow: 0 0 20px rgba(197, 165, 107, 0.3);
+
+    /* Softening */
+    filter: blur(2px);
+
+    /* Animation — Pulse expansion */
+    animation: wand-aura-pulse 1.2s ease-out forwards;
+    z-index: 9997;
+}
+
+/* =================================================================
+   ANCIENT RUNES — HOVER TEXT EFFECTS
+   Mystical symbols that appear when hovering interactive elements
+   ================================================================= */
+
+/* Ancient Rune Characters — Floating runic symbols
+   Uses actual runic Unicode characters for authenticity */
+.ancient-rune {
+    /* Positioning */
+    position: fixed;
+    pointer-events: none;
+
+    /* Typography */
+    font-size: 20px;
+    font-family: 'Cinzel', serif;
+    /* Matches site aesthetic */
+    color: rgba(197, 165, 107, 0.8);
+    /* Gold with transparency */
+
+    /* Glow effect */
+    text-shadow: 0 0 10px rgba(197, 165, 107, 0.8);
+
+    /* Animation — Rises and rotates using --rotation variable */
+    animation: rune-rise 2s ease-out forwards;
+    z-index: 9997;
+}
+
+/* =================================================================
+   AMBIENT MAGIC — GENERAL MOVEMENT PARTICLES
+   Subtle particles during cursor movement
+   ================================================================= */
+
+/* Ambient Magic Particles — Small rising sparkles
+   Adds extra magical atmosphere during cursor movement */
+.ambient-magic {
+    /* Positioning */
+    position: fixed;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    pointer-events: none;
+
+    /* Appearance — Gold particle */
+    background: rgba(197, 165, 107, 0.9);
+    box-shadow: 0 0 8px rgba(197, 165, 107, 0.8);
+
+    /* Animation — Floats upward with drift */
+    animation: float-up 3s ease-out forwards;
+    z-index: 9997;
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* How the Cursor System Works:
+   
+   1. CURSOR HIDING
+      - All default cursors removed via cursor: none
+      - Custom wand becomes visible via JavaScript positioning
+   
+   2. PIVOT POINT MATH (CRITICAL)
+      - transform-origin: 40px 0px matches:
+        * The top-center of the 80x80 container
+        * JavaScript wandOriginX/wandOriginY values
+      - This ensures rotation happens around the wand tip.
+   
+   3. STATE CLASSES
+      - .hovering — Added by JS when over interactive elements
+      - .typing — Added by JS when focusing text inputs
+      - Both trigger smooth transform transitions
+   
+   4. SPELL EFFECTS
+      - Created dynamically by cursor.js
+      - Each effect class handles its own styling
+      - z-index layers prevent overlap conflicts
+   
+   5. MOBILE BEHAVIOR
+      - @media query hides custom cursor
+      - Restores default cursor on touch devices
+      - Prevents cursor effects on phones/tablets
+*/

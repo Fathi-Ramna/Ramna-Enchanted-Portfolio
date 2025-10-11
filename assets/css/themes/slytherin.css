@@ -1,0 +1,265 @@
+/* =================================================================
+   SLYTHERIN THEME — HOUSE OF CUNNING & AMBITION
+   Default theme that loads when no other theme is selected
+   ================================================================= */
+
+/* Theme Selector
+   This applies the Slytherin color scheme to:
+   - Body with explicit .theme-slytherin class
+   - Body with no theme class (default fallback) */
+.theme-slytherin,
+body:not([class*="theme-"]) {
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE PRIMARY COLORS — Emerald Green Foundation
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Deep emerald - primary house color for major UI elements */
+    --house-primary: #0C3B2E;
+
+    /* Light emerald - used for highlights and lighter accents */
+    --house-tertiary: #154637;
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE ACCENT COLORS — Emerald Variations with Transparency
+       Used for layered backgrounds, glows, and atmospheric effects
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-accent-dark: rgba(12, 59, 46, 0.9);
+    /* Deepest emerald for shadows */
+    --house-accent-medium: rgba(21, 70, 55, 0.8);
+    /* Mid-tone emerald for depth */
+    --house-accent-light: rgba(40, 76, 53, 0.6);
+    /* Lighter emerald for glows */
+
+    /* ═════════════════════════════════════════════════════════════
+       WAND MAGIC COLORS — Ancient Emerald Spell Effects
+       Used for cursor trails, runes, and magical particle effects
+       ═════════════════════════════════════════════════════════════ */
+
+    --wand-magic-color-1: rgba(40, 76, 53, 0.85);
+    /* Primary spell color */
+    --wand-magic-color-2: rgba(28, 58, 42, 0.75);
+    /* Secondary spell shade */
+    --wand-magic-color-3: rgba(40, 76, 53, 0.5);
+    /* Faded spell trails */
+    --wand-magic-glow: rgba(40, 76, 53, 0.7);
+    /* Spell glow aura */
+
+    /* ═════════════════════════════════════════════════════════════
+       HERO CTA BUTTONS — Secondary Button Styling
+       Primary buttons use universal gold; these define secondary style
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-cta-secondary-bg: rgba(9, 44, 34, 0.35);
+    /* Default background */
+    --hero-cta-secondary-hover-bg: rgba(3, 38, 29, 0.55);
+    /* Hover state darkens */
+
+    /* ═════════════════════════════════════════════════════════════
+       ATMOSPHERIC OVERLAYS — Section Background Tints
+       Radial gradients that add house color to section backgrounds
+       Each section has a unique glow to create visual variety
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glow-1: rgba(94, 152, 121, .32);
+    /* Hero section glow */
+    --house-glow-2: rgba(43, 102, 79, .24);
+    /* Hero secondary glow */
+    --house-glow-3: rgba(53, 91, 68, 0.38);
+    /* About section glow */
+    --house-glow-4: rgba(43, 75, 59, 0.251);
+    /* Skills section glow */
+    --house-glow-5: rgba(118, 176, 142, .34);
+    /* Projects section glow */
+    --house-glow-6: rgba(126, 186, 148, .34);
+    /* Contact section glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       RADIAL GRADIENT COLORS — Circular UI Elements
+       Used in buttons, social links, and orb-style components
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-radial-1: rgba(28, 91, 68, 0.4);
+    /* Center highlight */
+    --house-radial-2: rgba(11, 32, 26, 0.6);
+    /* Outer shadow */
+
+    /* ═════════════════════════════════════════════════════════════
+       BACKGROUND IMAGES — AI-Generated Slytherin Chambers
+       Each section has a unique atmospheric background image
+       ═════════════════════════════════════════════════════════════ */
+
+    --bg-hero: url('../images/background/slytherin_common_room.png');
+    --bg-about: url('../images/background/slytherin_scholars_private_study.png');
+    --bg-skills: url('../images/background/slytherin_potions_classroom.png');
+    --bg-projects: url('../images/background/slytherin_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/slytherin_the_owlery.png');
+
+    /* ═════════════════════════════════════════════════════════════
+       SECTION OVERLAY ADJUSTMENTS — Darkness Level Control
+       Dark overlays that ensure text readability over backgrounds
+       Slytherin has subtle overlays since dungeons are already dark
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-overlay: rgba(0, 0, 0, 0.20);
+    /* Minimal - common room is dark */
+    --about-overlay: rgba(0, 0, 0, 0.10);
+    /* Very light - study is intimate */
+    --skills-overlay: rgba(0, 0, 0, 0.10);
+    /* Very light - potions classroom */
+    --projects-overlay: rgba(0, 0, 0, 0.10);
+    /* Very light - artifact chamber */
+    --contact-overlay: rgba(0, 0, 0, 0);
+    /* None - owlery has natural light */
+
+    /* ═════════════════════════════════════════════════════════════
+       GLASS/CARD EFFECTS — Glassmorphism Backgrounds
+       Frosted glass appearance for cards, panels, and containers
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glass-1: rgba(12, 32, 22, .42);
+    /* Standard glass (lighter) */
+    --house-glass-2: rgba(8, 18, 13, .28);
+    /* Subtle glass (more transparent) */
+    --house-glass-3: rgba(10, 24, 16, .65);
+    /* Strong glass (sidebar) */
+    --house-glass-4: rgba(12, 32, 22, .55);
+    /* Medium glass (sidebar inner) */
+
+    /* ═════════════════════════════════════════════════════════════
+       SIDEBAR/UI ELEMENTS — Interface Component Backgrounds
+       Used for navigation, controls, and interactive elements
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-ui-bg-1: rgba(10, 24, 16, .34);
+    /* Primary UI background */
+    --house-ui-bg-2: rgba(12, 32, 22, .26);
+    /* Secondary UI background */
+
+    /* ═════════════════════════════════════════════════════════════
+       VIAL LABEL BACKGROUNDS — Potion Skill Card Labels
+       The percentage indicators below each skill potion vial
+       ═════════════════════════════════════════════════════════════ */
+
+    --vial-label-bg: rgba(8, 12, 10, 0.85);
+    /* Default state */
+    --vial-label-hover-bg: rgba(12, 32, 22, 0.95);
+    /* Hover state (lighter) */
+
+    /* ═════════════════════════════════════════════════════════════
+       BUTTON/ORB BACKGROUNDS — Circular Interactive Elements
+       Used for nav buttons, social links, and orb-style controls
+       Creates depth with dual-color radial gradients
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Nav dock buttons */
+    --house-button-1: #1C5B44;
+    /* Nav button inner (lighter) */
+    --house-button-2: #0E2F25;
+    /* Nav button outer (darker) */
+
+    /* Sidebar social links */
+    --house-button-3: #1A4E3C;
+    /* Social link inner */
+    --house-button-4: #0E2821;
+    /* Social link outer */
+
+    /* Theme switcher artifact */
+    --house-button-5: #1B4C3B;
+    /* Artifact toggle inner */
+    --house-button-6: #0B201A;
+    /* Artifact toggle outer */
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE BADGE COLORS — Fixed Bottom-Right House Indicator
+       The small badge showing current house selection
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-badge-bg: rgba(12, 59, 46, 0.4);
+    /* Background tint */
+    --house-badge-border: rgba(197, 165, 107, 0.3);
+    /* Gold border */
+    --house-badge-glow: rgba(126, 186, 148, 0.3);
+    /* Emerald glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       POTION VIAL COLORS — Skill Card Liquid Gradients
+       Three-layer gradient creates realistic potion appearance
+       ═════════════════════════════════════════════════════════════ */
+
+    --potion-color-1: rgba(126, 186, 148, 0.9);
+    /* Top - light emerald */
+    --potion-color-2: rgba(94, 152, 121, 0.95);
+    /* Middle - mid emerald */
+    --potion-color-3: rgba(12, 59, 46, 1);
+    /* Bottom - deep emerald */
+
+    /* ═════════════════════════════════════════════════════════════
+       THEME COIN BACKGROUNDS — House Selector Panel
+       The artifact panel that opens when clicking house switcher
+       ═════════════════════════════════════════════════════════════ */
+
+    --coin-bg-1: rgba(28, 48, 40, 0.6);
+    /* Coin default top */
+    --coin-bg-2: rgba(14, 24, 20, 0.6);
+    /* Coin default bottom */
+    --coin-hover-bg: rgba(197, 165, 107, 0.18);
+    /* Gold hover overlay */
+
+    /* ═════════════════════════════════════════════════════════════
+       SUCCESS MODAL COLORS — Contact Form Success Message
+       The modal that appears after successfully sending a message
+       ═════════════════════════════════════════════════════════════ */
+
+    --modal-bg-1: rgba(12, 32, 22, 0.75);
+    /* Modal top gradient */
+    --modal-bg-2: rgba(18, 48, 36, 0.65);
+    /* Modal bottom gradient */
+
+    /* ═════════════════════════════════════════════════════════════
+       FOOTER BACKGROUND — Bottom Section Styling
+       Multi-layer gradient creates depth and atmospheric transition
+       ═════════════════════════════════════════════════════════════ */
+
+    --footer-radial-glow: rgba(12, 59, 46, 0.25);
+    /* Top radial accent */
+    --footer-gradient-start: rgba(3, 6, 4, 0.98);
+    /* Gradient top color */
+    --footer-gradient-end: rgba(2, 4, 3, 1);
+    /* Gradient bottom (darkest) */
+    --footer-top-vignette: rgba(5, 10, 8, 0.3);
+    /* Top fade overlay */
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* How This Theme System Works:
+   
+   1. THEME SELECTION
+      - User clicks house crest in theme artifact panel
+      - JavaScript adds .theme-slytherin class to <body>
+      - All these CSS variables override the defaults
+   
+   2. COLOR INHERITANCE
+      - Components reference variables like var(--house-primary)
+      - When theme changes, all components update automatically
+      - No need to modify individual component styles
+   
+   3. BACKGROUND SYSTEM
+      - Each section uses var(--bg-hero), var(--bg-about), etc.
+      - Overlay variables (--hero-overlay, etc.) adjust darkness
+      - Allows same layout with different imagery per house
+   
+   4. GLASSMORPHISM
+      - Multiple glass variables create layered depth
+      - Backdrop-filter: blur() in components creates frosted effect
+      - House colors tint the glass for themed appearance
+   
+   5. ATMOSPHERIC GLOWS
+      - Radial gradients (--house-glow-X) add color to sections
+      - Subtle tinting maintains dark atmosphere
+      - Each section gets unique glow for variety
+*/

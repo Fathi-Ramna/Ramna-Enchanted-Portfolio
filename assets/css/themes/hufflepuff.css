@@ -1,0 +1,279 @@
+/* =================================================================
+   HUFFLEPUFF THEME — HOUSE OF LOYALTY & DEDICATION
+   Warm earth tones with yellow/brown color scheme
+   Designed for bright daylight backgrounds with stronger overlays
+   ================================================================= */
+
+/* Theme Selector
+   Applies Hufflepuff color scheme when .theme-hufflepuff class
+   is added to body element by JavaScript */
+.theme-hufflepuff {
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE PRIMARY COLORS — Earth Brown Foundation
+       Warm, grounded tones representing loyalty and dedication
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Deep earth brown - primary house color for major UI elements */
+    --house-primary: #372E29;
+
+    /* Warm taupe - used for highlights and lighter accents */
+    --house-tertiary: #726255;
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE ACCENT COLORS — Brown/Yellow Variations with Transparency
+       Used for layered backgrounds, glows, and atmospheric effects
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-accent-dark: rgba(55, 46, 41, 0.9);
+    /* Deepest brown for shadows */
+    --house-accent-medium: rgba(114, 98, 85, 0.8);
+    /* Mid-tone taupe for depth */
+    --house-accent-light: rgba(238, 185, 57, 0.6);
+    /* Bright yellow for glows */
+
+    /* ═════════════════════════════════════════════════════════════
+       WAND MAGIC COLORS — Dark Aged Bronze Spell Effects
+       Used for cursor trails, runes, and magical particle effects
+       Muted to maintain sophisticated atmosphere
+       ═════════════════════════════════════════════════════════════ */
+
+    --wand-magic-color-1: rgba(114, 98, 85, 0.85);
+    /* Primary spell color */
+    --wand-magic-color-2: rgba(90, 75, 65, 0.75);
+    /* Secondary spell shade */
+    --wand-magic-color-3: rgba(114, 98, 85, 0.5);
+    /* Faded spell trails */
+    --wand-magic-glow: rgba(114, 98, 85, 0.7);
+    /* Spell glow aura */
+
+    /* ═════════════════════════════════════════════════════════════
+       HERO CTA BUTTONS — Secondary Button Styling
+       Primary buttons use universal gold; these define secondary style
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-cta-secondary-bg: rgba(47, 37, 31, 0.694);
+    /* Default background */
+    --hero-cta-secondary-hover-bg: rgba(55, 46, 41, 0.55);
+    /* Hover state */
+
+    /* ═════════════════════════════════════════════════════════════
+       ATMOSPHERIC OVERLAYS — Section Background Tints
+       Radial gradients that add house color to section backgrounds
+       Each section has a unique glow to create visual variety
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glow-1: rgba(238, 185, 57, .32);
+    /* Hero section glow - warm yellow */
+    --house-glow-2: rgba(114, 98, 85, .24);
+    /* Hero secondary glow - taupe */
+    --house-glow-3: rgba(238, 185, 57, .38);
+    /* About section glow */
+    --house-glow-4: rgba(200, 160, 70, .36);
+    /* Skills section glow */
+    --house-glow-5: rgba(238, 185, 57, .34);
+    /* Projects section glow */
+    --house-glow-6: rgba(200, 160, 70, .34);
+    /* Contact section glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       RADIAL GRADIENT COLORS — Circular UI Elements
+       Used in buttons, social links, and orb-style components
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-radial-1: rgba(114, 98, 85, 0.4);
+    /* Center highlight */
+    --house-radial-2: rgba(55, 46, 41, 0.6);
+    /* Outer shadow */
+
+    /* ═════════════════════════════════════════════════════════════
+       BACKGROUND IMAGES — AI-Generated Hufflepuff Chambers
+       Each section has a unique atmospheric background image
+       Hufflepuff backgrounds tend to be bright/daylight scenes
+       ═════════════════════════════════════════════════════════════ */
+
+    --bg-hero: url('../images/background/hufflepuff_common_room.png');
+    --bg-about: url('../images/background/hufflepuff_scholars_private_study.png');
+    --bg-skills: url('../images/background/hufflepuff_potions_classroom.png');
+    --bg-projects: url('../images/background/hufflepuff_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/hufflepuff_the_owlery.png');
+
+    /* ═════════════════════════════════════════════════════════════
+       SECTION OVERLAY ADJUSTMENTS — Darkness Level Control
+       Dark overlays that ensure text readability over backgrounds
+       Hufflepuff uses STRONGER overlays due to bright backgrounds
+       Higher values darken the bright daylight scenes
+       ═════════════════════════════════════════════════════════════ */
+
+    --hero-overlay: rgba(0, 0, 0, 0.10);
+    /* Light darkening for common room */
+    --about-overlay: rgba(0, 0, 0, 0.40);
+    /* Strong darkening for bright study */
+    --skills-overlay: rgba(0, 0, 0, 0.25);
+    /* Medium darkening for classroom */
+    --projects-overlay: rgba(0, 0, 0, 0.20);
+    /* Light-medium for artifacts */
+    --contact-overlay: rgba(0, 0, 0, 0.20);
+    /* Light-medium for owlery */
+
+    /* ═════════════════════════════════════════════════════════════
+       GLASS/CARD EFFECTS — Glassmorphism Backgrounds
+       Frosted glass appearance for cards, panels, and containers
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-glass-1: rgba(55, 46, 41, .42);
+    /* Standard glass (lighter) */
+    --house-glass-2: rgba(40, 34, 30, .28);
+    /* Subtle glass (more transparent) */
+    --house-glass-3: rgba(60, 48, 42, 0.65);
+    /* Strong glass (sidebar) */
+    --house-glass-4: rgba(63, 50, 43, 0.477);
+    /* Medium glass (sidebar inner) */
+
+    /* ═════════════════════════════════════════════════════════════
+       SIDEBAR/UI ELEMENTS — Interface Component Backgrounds
+       Used for navigation, controls, and interactive elements
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-ui-bg-1: rgba(55, 46, 41, .34);
+    /* Primary UI background */
+    --house-ui-bg-2: rgba(60, 50, 45, .26);
+    /* Secondary UI background */
+
+    /* ═════════════════════════════════════════════════════════════
+       VIAL LABEL BACKGROUNDS — Potion Skill Card Labels
+       The percentage indicators below each skill potion vial
+       ═════════════════════════════════════════════════════════════ */
+
+    --vial-label-bg: rgba(20, 16, 14, 0.85);
+    /* Default state */
+    --vial-label-hover-bg: rgba(55, 46, 41, 0.95);
+    /* Hover state (lighter) */
+
+    /* ═════════════════════════════════════════════════════════════
+       BUTTON/ORB BACKGROUNDS — Circular Interactive Elements
+       Used for nav buttons, social links, and orb-style controls
+       Creates depth with dual-color radial gradients
+       ═════════════════════════════════════════════════════════════ */
+
+    /* Nav dock buttons */
+    --house-button-1: #5C4D42;
+    /* Nav button inner (lighter) */
+    --house-button-2: #2D2520;
+    /* Nav button outer (darker) */
+
+    /* Sidebar social links */
+    --house-button-3: #6B5A4D;
+    /* Social link inner */
+    --house-button-4: #342A24;
+    /* Social link outer */
+
+    /* Theme switcher artifact */
+    --house-button-5: #635446;
+    /* Artifact toggle inner */
+    --house-button-6: #281F1B;
+    /* Artifact toggle outer */
+
+    /* ═════════════════════════════════════════════════════════════
+       HOUSE BADGE COLORS — Fixed Bottom-Right House Indicator
+       The small badge showing current house selection
+       ═════════════════════════════════════════════════════════════ */
+
+    --house-badge-bg: rgba(55, 46, 41, 0.4);
+    /* Background tint */
+    --house-badge-border: rgba(197, 165, 107, 0.3);
+    /* Gold border */
+    --house-badge-glow: rgba(238, 185, 57, 0.3);
+    /* Yellow glow */
+
+    /* ═════════════════════════════════════════════════════════════
+       POTION VIAL COLORS — Skill Card Liquid Gradients
+       Three-layer gradient creates realistic potion appearance
+       Warm yellow/gold tones for Hufflepuff house
+       ═════════════════════════════════════════════════════════════ */
+
+    --potion-color-1: rgba(238, 185, 57, 0.9);
+    /* Top - bright yellow */
+    --potion-color-2: rgba(200, 160, 70, 0.95);
+    /* Middle - golden yellow */
+    --potion-color-3: rgba(114, 98, 85, 1);
+    /* Bottom - deep bronze */
+
+    /* ═════════════════════════════════════════════════════════════
+       THEME COIN BACKGROUNDS — House Selector Panel
+       The artifact panel that opens when clicking house switcher
+       ═════════════════════════════════════════════════════════════ */
+
+    --coin-bg-1: rgba(55, 46, 41, 0.6);
+    /* Coin default top */
+    --coin-bg-2: rgba(40, 34, 30, 0.6);
+    /* Coin default bottom */
+    --coin-hover-bg: rgba(197, 165, 107, 0.18);
+    /* Gold hover overlay */
+
+    /* ═════════════════════════════════════════════════════════════
+       SUCCESS MODAL COLORS — Contact Form Success Message
+       The modal that appears after successfully sending a message
+       ═════════════════════════════════════════════════════════════ */
+
+    --modal-bg-1: rgba(55, 46, 41, 0.75);
+    /* Modal top gradient */
+    --modal-bg-2: rgba(70, 58, 50, 0.65);
+    /* Modal bottom gradient */
+
+    /* ═════════════════════════════════════════════════════════════
+       FOOTER BACKGROUND — Bottom Section Styling
+       Multi-layer gradient creates depth and atmospheric transition
+       ═════════════════════════════════════════════════════════════ */
+
+    --footer-radial-glow: rgba(55, 46, 41, 0.22);
+    /* Top radial accent */
+    --footer-gradient-start: rgba(6, 5, 4, 0.98);
+    /* Gradient top color */
+    --footer-gradient-end: rgba(4, 3, 2, 1);
+    /* Gradient bottom (darkest) */
+    --footer-top-vignette: rgba(12, 10, 8, 0.3);
+    /* Top fade overlay */
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/* Hufflepuff Theme Considerations:
+   
+   1. BRIGHT BACKGROUNDS
+      - Hufflepuff chambers feature warm daylight
+      - Solution: Stronger overlays (0.20-0.40 range)
+      - Maintains text readability without losing warmth
+   
+   2. COLOR PALETTE
+      - Earth browns provide grounding
+      - Bright yellow (238, 185, 57) for accent/energy
+      - Golden bronze (114, 98, 85) ties everything together
+   
+   3. OVERLAY STRATEGY
+      - About section needs strongest overlay (0.40)
+      - Skills/Projects/Contact use moderate (0.20-0.25)
+      - Hero uses lightest (0.10) to show common room
+   
+   4. WAND EFFECTS
+      - Bronze/taupe spell colors maintain sophistication
+      - Prevents overwhelming yellow in cursor trails
+      - Still visible but professionally muted
+   
+   5. POTION VIALS
+      - Yellow to bronze gradient creates honey/amber look
+      - Represents Hufflepuff's connection to earth/nature
+      - Three-layer depth maintains realism
+   
+   6. GLASS MORPHISM
+      - Slightly darker than Slytherin (55-63 range)
+      - Counteracts bright background wash
+      - Maintains premium frosted glass effect
+   
+   7. LOYALTY TO THEME
+      - Every color choice reflects house values
+      - Warm, welcoming, grounded atmosphere
+      - Professional yet approachable aesthetic
+*/
