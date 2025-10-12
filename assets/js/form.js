@@ -294,10 +294,10 @@ if (!form) {
     // FORM SUBMIT HANDLER — Main Submission Logic
     // ═══════════════════════════════════════════════════════════
     /* Validates all fields, triggers magical effects sequence,
-       simulates submission, and resets form on success */
+       submits to Formspree API, and resets form on success */
 
-    form.addEventListener('submit', (e) => {
-        /* Prevent default form submission (no page reload) */
+    form.addEventListener('submit', async (e) => {
+        /* Prevent default form submission (we'll handle it with fetch) */
         e.preventDefault();
 
         /* ═══════════════════════════════════════════════════════
@@ -345,61 +345,87 @@ if (!form) {
         }, 1000);
 
         /* ═══════════════════════════════════════════════════════
-           STEP 4: SIMULATE SUBMISSION — Replace with Real API Call
+           STEP 4: FORMSPREE API SUBMISSION — Real Email Delivery
            ═══════════════════════════════════════════════════════
-           Current: 4 second timeout simulates server response
-           Production: Replace with actual fetch() to your backend */
+           Sends form data to Formspree endpoint via fetch API.
+           Uses FormData to automatically format the submission.
+           Waits 4 seconds to let animations complete before showing
+           success message. */
 
-        setTimeout(() => {
-            /* --- SUCCESS MODAL --- */
-            showSuccessMessage();
-
-            /* --- RESET FORM --- */
-            form.reset();
-
-            /* --- CLEAR VALIDATION STATES --- */
-            // Remove all validation classes (green checkmarks, red X's)
-            document.querySelectorAll('.form-group').forEach(group => {
-                group.classList.remove('valid', 'invalid');
+        try {
+            // Prepare form data for Formspree
+            const formData = new FormData(form);
+            
+            // Submit to Formspree API
+            const response = await fetch('https://formspree.io/f/meorryrj', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // Request JSON response
+                }
             });
 
-            /* --- RESET CHARACTER COUNTER --- */
-            charCounter.textContent = '0 / 1000';
-            charCounter.classList.remove('warning', 'danger');
+            /* ═══ SUCCESS PATH ═══ */
+            if (response.ok) {
+                /* Wait 4 seconds for animations to complete
+                   before showing success and resetting form */
+                setTimeout(() => {
+                    /* --- SUCCESS MODAL --- */
+                    // Display owl delivery confirmation
+                    showSuccessMessage();
 
-            /* --- RESET TEXTAREA HEIGHT --- */
-            messageTextarea.style.height = 'auto';
+                    /* --- RESET FORM --- */
+                    // Clear all input fields
+                    form.reset();
 
+                    /* --- CLEAR VALIDATION STATES --- */
+                    // Remove all validation classes (green checkmarks, red X's)
+                    document.querySelectorAll('.form-group').forEach(group => {
+                        group.classList.remove('valid', 'invalid');
+                    });
+
+                    /* --- RESET CHARACTER COUNTER --- */
+                    // Return counter to initial state
+                    charCounter.textContent = '0 / 1000';
+                    charCounter.classList.remove('warning', 'danger');
+
+                    /* --- RESET TEXTAREA HEIGHT --- */
+                    // Collapse textarea back to default size
+                    messageTextarea.style.height = 'auto';
+
+                    /* --- RE-ENABLE SUBMIT BUTTON --- */
+                    // Allow form to be submitted again
+                    submitButton.disabled = false;
+                    submitText.textContent = 'Send an Owl';
+
+                }, 4000); // 4 second delay for animation timing
+
+            } else {
+                /* ═══ ERROR PATH: API RESPONDED WITH ERROR ═══ */
+                // Formspree returned non-200 status
+                throw new Error('Form submission failed');
+            }
+
+        } catch (error) {
+            /* ═══════════════════════════════════════════════════
+               ERROR HANDLING — Network or Submission Failure
+               ═══════════════════════════════════════════════════
+               Handles both network errors and API failures.
+               Shows user-friendly message with fallback email. */
+
+            console.error('Formspree submission error:', error);
+            
+            /* Show user-friendly error message */
+            alert(
+                'Oops! The owl couldn\'t deliver your message. ' +
+                'Please try again or email me directly at ramnarazeek@gmail.com'
+            );
+            
             /* --- RE-ENABLE SUBMIT BUTTON --- */
+            // Allow user to retry submission
             submitButton.disabled = false;
             submitText.textContent = 'Send an Owl';
-
-            /* ═══════════════════════════════════════════════════
-               PRODUCTION IMPLEMENTATION NOTES:
-               ═══════════════════════════════════════════════════
-               Replace the setTimeout above with actual API call:
-               
-               const response = await fetch('/api/contact', {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify({
-                       name: nameInput.value,
-                       email: emailInput.value,
-                       message: messageTextarea.value
-                   })
-               });
-               
-               if (response.ok) {
-                   // Success path (current code)
-               } else {
-                   // Error handling
-                   submitButton.disabled = false;
-                   submitText.textContent = 'Send an Owl';
-                   // Show error message to user
-               }
-            */
-
-        }, 4000); // 4 second simulated delay
+        }
     });
 }
 
@@ -436,7 +462,7 @@ if (!form) {
       T+0ms:    Submit sparkles begin rising
       T+1000ms: Owl animation starts
       T+1000ms: Particle explosion
-      T+4000ms: Success modal appears
+      T+4000ms: Success modal appears (if submission successful)
       T+7000ms: Success modal auto-dismisses
       
    6. SINGLE OWL CONSTRAINT
@@ -454,6 +480,7 @@ if (!form) {
       - Disabled during submission prevents double-submit
       - Text changes to "Sending..." for feedback
       - Re-enabled after completion or error
+      - Remains disabled during 4-second animation window
    
    9. FORM RESET
       - Clears all fields
@@ -461,9 +488,18 @@ if (!form) {
       - Resets counter and textarea height
       - Returns UI to pristine state
    
-   10. PRODUCTION DEPLOYMENT
-       - Replace setTimeout(4000) with real API call
-       - Add error handling for failed submissions
-       - Consider adding loading spinner
-       - Implement server-side validation
+   10. FORMSPREE INTEGRATION (PRODUCTION READY)
+       - Uses async/await for clean error handling
+       - FormData automatically formats submission
+       - Proper error handling with user feedback
+       - Fallback email provided on failure
+       - No page reload required (single-page experience)
+       - Server-side validation handled by Formspree
+   
+   11. ERROR HANDLING STRATEGY
+       - Network errors caught by try/catch
+       - API errors caught via response.ok check
+       - User sees friendly error message
+       - Console logs technical details for debugging
+       - Form remains functional after errors
 */
