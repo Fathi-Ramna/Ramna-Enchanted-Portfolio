@@ -417,7 +417,7 @@
     background: linear-gradient(180deg,
             rgba(0, 0, 0, 0.186) 0%,
             rgba(0, 0, 0, 0.25) 100%),
-        url('../images/ramna.png') center/cover;
+        url('../images/ramna.jpg') center/cover;
 
     position: relative;
     z-index: 1;
@@ -427,7 +427,7 @@
 /* Remove gradient overlay on hover */
 .profile-ring:hover .profile-image {
     background: linear-gradient(180deg, transparent, transparent),
-        url('../images/ramna.png') center/cover;
+        url('../images/ramna.jpg') center/cover;
 }
 
 /* ═══ PROFILE TEXT ELEMENTS ═══ */

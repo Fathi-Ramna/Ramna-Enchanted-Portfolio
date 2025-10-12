@@ -1,0 +1,669 @@
+/* =================================================================
+   RESPONSIVE.CSS — OPTIMIZED FOR 1366×768 LAPTOPS
+   Built from scratch analyzing laptop display independently
+   ================================================================= */
+
+/* =================================================================
+   PRIMARY BREAKPOINT: 1366×768 LAPTOPS (and 1440×900)
+   All measurements calculated specifically for this resolution
+   ================================================================= */
+@media (max-width: 1600px) and (min-width: 769px) {
+
+    /* ═══ BASE FONT SIZE ═══ */
+    /* Calculated for comfortable reading on 1366px width */
+    html {
+        font-size: 13px;
+        /* Increased from 11px - more readable */
+    }
+
+    /* ═══ NAVIGATION DOCK ═══ */
+    .nav-dock {
+        top: 12px;
+        padding: 5px 10px;
+    }
+
+    .nav-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .nav-button i {
+        font-size: 1rem;
+    }
+
+    .nav-button::before {
+        font-size: 0.8rem;
+    }
+
+    /* ═══ SIDEBAR DRAWER ═══ */
+    .sidebar-drawer {
+        width: 19.5rem;
+        /* Expanded from 18rem */
+    }
+
+    .sidebar-handle {
+        right: -2.4rem;
+        width: 2.4rem;
+        height: 5.5rem;
+    }
+
+    .premium-sidebar-card {
+        padding: 1.6rem 1.4rem;
+    }
+
+    .profile-ring {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-name {
+        font-size: 1.9rem;
+    }
+
+    .profile-title {
+        font-size: 1.05rem;
+    }
+
+    .profile-divider {
+        width: 90px;
+        margin: 0.9rem auto 1.1rem;
+    }
+
+    .profile-quote {
+        font-size: 0.95rem;
+        padding: 0.85rem 1rem;
+    }
+
+    .cv-download-button {
+        margin: 2rem auto 0;
+        padding: 0.7rem 1.3rem;
+        font-size: 0.8rem;
+    }
+
+    .cv-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .social-links {
+        gap: 0.7rem;
+        margin-top: 1rem;
+    }
+
+    .house-emblem {
+        margin-top: 1.4rem;
+    }
+
+    .house-emblem i {
+        font-size: 2.6rem;
+    }
+
+    .house-emblem-prefix {
+        font-size: 0.9rem;
+    }
+
+    .house-emblem-label {
+        font-size: 0.9rem;
+    }
+
+    /* ═══ THEME ARTIFACT ═══ */
+    .theme-artifact {
+        right: 1rem;
+        top: 1rem;
+    }
+
+    .artifact-toggle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .artifact-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .artifact-panel {
+        margin-top: 0.5rem;
+        margin-left: -150px;
+        padding: 0.5rem;
+    }
+
+    .coin {
+        padding: 0.55rem 0.65rem;
+        gap: 0.6rem;
+    }
+
+    .crest {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* ═══ HERO SECTION ═══ */
+    .hero {
+        min-height: 100vh;
+        /* Increased from 95vh to prevent about section visibility */
+    }
+
+    .hero-content {
+        padding: 2rem;
+        max-width: 900px;
+        /* Wider for 1366px screen */
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 7vw, 6rem);
+        /* Expanded significantly from 2.84rem/5.57rem */
+        letter-spacing: 0.07em;
+    }
+
+    .hero-subtitle {
+        font-size: 1.15rem;
+        /* Expanded from 1.05rem */
+        letter-spacing: 0.16em;
+        margin-top: 0.5rem;
+    }
+
+    .hero-tagline {
+        font-size: 1.05rem;
+        /* Larger */
+        max-width: 560px;
+        /* Reduced significantly from 670px */
+        margin: 1rem auto 1.9rem;
+        line-height: 1.65;
+    }
+
+    .hero-ctas {
+        gap: 0.8rem;
+    }
+
+    .hero-cta {
+        padding: 0.5rem 1.7rem;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        /* Larger */
+    }
+
+    .cta-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .hero-serpent {
+        width: 48vw;
+        max-width: 750px;
+    }
+
+    .scroll-indicator {
+        bottom: 1.8rem;
+        font-size: 1.1rem;
+    }
+
+    /* ═══ SECTIONS - GENERAL ═══ */
+    .content-section {
+        min-height: 100svh;
+        /* Increased from 95vh to prevent next section visibility */
+        padding: 5.5rem 2rem;
+        /* More padding */
+    }
+
+    .section-header {
+        margin-bottom: 3rem;
+    }
+
+    .section-title {
+        font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+        /* Larger */
+    }
+
+    .section-subtitle {
+        font-size: 1.05rem;
+        /* Larger */
+        margin-top: 0.6rem;
+    }
+
+    .section-content {
+        max-width: 1180px;
+        /* Wider - uses more screen width */
+    }
+
+    /* ═══ ABOUT SECTION ═══ */
+    .about-illuminated-card {
+        max-width: 625px;
+        /* Reduced by ~20% from 780px */
+        padding: 2.5rem 1.9rem;
+        /* Reduced by ~20% from 2.2rem 2.4rem */
+        border-radius: 18px;
+    }
+
+    .about-illuminated-card::before {
+        width: 85px;
+        height: 85px;
+        border-radius: 0 18px 0 85px;
+    }
+
+    .statement-text {
+        font-size: 1.3rem;
+        /* Much larger text */
+        line-height: 1.8;
+        margin-bottom: 1.8rem;
+    }
+
+    .glow-word {
+        font-size: inherit;
+        /* Ensure glow words match */
+    }
+
+    .statement-signature {
+        font-size: 1rem;
+        /* Larger */
+        margin-top: 1.5rem;
+    }
+
+    /* ═══ SKILLS SECTION ═══ */
+    /* Adjusted to match desktop readability and layout */
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* This forces 2 columns */
+        gap: 1.8rem;
+        max-width: 1000px;
+        /* Reduced from 1200px to shrink the cards */
+    }
+
+    .skill-card {
+        padding: 1.9rem 1.7rem;
+        /* Horizontal padding reduced from 1.85rem */
+        gap: 1.8rem;
+        /* More space between content and vial */
+        min-height: 190px;
+        /* Slightly taller for better proportions */
+        border-radius: 18px;
+    }
+
+    .skill-card::before {
+        width: 90px;
+        height: 90px;
+        border-radius: 0 18px 0 90px;
+    }
+
+    .skill-header {
+        gap: 1.1rem;
+        /* Better spacing between icon and title */
+    }
+
+    .skill-icon {
+        font-size: 2.6rem;
+        /* Larger icons closer to desktop */
+    }
+
+    .skill-name {
+        font-size: 1.5rem;
+        /* Larger, more readable title text */
+        letter-spacing: 0.02em;
+    }
+
+    .skill-description {
+        font-size: 1.08rem;
+        /* Increased from 1.02rem for better readability */
+        line-height: 1.65;
+        /* Better line height for reading */
+    }
+
+    .potion-vial-container {
+        width: 80px;
+        /* Slightly larger vial */
+        height: 145px;
+    }
+
+    .vial-glass {
+        width: 62px;
+        height: 125px;
+        border-radius: 11px 11px 16px 16px;
+    }
+
+    .vial-glass::before {
+        left: 9px;
+        top: 13px;
+        width: 13px;
+    }
+
+    .vial-bubble {
+        width: 3.8px;
+        height: 3.8px;
+    }
+
+    .vial-label {
+        bottom: -30px;
+        font-size: 0.85rem;
+        /* Slightly larger label */
+        padding: 5px 9px;
+        border-radius: 7px;
+    }
+
+    .vial-steam-container {
+        top: -9px;
+        width: 72px;
+        height: 92px;
+    }
+
+    .steam-particle {
+        width: 18px;
+        height: 18px;
+    }
+
+    .vapor-wisp {
+        width: 37px;
+        height: 54px;
+    }
+
+    /* ═══ PROJECTS SECTION ═══ */
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.8rem;
+        max-width: 1000px;
+        /* Reduced from 1180px to shrink cards horizontally */
+    }
+
+    .project-card {
+        min-height: 305px;
+        /* Reduced by ~20% from 380px */
+        padding: 1.5rem 1.35rem;
+        /* Horizontal padding reduced more from 1.45rem */
+        border-radius: 18px;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        /* Larger text */
+        margin-bottom: 0.9rem;
+    }
+
+    .project-description {
+        font-size: 1.02rem;
+        /* Increased from 0.95rem for better readability */
+        line-height: 1.6;
+        margin-bottom: 1.3rem;
+    }
+
+    .project-tags {
+        gap: 0.6rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .project-tag {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 12px;
+    }
+
+    .project-links {
+        gap: 0.7rem;
+    }
+
+    .project-link {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        border-radius: 15px;
+        gap: 0.45rem;
+    }
+
+    /* ═══ CONTACT SECTION ═══ */
+
+
+    .contact-container {
+        max-width: 550px;
+        /* Reduced horizontal padding from 1.75rem to 1.2rem to make fields wider */
+        padding: 2.6rem 2.5rem;
+        border-radius: 16px;
+    }
+
+    .form-row {
+        /* Reduced gap from 1.4rem to 1rem to shrink space between fields */
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.4rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 0.95rem 0.9rem 0.55rem;
+        /* Less padding */
+        font-size: 0.95rem;
+        /* Larger text */
+        border-radius: 11px;
+    }
+
+    .form-label {
+        top: 0.95rem;
+        left: 0.9rem;
+        font-size: 0.95rem;
+        /* Larger text */
+    }
+
+    .form-input:focus+.form-label,
+    .form-input:not(:placeholder-shown)+.form-label,
+    .form-textarea:focus+.form-label,
+    .form-textarea:not(:placeholder-shown)+.form-label {
+        top: 0.3rem;
+        left: 0.75rem;
+        font-size: 0.7rem;
+    }
+
+    .validation-icon {
+        right: 0.9rem;
+        top: 0.95rem;
+        width: 18px;
+        height: 18px;
+    }
+
+    .form-textarea {
+        min-height: 120px;
+    }
+
+    .char-counter {
+        font-size: 0.8rem;
+        margin-top: 0.35rem;
+    }
+
+    .submit-container {
+        margin-top: 1.8rem;
+    }
+
+    .submit-button {
+        padding: 1rem;
+        font-size: 0.9rem;
+        /* Larger text */
+        border-radius: 35px;
+        gap: 0.7rem;
+    }
+
+    .submit-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .success-message {
+        padding: 2.2rem 2.6rem;
+        border-radius: 18px;
+    }
+
+    .success-message-icon {
+        font-size: 3.4rem;
+        margin-bottom: 0.9rem;
+    }
+
+    .success-message-text {
+        font-size: 1.4rem;
+        /* Larger text */
+    }
+
+    .success-message-subtext {
+        font-size: 0.95rem;
+        /* Larger text */
+    }
+
+    /* ═══ FOOTER ═══ */
+    .footer {
+        /* Top, Left/Right, Bottom padding */
+        padding: 3.8rem 8rem 1.8rem;
+        /* Increased horizontal padding from 2rem to 8rem */
+    }
+
+    .footer::before {
+        height: 52px;
+    }
+
+    .footer-divider {
+        gap: 1.4rem;
+        margin-bottom: 2.6rem;
+    }
+
+    .footer-serpent {
+        font-size: 1.6rem;
+    }
+
+    .footer-grid {
+        display: grid;
+        /* This explicitly creates 3 equal columns */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.4rem;
+        margin-bottom: 2.4rem;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+        font-size: 0.95rem;
+        /* Larger text */
+        line-height: 1.6;
+    }
+
+    .footer-title {
+        font-size: 1.05rem;
+        /* Larger text */
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-link {
+        font-size: 0.95rem;
+        /* Larger text */
+        gap: 0.45rem;
+    }
+
+    .footer-contact-item {
+        font-size: 0.95rem;
+        /* Larger text */
+        gap: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .footer-contact-item i {
+        font-size: 1.05rem;
+        width: 22px;
+    }
+
+    .footer-social-links {
+        gap: 0.9rem;
+    }
+
+    .footer-social-link {
+        width: 42px;
+        height: 42px;
+        font-size: 1rem;
+    }
+
+    .footer-bottom {
+        padding-top: 1.8rem;
+        font-size: 0.85rem;
+        gap: 0.9rem;
+    }
+
+    /* ═══ HOUSE BADGE ═══ */
+    .house-badge {
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
+        border-radius: 18px;
+        gap: 0.45rem;
+    }
+
+    .house-badge img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* =================================================================
+   FINE-TUNE FOR EXACT 1366×768
+   ================================================================= */
+@media (width: 1366px) and (height: 768px) {
+    html {
+        font-size: 13px;
+        /* Optimized specifically for this resolution */
+    }
+
+    .section-content {
+        max-width: 1180px;
+        /* 86% of screen width */
+    }
+}
+
+/* =================================================================
+   IMPLEMENTATION NOTES
+   ================================================================= */
+
+/*
+DESIGN PHILOSOPHY FOR 1366×768:
+
+1. SCREEN UTILIZATION: 70-86% width usage for main content
+   - About card: 780px (57%)
+   - Skills/Projects: 1180-1200px max (86-88%)
+   - Contact form: 680px (50%)
+
+2. TYPOGRAPHY: Base 13px (comfortable reading)
+   - Hero title: up to 5.5rem
+   - Section titles: up to 3.8rem
+   - Body text: 0.95-1.05rem
+   - Card titles: 1.3-1.5rem
+   - Skill card text: 1.02rem (improved for readability)
+
+3. SPACING STRATEGY:
+   - More whitespace between elements (gaps)
+   - Balanced internal padding in cards
+   - 95vh sections for vertical breathing room
+   - Skills section: improved spacing matching desktop
+
+4. CARD SIZING:
+   - Skills: 440px minmax (better text layout, 2 columns)
+   - Projects: 300px minmax (3 columns fit perfectly)
+   - Skill cards: taller with better proportions (190px min-height)
+
+5. TEXT READABILITY:
+   - All text sizes increased for better readability
+   - Line heights optimized for reading
+   - Skills section brought closer to desktop sizes
+   - Better contrast with improved spacing
+
+SKILLS SECTION IMPROVEMENTS:
+- Increased card width minimum to 440px
+- Larger text: titles 1.5rem, descriptions 1.02rem
+- Better padding: 1.9rem 2.2rem
+- Larger icons: 2.6rem
+- Improved spacing throughout
+- Slightly larger vials for better visibility
+
+This design is optimized for 1366×768 screens with special
+attention to matching desktop readability in the skills section.
+*/

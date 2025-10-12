@@ -1083,11 +1083,14 @@
     margin-bottom: 1.5rem;
     flex: 1;
     text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-    transition: text-shadow var(--t-med);
+    /* Updated transition to include opacity */
+    transition: text-shadow var(--t-med), opacity var(--t-med);
 }
 
 .project-card:hover .project-description {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    /* Add this line to make it disappear */
+    opacity: 0;
 }
 
 /* ═══ TECHNOLOGY TAGS ═══ */
