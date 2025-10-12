@@ -10,13 +10,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO & Social Sharing Metadata -->
-  <meta name="description" content="Fathima Ramna - Data Science Specialist | Machine Learning & AI Portfolio">
-  <meta name="keywords" content="data science, machine learning, AI, portfolio">
-  <meta property="og:title" content="Fathima Ramna - Data Science Portfolio">
-  <meta property="og:description" content="Professional portfolio showcasing data science projects and expertise">
-  <title>Fathima Ramna - Data Science Portfolio</title>
+  <title>Fathima Ramna | Data Science & AI Portfolio</title>
+  <meta name="author" content="Fathima Ramna">
+  <meta name="description"
+    content="Explore the data science and machine learning portfolio of Fathima Ramna. Discover Ramna's projects in predictive analytics, deep learning, and NLP that turn complex data into strategic insights.">
+  <meta name="keywords"
+    content="Fathima Ramna, Ramna, Data Scientist, Machine Learning Engineer, AI Specialist, Portfolio, Data Analytics, Python, Deep Learning, NLP">
+
+  <link rel="canonical" href="https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/">
+
+  <meta property="og:title" content="Fathima Ramna | Data Science & AI Portfolio">
+  <meta property="og:description"
+    content="Discover Ramna's projects in predictive analytics, deep learning, and NLP that turn complex data into strategic insights.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/">
+  <meta property="og:image"
+    content="https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/assets/images/social-preview.jpg">
+  <meta property="og:site_name" content="Fathima Ramna's Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fathima Ramna | Data Science & AI Portfolio">
+  <meta name="twitter:description"
+    content="Discover Ramna's projects in predictive analytics, deep learning, and NLP that turn complex data into strategic insights.">
+  <meta name="twitter:image"
+    content="https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/assets/images/social-preview.jpg">
+  <meta name="twitter:creator" content="@fathi_ramna">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Fathima Ramna",
+    "alternateName": "Ramna",
+    "jobTitle": "Data Science Specialist",
+    "url": "https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/",
+    "image": "https://fathi-ramna.github.io/Ramna-Enchanted-Portfolio/assets/images/ramna.png",
+    "sameAs": [
+      "https://github.com/Fathi-Ramna",
+      "https://www.linkedin.com/in/fathima-ramna-643785355/",
+      "https://x.com/fathi_ramna",
+      "https://www.instagram.com/fathi_ramna/",
+      "https://web.facebook.com/fathimaramna.razeek"
+    ]
+  }
+}
+</script>
+
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/favicon/r-logo.png">
+  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Ramna" />
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
 
   <!-- ================================================================= -->
   <!-- STYLESHEETS & FONTS -->
@@ -40,6 +88,7 @@
   <link rel="stylesheet" href="assets/css/animations.css"> <!-- All @keyframes -->
   <link rel="stylesheet" href="assets/css/cursor.css"> <!-- Wand cursor styling -->
   <link rel="stylesheet" href="assets/css/sections.css"> <!-- Hero, About, Skills, etc. -->
+  <link rel="stylesheet" href="assets/css/responsive.css"> <!-- Responsive breakpoints -->
 
   <!-- ================================================================= -->
   <!-- DEFERRED JAVASCRIPTS -->
@@ -599,22 +648,37 @@
         <h2 class="section-title">Send an Owl</h2>
         <p class="section-subtitle">Let's create something remarkable</p>
       </div>
+      <!-- Container for the entire contact form -->
       <div class="contact-container">
-        <form id="contactForm">
-          <!-- Row for Name and Email fields -->
+
+        <!-- Form element with Formspree endpoint for handling submissions -->
+        <form id="contactForm" action="https://formspree.io/f/meorryrj" method="POST">
+
+          <!-- Row grouping name and email fields side by side -->
           <div class="form-row">
+
+            <!-- Name input field -->
             <div class="form-group">
-              <input class="form-input" id="name" type="text" required placeholder=" ">
+              <!-- Text input for user's name -->
+              <input class="form-input" id="name" type="text" name="name" required placeholder=" ">
+              <!-- Floating label for accessibility and UX -->
               <label class="form-label" for="name">Your Name</label>
+
+              <!-- Icon shown when input is valid -->
               <img class="validation-icon valid-icon"
                 src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
+              <!-- Icon shown when input is invalid -->
               <img class="validation-icon invalid-icon"
                 src="https://img.icons8.com/?size=100&id=0ny63oDHuHzk&format=png&color=FF6B6B" alt="Invalid" />
             </div>
 
+            <!-- Email input field -->
             <div class="form-group">
-              <input class="form-input" id="email" type="email" required placeholder=" ">
+              <!-- Email input with Formspree's expected name attribute (_replyto) -->
+              <input class="form-input" id="email" type="email" name="_replyto" required placeholder=" ">
               <label class="form-label" for="email">Your Email</label>
+
+              <!-- Valid/invalid icons for email field -->
               <img class="validation-icon valid-icon"
                 src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
               <img class="validation-icon invalid-icon"
@@ -622,27 +686,37 @@
             </div>
           </div>
 
-          <!-- Message Textarea -->
+          <!-- Message textarea field -->
           <div class="form-group">
-            <textarea class="form-textarea" id="message" required placeholder=" " maxlength="1000"></textarea>
+            <!-- Textarea for user's message, with max length of 1000 characters -->
+            <textarea class="form-textarea" id="message" name="message" required placeholder=" "
+              maxlength="1000"></textarea>
             <label class="form-label" for="message">Your Message</label>
+
+            <!-- Validation icons for message field -->
             <img class="validation-icon valid-icon"
               src="https://img.icons8.com/?size=100&id=KHzbbdfBj3PC&format=png&color=C5A56B" alt="Valid" />
             <img class="validation-icon invalid-icon"
               src="https://img.icons8.com/?size=100&id=0ny63oDHuHzk&format=png&color=FF6B6B" alt="Invalid" />
+
+            <!-- Character counter for live feedback -->
             <div class="char-counter" id="charCounter">0 / 1000</div>
           </div>
 
-          <!-- Submit Button -->
+          <!-- Submit button section -->
           <div class="submit-container">
             <button class="submit-button" type="submit">
+              <!-- Themed icon (owl) for magical touch -->
               <img class="submit-icon" src="https://img.icons8.com/?size=100&id=36449&format=png&color=C5A56B"
                 alt="Send owl" />
+              <!-- Button text with thematic phrasing -->
               <span id="submitText">Send an Owl</span>
             </button>
           </div>
+
         </form>
       </div>
+
     </div>
   </section>
 
