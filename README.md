@@ -24,6 +24,18 @@ Explore all four Hogwarts house themes with full-page screenshots:
 
 ---
 
+## Recent Updates
+
+**Latest improvements to the portfolio:**
+
+- **`responsive.css`**: Added critical stylesheet to address scaling issues on laptop screens (1366x768). Since the portfolio was originally designed on a desktop (1920x1080), content appeared oversized on smaller displays. This breakpoint ensures optimal viewing experience across all screen sizes.
+- **Favicon Complete**: Populated `assets/images/favicon/` folder with full set of generated icons (apple-touch-icon, multiple sizes, webmanifest)
+- **Profile Image**: Added compressed profile picture (`ramna.jpg`) to `assets/images/` for optimized loading
+- **Social Preview**: Added `social-preview.jpg` for enhanced social media sharing and link previews
+- **Better Organization**: Moved `wand1.png` and `wand2.png` from root directory into `assets/images/` for improved project structure
+
+---
+
 ## Table of Contents
 
 - [About The Project](#about-the-project)
@@ -78,11 +90,12 @@ Switch between four distinct Hogwarts house themes (Slytherin, Gryffindor, Raven
 - Glitch effects and hover interactions
 
 ### Professional Features
-- Custom-designed favicon
-- Fully responsive layout (desktop, tablet, mobile)
+- Custom-designed favicon set for all devices
+- Fully responsive layout with optimized breakpoints scaling from desktop (1920x1080) to laptop (1366x768), tablet, and mobile
 - Well-documented, maintainable codebase
 - Form validation with character counters
 - Downloadable resume integration
+- Social media preview image for link sharing
 
 ---
 
@@ -174,7 +187,8 @@ Follow these steps to get a local copy up and running.
 │   │   ├── layout.css
 │   │   ├── sections.css
 │   │   ├── animations.css
-│   │   └── cursor.css
+│   │   ├── cursor.css
+│   │   └── responsive.css
 │   ├── js/
 │   │   ├── cursor.js
 │   │   ├── theme-switcher.js
@@ -184,20 +198,30 @@ Follow these steps to get a local copy up and running.
 │   ├── images/
 │   │   ├── background/
 │   │   ├── favicon/
+│   │   │   ├── apple-touch-icon.png
+│   │   │   ├── favicon-16x16.png
+│   │   │   ├── favicon-32x32.png
+│   │   │   ├── favicon.ico
+│   │   │   └── site.webmanifest
 │   │   ├── projects/
-│   │   └── screenshots/
-│   │       ├── slytherin-theme.png
-│   │       ├── gryffindor-theme.png
-│   │       ├── ravenclaw-theme.png
-│   │       └── hufflepuff-theme.png
+│   │   │   ├── project-1.png
+│   │   │   ├── project-2.png
+│   │   │   └── project-3.png
+│   │   ├── screenshots/
+│   │   │   ├── slytherin-theme.png
+│   │   │   ├── gryffindor-theme.png
+│   │   │   ├── ravenclaw-theme.png
+│   │   │   └── hufflepuff-theme.png
+│   │   ├── ramna.jpg
+│   │   ├── social-preview.jpg
+│   │   ├── wand1.png
+│   │   └── wand2.png
 │   ├── fonts/
 │   │   ├── HarryPotter.ttf
 │   │   └── OFL.txt
 │   └── files/
 │       └── Fathima_Ramna_Resume.pdf
 ├── index.html
-├── wand1.png
-├── wand2.png
 ├── LICENSE
 └── README.md
 ```
@@ -251,6 +275,12 @@ Follow these steps to get a local copy up and running.
 - Magical effect overlays (Lumos, sparks, runes)
 - Serpent trail animations
 - Click and hover states
+
+**`assets/css/responsive.css`**
+- Responsive design breakpoints for optimal viewing across devices
+- Critical laptop breakpoint (1366x768) to scale down content designed for desktop (1920x1080)
+- Adjusts layout, typography, and spacing to prevent oversized elements on smaller screens
+- Ensures consistent visual experience across desktop, laptop, tablet, and mobile devices
 
 ### Interactivity (JavaScript)
 
