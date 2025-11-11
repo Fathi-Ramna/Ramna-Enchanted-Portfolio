@@ -69,10 +69,18 @@ sidebarSocialLinks.forEach(link => {
 // =================================================================
 /**
  * Toggles the visibility of the sidebar by adding/removing the 'open' class.
+ * On mobile, also prevents body scrolling when sidebar is open.
  * Exposed globally to be callable from `onclick` in the HTML.
  */
 window.toggleSidebar = function () {
-    document.getElementById('sidebarDrawer').classList.toggle('open');
+    const sidebar = document.getElementById('sidebarDrawer');
+    sidebar.classList.toggle('open');
+
+    // On mobile, prevent background scrolling when sidebar is open
+    const isMobile = document.body.dataset.mobileUi === 'true';
+    if (isMobile) {
+        document.body.classList.toggle('sidebar-open', sidebar.classList.contains('open'));
+    }
 }
 
 /**
@@ -168,6 +176,154 @@ function handleHouseBadgePosition() {
 
 // Initialize the badge positioning logic.
 handleHouseBadgePosition();
+
+
+// =================================================================
+// MOBILE TAB BAR — Active State Management
+// =================================================================
+/**
+ * Updates the active tab indicator in the mobile bottom navigation
+ * based on the current scroll position and visible section.
+ */
+function initMobileTabBar() {
+    const tabButtons = document.querySelectorAll('.m-app__tabbar button[data-section]');
+    if (tabButtons.length === 0) return; // Exit if mobile tab bar doesn't exist
+
+    // Map section IDs to their corresponding elements
+    const sections = Array.from(tabButtons).map(btn => {
+        const sectionId = btn.getAttribute('data-section');
+        return {
+            id: sectionId,
+            element: document.getElementById(sectionId),
+            button: btn
+        };
+    }).filter(s => s.element); // Remove any that don't have matching sections
+
+    function updateActiveTab() {
+        // Get current scroll position
+        const scrollPos = window.pageYOffset + 120; // Offset for app bar
+
+        // Find which section is currently in view
+        let currentSection = sections[0]; // Default to first section (hero)
+
+        for (const section of sections) {
+            const rect = section.element.getBoundingClientRect();
+            const absoluteTop = rect.top + window.pageYOffset;
+
+            if (scrollPos >= absoluteTop - 150) {
+                currentSection = section;
+            }
+        }
+
+        // Update active states
+        sections.forEach(section => {
+            if (section === currentSection) {
+                section.button.classList.add('active');
+            } else {
+                section.button.classList.remove('active');
+            }
+        });
+    }
+
+    // Update on scroll
+    window.addEventListener('scroll', updateActiveTab);
+
+    // Update on initial load
+    document.addEventListener('DOMContentLoaded', updateActiveTab);
+    updateActiveTab(); // Call immediately in case DOM is already loaded
+}
+
+// Initialize mobile tab bar functionality
+initMobileTabBar();
+
+// =================================================================
+// TOUCH CARD TOGGLES — Mirror Hover Reveals on Tap
+// =================================================================
+function initTouchCardToggles() {
+    const cardSelector = '.project-card, .skill-card, .about-illuminated-card';
+    const touchQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+    let cards = [];
+    let isBound = false;
+
+    const clearCardStates = (except) => {
+        cards.forEach(card => {
+            if (!except || card !== except) {
+                card.classList.remove('is-revealed');
+            }
+        });
+    };
+
+    const handleCardClick = (event) => {
+        const interactiveTarget = event.target.closest('a, button');
+        if (interactiveTarget) {
+            return; // Allow natural navigation for links/buttons
+        }
+
+        const card = event.currentTarget;
+        const shouldActivate = !card.classList.contains('is-revealed');
+
+        event.preventDefault();
+        clearCardStates();
+        if (shouldActivate) {
+            card.classList.add('is-revealed');
+        }
+    };
+
+    const handleDocumentClick = (event) => {
+        if (!event.target.closest(cardSelector)) {
+            clearCardStates();
+        }
+    };
+
+    const bind = () => {
+        if (isBound) return;
+        cards = Array.from(document.querySelectorAll(cardSelector));
+        if (!cards.length) return;
+
+        cards.forEach(card => {
+            card.addEventListener('click', handleCardClick);
+            card.classList.remove('is-revealed');
+        });
+        document.addEventListener('click', handleDocumentClick);
+        document.body.classList.add('touch-card-mode');
+        isBound = true;
+    };
+
+    const unbind = () => {
+        if (!isBound) return;
+        cards.forEach(card => card.removeEventListener('click', handleCardClick));
+        document.removeEventListener('click', handleDocumentClick);
+        clearCardStates();
+        cards = [];
+        document.body.classList.remove('touch-card-mode');
+        isBound = false;
+    };
+
+    const evaluate = () => {
+        if (touchQuery.matches) {
+            bind();
+        } else {
+            unbind();
+        }
+    };
+
+    const start = () => {
+        evaluate();
+        if (touchQuery.addEventListener) {
+            touchQuery.addEventListener('change', evaluate);
+        } else if (touchQuery.addListener) {
+            touchQuery.addListener(evaluate);
+        }
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', start, { once: true });
+    } else {
+        start();
+    }
+}
+
+initTouchCardToggles();
 
 /* =================================================================
    IMPLEMENTATION NOTES

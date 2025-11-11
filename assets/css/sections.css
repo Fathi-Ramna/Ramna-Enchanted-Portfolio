@@ -431,7 +431,8 @@
 }
 
 /* Hover effects - lifts and glows */
-.about-illuminated-card:hover {
+body:not(.touch-card-mode) .about-illuminated-card:hover,
+.about-illuminated-card.is-revealed {
     transform: translateY(-8px) scale(1.01);
     border-color: rgba(197, 165, 107, .65);
     box-shadow:
@@ -456,7 +457,8 @@
     pointer-events: none;
 }
 
-.about-illuminated-card:hover::after {
+body:not(.touch-card-mode) .about-illuminated-card:hover::after,
+.about-illuminated-card.is-revealed::after {
     opacity: 1;
 }
 
@@ -587,7 +589,8 @@
 }
 
 /* Hover effects */
-.skill-card:hover {
+body:not(.touch-card-mode) .skill-card:hover,
+.skill-card.is-revealed {
     transform: translateY(-8px) scale(1.01);
     border-color: rgba(197, 165, 107, .65);
     box-shadow:
@@ -612,7 +615,8 @@
     pointer-events: none;
 }
 
-.skill-card:hover::after {
+body:not(.touch-card-mode) .skill-card:hover::after,
+.skill-card.is-revealed::after {
     opacity: 1;
 }
 
@@ -639,7 +643,8 @@
     transition: transform var(--t-med), text-shadow var(--t-med);
 }
 
-.skill-card:hover .skill-icon {
+body:not(.touch-card-mode) .skill-card:hover .skill-icon,
+.skill-card.is-revealed .skill-icon {
     transform: scale(1.1) rotateY(10deg);
     text-shadow: 0 0 30px rgba(197, 165, 107, .6);
 }
@@ -727,7 +732,8 @@
     transition: all var(--t-med);
 }
 
-.skill-card:hover .vial-glass {
+body:not(.touch-card-mode) .skill-card:hover .vial-glass,
+.skill-card.is-revealed .vial-glass {
     border-color: rgba(197, 165, 107, 0.5);
     box-shadow:
         inset 2px 0 12px rgba(255, 255, 255, 0.2),
@@ -840,7 +846,8 @@
     transition: all var(--t-med);
 }
 
-.skill-card:hover .vial-label {
+body:not(.touch-card-mode) .skill-card:hover .vial-label,
+.skill-card.is-revealed .vial-label {
     background: var(--vial-label-hover-bg);
     border-color: rgba(197, 165, 107, 0.5);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
@@ -860,7 +867,8 @@
     transition: opacity 0.4s ease;
 }
 
-.skill-card:hover .vial-steam-container {
+body:not(.touch-card-mode) .skill-card:hover .vial-steam-container,
+.skill-card.is-revealed .vial-steam-container {
     opacity: 1;
     /* Show on card hover */
 }
@@ -995,7 +1003,8 @@
     z-index: 0;
 }
 
-.project-card:hover .project-image-reveal {
+body:not(.touch-card-mode) .project-card:hover .project-image-reveal,
+.project-card.is-revealed .project-image-reveal {
     opacity: 1;
 }
 
@@ -1008,7 +1017,8 @@
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.project-card:hover .project-image {
+body:not(.touch-card-mode) .project-card:hover .project-image,
+.project-card.is-revealed .project-image {
     transform: scale(1.08);
     /* Subtle zoom on hover */
 }
@@ -1069,7 +1079,8 @@
     transition: text-shadow var(--t-med);
 }
 
-.project-card:hover .project-title {
+body:not(.touch-card-mode) .project-card:hover .project-title,
+.project-card.is-revealed .project-title {
     text-shadow:
         0 5px 12px rgba(0, 0, 0, 0.885),
         0 0 20px rgba(197, 165, 107, 0.4);
@@ -1087,7 +1098,8 @@
     transition: text-shadow var(--t-med), opacity var(--t-med);
 }
 
-.project-card:hover .project-description {
+body:not(.touch-card-mode) .project-card:hover .project-description,
+.project-card.is-revealed .project-description {
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
     /* Add this line to make it disappear */
     opacity: 0;
@@ -1115,7 +1127,8 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.project-card:hover .project-tag {
+body:not(.touch-card-mode) .project-card:hover .project-tag,
+.project-card.is-revealed .project-tag {
     background: var(--house-glass-1);
     border-color: rgba(197, 165, 107, .5);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -1155,7 +1168,8 @@
 }
 
 /* Card hover effects */
-.project-card:hover {
+body:not(.touch-card-mode) .project-card:hover,
+.project-card.is-revealed {
     transform: translateY(-8px);
     border-color: rgba(197, 165, 107, .6);
     box-shadow:
@@ -1181,7 +1195,8 @@
     z-index: 0;
 }
 
-.project-card:hover::before {
+body:not(.touch-card-mode) .project-card:hover::before,
+.project-card.is-revealed::before {
     opacity: 1;
 }
 
@@ -1811,12 +1826,42 @@
     opacity: 0.8;
 }
 
-.footer-copyright {
+.footer-signoff {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.footer-signoff__primary {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: 0.95rem;
+    letter-spacing: 0.015em;
+}
+
+.footer-year {
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.footer-dot {
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-signoff__crafted {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.footer-crafted-text {
+    color: rgba(255, 255, 255, 0.75);
 }
 
 /* Animated heart */

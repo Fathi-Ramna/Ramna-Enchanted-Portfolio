@@ -35,9 +35,35 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastY = null; // Previous mouse Y position
     let isHoveringInteractive = false; // Whether cursor is over interactive element
     let hoverInterval = null; // Timer for wand-tip aura effect
-    let runeInterval = null; // Timer for ancient rune spawning
+    let runeInterval = null; // Timer/interval for ancient rune spawning
+    let runeBurstTimeout = null; // Timeout to stop rune bursts on touch
     let currentMouseX = 0; // Current mouse X position
     let currentMouseY = 0; // Current mouse Y position
+
+    const pointerQuery = window.matchMedia('(hover: none), (pointer: coarse)');
+    let isTouchPointer = pointerQuery.matches;
+    const handlePointerSchemeChange = () => {
+        isTouchPointer = pointerQuery.matches;
+    };
+
+    if (pointerQuery.addEventListener) {
+        pointerQuery.addEventListener('change', handlePointerSchemeChange);
+    } else if (pointerQuery.addListener) {
+        pointerQuery.addListener(handlePointerSchemeChange);
+    }
+
+    const runeCharacters = ['ᛋ', 'ᚦ', 'ᚱ', 'ᛚ', 'ᚺ', 'ᛗ', 'ᚹ', 'ᛈ', 'ᚾ'];
+    const spawnRune = () => {
+        if (!isHoveringInteractive) return;
+        const rune = document.createElement('div');
+        rune.className = 'ancient-rune';
+        rune.textContent = runeCharacters[Math.floor(Math.random() * runeCharacters.length)];
+        rune.style.setProperty('--rotation', `${(Math.random() - 0.5) * 90}deg`);
+        rune.style.left = `${currentMouseX + (Math.random() - 0.5) * 120}px`;
+        rune.style.top = `${currentMouseY + 20 + (Math.random() - 0.5) * 80}px`;
+        document.body.appendChild(rune);
+        setTimeout(() => rune.remove(), 2000);
+    };
 
     // ═══════════════════════════════════════════════════════════
     // LUMOS SPELL — CLICK EVENT (Wand Lighting Burst)
@@ -46,65 +72,80 @@ document.addEventListener('DOMContentLoaded', () => {
        rising ambient particles when user clicks anywhere */
 
     document.addEventListener('mousedown', (e) => {
-        // Skip on mobile devices
-        if (window.innerWidth <= 768) return;
+        const isTouchLikeClick = isTouchPointer || window.innerWidth <= 768;
 
-        /* === MAIN LUMOS BURST === */
-        const burst = document.createElement('div');
-        burst.className = 'lumos-burst';
+        if (!isTouchLikeClick) {
+            /* === MAIN LUMOS BURST === */
+            const burst = document.createElement('div');
+            burst.className = 'lumos-burst';
 
-        // Size and positioning
-        const size = 100;
-        burst.style.width = `${size}px`;
-        burst.style.height = `${size}px`;
-        burst.style.left = `${e.clientX - size / 2}px`; // Center on click
-        burst.style.top = `${e.clientY - size / 2}px`;
+            // Size and positioning
+            const size = 100;
+            burst.style.width = `${size}px`;
+            burst.style.height = `${size}px`;
+            burst.style.left = `${e.clientX - size / 2}px`; // Center on click
+            burst.style.top = `${e.clientY - size / 2}px`;
 
-        // Add to DOM and auto-remove after animation
-        document.body.appendChild(burst);
-        setTimeout(() => burst.remove(), 1200);
+            // Add to DOM and auto-remove after animation
+            document.body.appendChild(burst);
+            setTimeout(() => burst.remove(), 1200);
 
-        /* === RADIATING SPARKS === */
-        // Create 16 sparks in a perfect circle around click point
-        for (let i = 0; i < 16; i++) {
-            const spark = document.createElement('div');
-            spark.className = 'lumos-spark';
+            /* === RADIATING SPARKS === */
+            // Create 16 sparks in a perfect circle around click point
+            for (let i = 0; i < 16; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'lumos-spark';
 
-            // Calculate angle for even distribution
-            const angle = (i / 16) * Math.PI * 2;
-            const distance = 80 + Math.random() * 40; // Random distance 80-120px
+                // Calculate angle for even distribution
+                const angle = (i / 16) * Math.PI * 2;
+                const distance = 80 + Math.random() * 40; // Random distance 80-120px
 
-            // Set direction using CSS variables
-            spark.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
-            spark.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
+                // Set direction using CSS variables
+                spark.style.setProperty('--tx', `${Math.cos(angle) * distance}px`);
+                spark.style.setProperty('--ty', `${Math.sin(angle) * distance}px`);
 
-            // Position at click point
-            spark.style.left = `${e.clientX}px`;
-            spark.style.top = `${e.clientY}px`;
-
-            // Add to DOM and auto-remove
-            document.body.appendChild(spark);
-            setTimeout(() => spark.remove(), 1000);
-        }
-
-        /* === AMBIENT RISING PARTICLES === */
-        // Create 8 particles that float upward after click
-        for (let i = 0; i < 8; i++) {
-            setTimeout(() => {
-                const particle = document.createElement('div');
-                particle.className = 'ambient-magic';
-
-                // Random horizontal drift
-                particle.style.setProperty('--drift', `${(Math.random() - 0.5) * 40}px`);
-
-                // Random position near click point
-                particle.style.left = `${e.clientX + (Math.random() - 0.5) * 60}px`;
-                particle.style.top = `${e.clientY + (Math.random() - 0.5) * 60}px`;
+                // Position at click point
+                spark.style.left = `${e.clientX}px`;
+                spark.style.top = `${e.clientY}px`;
 
                 // Add to DOM and auto-remove
-                document.body.appendChild(particle);
-                setTimeout(() => particle.remove(), 3000);
-            }, i * 100); // Staggered timing for cascading effect
+                document.body.appendChild(spark);
+                setTimeout(() => spark.remove(), 1000);
+            }
+
+            /* === AMBIENT RISING PARTICLES === */
+            // Create 8 particles that float upward after click
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'ambient-magic';
+
+                    // Random horizontal drift
+                    particle.style.setProperty('--drift', `${(Math.random() - 0.5) * 40}px`);
+
+                    // Random position near click point
+                    particle.style.left = `${e.clientX + (Math.random() - 0.5) * 60}px`;
+                    particle.style.top = `${e.clientY + (Math.random() - 0.5) * 60}px`;
+
+                    // Add to DOM and auto-remove
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 3000);
+                }, i * 100); // Staggered timing for cascading effect
+            }
+        } else {
+            // Touch rune burst
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => {
+                    const rune = document.createElement('div');
+                    rune.className = 'ancient-rune';
+                    rune.textContent = runeCharacters[Math.floor(Math.random() * runeCharacters.length)];
+                    rune.style.setProperty('--rotation', `${(Math.random() - 0.5) * 90}deg`);
+                    rune.style.left = `${e.clientX + (Math.random() - 0.5) * 60}px`;
+                    rune.style.top = `${e.clientY + (Math.random() - 0.5) * 60}px`;
+                    document.body.appendChild(rune);
+                    setTimeout(() => rune.remove(), 2000);
+                }, i * 80);
+            }
         }
     });
 
@@ -144,36 +185,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 /* --- WAND-TIP AURA EFFECT --- */
                 // Creates pulsing glow at wand tip every 400ms
-                hoverInterval = setInterval(() => {
-                    const aura = document.createElement('div');
-                    aura.className = 'wand-tip-aura';
-                    aura.style.left = `${currentMouseX - 20}px`; // Center on cursor
-                    aura.style.top = `${currentMouseY - 20}px`;
-                    document.body.appendChild(aura);
-                    setTimeout(() => aura.remove(), 1200);
-                }, 400);
+                if (!isTouchPointer) {
+                    hoverInterval = setInterval(() => {
+                        const aura = document.createElement('div');
+                        aura.className = 'wand-tip-aura';
+                        aura.style.left = `${currentMouseX - 20}px`; // Center on cursor
+                        aura.style.top = `${currentMouseY - 20}px`;
+                        document.body.appendChild(aura);
+                        setTimeout(() => aura.remove(), 1200);
+                    }, 400);
+                }
 
                 /* --- ANCIENT RUNES EFFECT --- */
-                // Spawns floating runic characters every 700ms
-                const runes = ['ᛋ', 'ᚦ', 'ᚱ', 'ᛚ', 'ᚺ', 'ᛗ', 'ᚹ', 'ᛈ', 'ᚾ'];
-                runeInterval = setInterval(() => {
-                    if (!isHoveringInteractive) return; // Safety check
+                // Desktop: continuous runes. Touch: short burst per tap.
+                const startRuneEffect = () => {
+                    if (runeInterval) {
+                        clearInterval(runeInterval);
+                        runeInterval = null;
+                    }
+                    if (runeBurstTimeout) {
+                        clearTimeout(runeBurstTimeout);
+                        runeBurstTimeout = null;
+                    }
 
-                    const rune = document.createElement('div');
-                    rune.className = 'ancient-rune';
-                    rune.textContent = runes[Math.floor(Math.random() * runes.length)];
+                    if (isTouchPointer) {
+                        spawnRune();
+                        runeInterval = setInterval(spawnRune, 220);
+                        runeBurstTimeout = setTimeout(() => {
+                            clearInterval(runeInterval);
+                            runeInterval = null;
+                            runeBurstTimeout = null;
+                        }, 900);
+                    } else {
+                        runeInterval = setInterval(spawnRune, 700);
+                    }
+                };
 
-                    // Random rotation
-                    rune.style.setProperty('--rotation', `${(Math.random() - 0.5) * 90}deg`);
-
-                    // WIDER SPAWN AREA: 120px horizontal, 80px vertical
-                    // This spreads runes more naturally around cursor
-                    rune.style.left = `${currentMouseX + (Math.random() - 0.5) * 120}px`;
-                    rune.style.top = `${currentMouseY + 20 + (Math.random() - 0.5) * 80}px`;
-
-                    document.body.appendChild(rune);
-                    setTimeout(() => rune.remove(), 2000);
-                }, 700);
+                startRuneEffect();
             }
         } else {
             /* === LEAVING INTERACTIVE ELEMENT === */
@@ -184,8 +232,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Stop both interval effects
                 clearInterval(hoverInterval);
                 clearInterval(runeInterval); // CRITICAL: Must clear to prevent memory leak
+                clearTimeout(runeBurstTimeout);
                 hoverInterval = null;
                 runeInterval = null;
+                runeBurstTimeout = null;
             }
         }
 

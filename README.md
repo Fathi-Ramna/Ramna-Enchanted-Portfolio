@@ -28,6 +28,19 @@ Explore all four Hogwarts house themes with full-page screenshots:
 
 **Latest improvements to the portfolio:**
 
+- **Immersive Mobile UI (`assets/css/mobile/mobile-app.css`)**  
+  Introduced a bespoke “app shell” that mirrors high-end product UI:
+  - Full-screen sidebar drawer with inline close button and reflowed profile card
+  - Hero/About/Skills/Projects/Contact sections rebuilt with touch-friendly spacing, typography tokens, and stacked CTAs
+  - Potion vials now include horizontal fluid physics, animated Brownian bubbles, and adaptive highlights that respect `prefers-reduced-motion`
+  - Footer spacing reworked so the persistent tab bar never covers legal text
+
+- **Mobile Experience Script (`assets/js/mobile-ui.js`)**  
+  Lightweight controller that:
+  - Toggles the `data-mobile-ui` attribute so the CSS overlay is activated only under `max-width: 768px`
+  - Dynamically rebuilds skill-vial bubbles with randomized drift paths tied to mastery percentages
+  - Restores the original markup when returning to desktop so no progressive-enhancement hacks are needed
+
 - **`responsive.css`**: Added critical stylesheet to address scaling issues on laptop screens (1366x768). Since the portfolio was originally designed on a desktop (1920x1080), content appeared oversized on smaller displays. This breakpoint ensures optimal viewing experience across all screen sizes.
 - **Favicon Complete**: Populated `assets/images/favicon/` folder with full set of generated icons (apple-touch-icon, multiple sizes, webmanifest)
 - **Profile Image**: Added compressed profile picture (`ramna.jpg`) to `assets/images/` for optimized loading
@@ -81,6 +94,12 @@ Switch between four distinct Hogwarts house themes (Slytherin, Gryffindor, Raven
 - Custom background imagery
 - House-specific atmospheric effects
 - Theme persistence via sessionStorage
+
+### Touch-First Mobile Experience
+- Dedicated `mobile-app.css` layer with its own spacing tokens, tap targets, and tab bar
+- Slide-in profile drawer refactored into a modal with an inline close button
+- Potion vials gain horizontal fill physics, randomized bubble fields, and shimmering liquid highlights
+- Sticky nav + footer spacing ensures persistent controls never overlap content
 
 ### Animated & Interactive UI
 - Floating magical particles with parallax effects
@@ -188,13 +207,16 @@ Follow these steps to get a local copy up and running.
 │   │   ├── sections.css
 │   │   ├── animations.css
 │   │   ├── cursor.css
-│   │   └── responsive.css
+│   │   ├── responsive.css
+│   │   └── mobile/
+│   │       └── mobile-app.css   ← mobile-specific layer   
 │   ├── js/
 │   │   ├── cursor.js
 │   │   ├── theme-switcher.js
 │   │   ├── navigation.js
 │   │   ├── particles.js
-│   │   └── form.js
+│   │   ├── form.js
+│   │   └── mobile-ui.js            ← activates mobile shell + vial FX
 │   ├── images/
 │   │   ├── background/
 │   │   ├── favicon/

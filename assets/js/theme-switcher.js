@@ -99,6 +99,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (toggle && panel) {
         toggle.addEventListener('click', () => panel.classList.toggle('open'));
     }
+
+    // --- 3. Setup Mobile Theme Toggle ---
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    if (mobileThemeToggle) {
+        // Define the theme cycle order
+        const themes = ['slytherin', 'gryffindor', 'ravenclaw', 'hufflepuff'];
+
+        mobileThemeToggle.addEventListener('click', () => {
+            // Get current theme
+            const currentTheme = sessionStorage.getItem('selectedTheme') || 'slytherin';
+            // Find current index
+            const currentIndex = themes.indexOf(currentTheme);
+            // Calculate next index (cycle back to 0 if at the end)
+            const nextIndex = (currentIndex + 1) % themes.length;
+            // Apply next theme
+            changeTheme(themes[nextIndex]);
+
+            // Add a brief animation feedback
+            mobileThemeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                mobileThemeToggle.style.transform = '';
+            }, 300);
+        });
+    }
 });
 
 /* =================================================================
