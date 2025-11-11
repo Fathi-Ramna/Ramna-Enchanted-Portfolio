@@ -1683,7 +1683,7 @@ body:not(.touch-card-mode) .project-card:hover::before,
 }
 
 .footer-logo {
-    font-family: 'Old London', 'Cinzel', serif;
+    font-family: 'Cinzel', 'Old London', serif;
     font-size: 2rem;
     color: var(--gold);
     text-shadow: 0 2px 12px rgba(197, 165, 107, 0.4);
@@ -1697,6 +1697,12 @@ body:not(.touch-card-mode) .project-card:hover::before,
     font-size: 1.05rem;
     line-height: 1.6;
     opacity: 0.9;
+}
+
+.footer-name {
+    font-family: 'Cinzel', 'Old London', serif;
+    letter-spacing: 0.06em;
+    color: var(--gold);
 }
 
 /* ═══ FOOTER SECTIONS ═══ */

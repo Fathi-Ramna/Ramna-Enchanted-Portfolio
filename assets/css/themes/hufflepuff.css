@@ -92,11 +92,11 @@
        Hufflepuff backgrounds tend to be bright/daylight scenes
        ═════════════════════════════════════════════════════════════ */
 
-    --bg-hero: url('/assets/images/background/hufflepuff_common_room.png');
-    --bg-about: url('/assets/images/background/hufflepuff_scholars_private_study.png');
-    --bg-skills: url('/assets/images/background/hufflepuff_potions_classroom.png');
-    --bg-projects: url('/assets/images/background/hufflepuff_chamber_of_magical_artifacts.png');
-    --bg-contact: url('/assets/images/background/hufflepuff_the_owlery.png');
+    --bg-hero: url('../images/background/hufflepuff_common_room.png');
+    --bg-about: url('../images/background/hufflepuff_scholars_private_study.png');
+    --bg-skills: url('../images/background/hufflepuff_potions_classroom.png');
+    --bg-projects: url('../images/background/hufflepuff_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/hufflepuff_the_owlery.png');
 
     /* ═════════════════════════════════════════════════════════════
        SECTION OVERLAY ADJUSTMENTS — Darkness Level Control

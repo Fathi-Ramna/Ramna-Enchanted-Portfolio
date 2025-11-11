@@ -90,11 +90,11 @@
        Each section has a unique atmospheric background image
        ═════════════════════════════════════════════════════════════ */
 
-    --bg-hero: url('/assets/images/background/gryffindor_common_room.png');
-    --bg-about: url('/assets/images/background/gryffindor_scholars_private_study.png');
-    --bg-skills: url('/assets/images/background/gryffindor_potions_classroom.png');
-    --bg-projects: url('/assets/images/background/gryffindor_chamber_of_magical_artifacts.png');
-    --bg-contact: url('/assets/images/background/gryffindor_the_owlery.png');
+    --bg-hero: url('../images/background/gryffindor_common_room.png');
+    --bg-about: url('../images/background/gryffindor_scholars_private_study.png');
+    --bg-skills: url('../images/background/gryffindor_potions_classroom.png');
+    --bg-projects: url('../images/background/gryffindor_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/gryffindor_the_owlery.png');
 
     /* ═════════════════════════════════════════════════════════════
        SECTION OVERLAY ADJUSTMENTS — Darkness Level Control

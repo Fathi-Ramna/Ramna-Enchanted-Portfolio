@@ -1,0 +1,1201 @@
+/* =================================================================
+   MOBILE EXPERIENCE ENTRY POINT
+   This stylesheet is loaded on top of the desktop experience once
+   the JavaScript flag sets body[data-mobile-ui="true"].
+   ================================================================= */
+
+/* Hide mobile navigation by default (desktop) */
+.m-corner-btn,
+.m-app__tabbar {
+  display: none;
+}
+
+/* -----------------------------------------------------------------
+   Design tokens tuned for small screens. Everything in this file
+   references these values so adjustments stay consistent.
+   ----------------------------------------------------------------- */
+body[data-mobile-ui="true"] {
+  /* Tokens */
+  --m-radius-s: 8px;
+  --m-radius-m: 16px;
+  --m-radius-l: 28px;
+  --m-space-2xs: 4px;
+  --m-space-xs: 8px;
+  --m-space-s: 12px;
+  --m-space-m: 16px;
+  --m-space-l: 24px;
+  --m-space-xl: 32px;
+  --m-space-2xl: 48px;
+  --m-tap-size: 48px;
+  --m-color-bg: rgba(6, 10, 8, 0.96);
+  --m-color-surface: rgba(18, 24, 22, 0.85);
+  --m-color-surface-alt: rgba(24, 32, 29, 0.9);
+  --m-color-border: rgba(255, 255, 255, 0.08);
+  --m-color-text: #f7f3e9;
+  --m-color-text-muted: rgba(247, 243, 233, 0.75);
+  --m-color-primary: #c5a56b;
+  --m-shadow-float: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --m-shadow-card: 0 6px 18px rgba(0, 0, 0, 0.25);
+  --m-corner-btn-size: 48px;
+  --m-tab-bar-height: 64px;
+}
+
+/* High-contrast mode aligns with OS settings but keeps the warm
+   palette by swapping variables instead of redefining styles. */
+body[data-mobile-ui="true"][data-contrast="high"],
+body[data-mobile-ui="true"].m-contrast-high {
+  --m-color-bg: #010302;
+  --m-color-surface: rgba(10, 14, 12, 0.98);
+  --m-color-surface-alt: rgba(28, 36, 32, 0.95);
+  --m-color-text: #ffffff;
+  --m-color-text-muted: rgba(255, 255, 255, 0.8);
+  --m-color-primary: #ffdc96;
+  --m-shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 18px 32px rgba(0, 0, 0, 0.75);
+}
+
+body[data-mobile-ui="true"][data-contrast="high"] .m-app__tabbar,
+body[data-mobile-ui="true"].m-contrast-high .m-app__tabbar {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+body[data-mobile-ui="true"][data-contrast="high"] .hero-cta,
+body[data-mobile-ui="true"].m-contrast-high .hero-cta {
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 0 2px rgba(255, 220, 150, 0.45), var(--m-shadow-card);
+}
+
+body[data-mobile-ui="true"][data-contrast="high"] .m-app__tabbar button .m-tab__chip,
+body[data-mobile-ui="true"].m-contrast-high .m-app__tabbar button .m-tab__chip {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #0b0f0d;
+}
+
+@media (prefers-contrast: more) {
+  body[data-mobile-ui="true"] {
+    --m-color-text: #ffffff;
+    --m-color-text-muted: rgba(255, 255, 255, 0.85);
+    --m-color-border: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Hide desktop navigation on mobile to avoid duplicated controls */
+body[data-mobile-ui="true"] .nav-dock {
+  display: none !important;
+}
+
+/* Hide theme artifact on mobile (conflicts with mobile layout) */
+body[data-mobile-ui="true"] .theme-artifact {
+  display: none !important;
+}
+
+/* Hide house badge on mobile - takes up valuable screen space */
+body[data-mobile-ui="true"] .house-badge {
+  display: none !important;
+}
+
+/* =================================================================
+   SIDEBAR DRAWER
+   Recycles the premium profile card but turns it into a modal sheet
+   that slides in from the left and locks background scrolling.
+   ================================================================= */
+body[data-mobile-ui="true"] .sidebar-drawer {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  /* Dynamic viewport height for mobile browsers */
+  top: 0;
+  left: 0;
+  z-index: 300;
+  /* Above corner buttons and tab bar */
+  display: block;
+  /* Change from flex to block to prevent any centering */
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--m-space-l));
+  /* Remove faux top bar spacing */
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + var(--m-space-xl));
+  padding-left: var(--m-space-m);
+  padding-right: var(--m-space-m);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: rgba(6, 10, 8, 0.98);
+  backdrop-filter: blur(24px);
+  transform: translateX(-100%);
+  /* Remove desktop vertical offset while keeping slide-in behavior */
+}
+
+/* Prevent body scroll when sidebar is open on mobile */
+body[data-mobile-ui="true"].sidebar-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Hide the sidebar handle on mobile - use corner button instead */
+body[data-mobile-ui="true"] .sidebar-handle {
+  display: none !important;
+}
+
+/* Adjust sidebar card layout for full-screen mobile */
+body[data-mobile-ui="true"] .sidebar-drawer .premium-sidebar-card {
+  width: min(100%, 380px);
+  margin: var(--m-space-l) auto var(--m-space-xl);
+  padding: var(--m-space-xl) var(--m-space-m);
+  border-radius: var(--m-radius-l);
+  background: linear-gradient(135deg, var(--house-glass-3) 0%, var(--house-glass-4) 100%);
+  border: 1px solid rgba(197, 165, 107, 0.35);
+  box-shadow: var(--m-shadow-card);
+  overflow: visible;
+  text-align: center;
+  transform: none !important;
+  /* Prevent any transforms */
+  position: relative !important;
+  /* Anchor close button */
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .sidebar-story {
+  display: grid;
+  gap: var(--m-space-m);
+  margin-top: var(--m-space-l);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .sidebar-story__panel {
+  padding: var(--m-space-m);
+  border-radius: var(--m-radius-m);
+  border: 1px solid rgba(197, 165, 107, 0.25);
+  background: linear-gradient(135deg, var(--house-glass-3, rgba(16, 26, 23, 0.85)), rgba(6, 10, 8, 0.75));
+  color: var(--m-color-text);
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .sidebar-story__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 15% 20%, rgba(197, 165, 107, 0.25), transparent 45%);
+  opacity: 0.6;
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .ritual-progress {
+  display: flex;
+  justify-content: center;
+  gap: var(--m-space-xs);
+  margin-top: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .ritual-progress span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(197, 165, 107, 0.35);
+  background: rgba(6, 10, 8, 0.65);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .ritual-progress span.is-active {
+  background: var(--m-color-primary);
+  box-shadow: 0 0 12px rgba(197, 165, 107, 0.75);
+}
+
+/* Ensure profile elements are visible and properly spaced */
+body[data-mobile-ui="true"] .sidebar-drawer .profile-ring {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .profile-name {
+  margin-top: var(--m-space-s);
+  font-size: 1.6rem;
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .profile-title {
+  margin-top: var(--m-space-2xs);
+  margin-bottom: var(--m-space-m);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .cv-download-button {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--m-space-l);
+  gap: var(--m-space-xs);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .social-links {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--m-space-s);
+  margin-top: var(--m-space-l);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .social-link {
+  width: var(--m-tap-size);
+  height: var(--m-tap-size);
+}
+
+body[data-mobile-ui="true"] .sidebar-drawer .social-link:focus-visible,
+body[data-mobile-ui="true"] .project-tag:focus-visible {
+  outline: 2px solid rgba(197, 165, 107, 0.8);
+  outline-offset: 4px;
+}
+
+/* Inline close button lives inside the card so the tap target is
+   always within reach instead of hovering near the status bar. */
+.m-sidebar-close {
+  display: none;
+}
+
+body[data-mobile-ui="true"] .premium-sidebar-card .m-sidebar-close {
+  display: flex;
+  position: absolute;
+  top: var(--m-space-m);
+  right: var(--m-space-m);
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(10, 16, 14, 0.85), rgba(0, 0, 0, 0.65));
+  border: 1px solid rgba(197, 165, 107, 0.45);
+  border-radius: 50%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  color: var(--gold);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
+}
+
+body[data-mobile-ui="true"] .premium-sidebar-card .m-sidebar-close:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Corner buttons toggle profile + theme. They stay fixed to mimic
+   native floating action buttons. */
+body[data-mobile-ui="true"] .m-corner-btn {
+  display: flex;
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + var(--m-space-m));
+  width: var(--m-corner-btn-size);
+  height: var(--m-corner-btn-size);
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--house-glass-3), var(--house-glass-4));
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(197, 165, 107, 0.35);
+  border-radius: 50%;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 22px var(--house-glow-5, rgba(126, 186, 148, 0.25));
+  color: var(--m-color-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  z-index: 200;
+  transition: all 200ms ease;
+  touch-action: manipulation;
+}
+
+/* Hide corner buttons when sidebar is open on mobile */
+body[data-mobile-ui="true"].sidebar-open .m-corner-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body[data-mobile-ui="true"] .m-corner-btn:focus-visible,
+body[data-mobile-ui="true"] .premium-sidebar-card .m-sidebar-close:focus-visible {
+  outline: 2px solid rgba(197, 165, 107, 0.6);
+  outline-offset: 4px;
+}
+
+/* Hide tab bar when sidebar is open on mobile */
+body[data-mobile-ui="true"].sidebar-open .m-app__tabbar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body[data-mobile-ui="true"] .m-corner-btn--left {
+  left: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .m-corner-btn--right {
+  right: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .m-corner-btn:active {
+  transform: scale(0.95);
+  background: linear-gradient(135deg, var(--house-glass-4), rgba(0, 0, 0, 0.7));
+}
+
+body[data-mobile-ui="true"] .m-corner-btn i {
+  transition: transform 180ms ease, filter 200ms ease, color 200ms ease;
+}
+
+body[data-mobile-ui="true"] .m-corner-btn:active i {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(197, 165, 107, 0.4));
+}
+
+body[data-mobile-ui="true"] .m-corner-btn--right {
+  transition: all 180ms ease, transform 300ms ease;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar {
+  display: grid;
+  position: fixed;
+  left: var(--m-space-s);
+  right: var(--m-space-s);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--m-space-m));
+  height: var(--m-tab-bar-height);
+  padding: var(--m-space-xs) var(--m-space-s);
+  border-radius: var(--m-radius-l);
+  border: 1px solid rgba(197, 165, 107, 0.18);
+  background: linear-gradient(135deg, var(--house-glass-3), var(--house-glass-4));
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.45),
+    0 0 22px var(--house-glow-5, rgba(126, 186, 148, 0.28));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  gap: var(--m-space-s);
+  z-index: 200;
+  overflow: hidden;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.08), transparent 45%);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button {
+  min-height: var(--m-tap-size);
+  border: none;
+  position: relative;
+  background: transparent;
+  color: var(--m-color-text-muted);
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  border-radius: var(--m-radius-m);
+  transition: all 200ms ease;
+  cursor: pointer;
+  padding: 15px 4px 6px;
+  touch-action: manipulation;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button[data-role="featured"] {
+  padding: var(--m-space-xs);
+  border-radius: var(--m-radius-l);
+  background: linear-gradient(135deg, var(--house-glass-3, rgba(24, 32, 29, 0.95)), var(--house-glass-4, rgba(10, 16, 14, 0.9)));
+  box-shadow: var(--m-shadow-float);
+  color: var(--m-color-text);
+  transform: translateY(-6px);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button[data-role="featured"] i {
+  width: 48px;
+  height: 48px;
+  font-size: 1.35rem;
+  background: linear-gradient(135deg, var(--house-ui-bg-1, rgba(10, 16, 14, 0.9)), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(197, 165, 107, 0.45);
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(197, 165, 107, 0.35);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button i {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--house-ui-bg-1), rgba(0, 0, 0, 0.6));
+  border: 1px solid rgba(197, 165, 107, 0.12);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button .m-tab__chip {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  min-width: 22px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(197, 165, 107, 0.18);
+  border: 1px solid rgba(197, 165, 107, 0.35);
+  color: var(--m-color-primary);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button .m-tab__badge {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 10px);
+  transform: translate(-50%, -40%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--m-color-primary);
+  color: rgba(6, 10, 8, 0.9);
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button .m-tab__progress {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button .m-tab__progress span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button .m-tab__progress span.is-active {
+  background: var(--m-color-primary);
+  box-shadow: 0 0 8px rgba(197, 165, 107, 0.7);
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button span {
+  font-size: 0.72rem;
+  font-weight: 500;
+  margin-top: 0;
+  padding-bottom: 12px;
+  letter-spacing: 0.04em;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button:active,
+body[data-mobile-ui="true"] .m-app__tabbar button.active {
+  color: var(--m-color-primary);
+  background: transparent;
+  box-shadow: none;
+  transform: translateY(-1px);
+  animation: m-tab-lift 250ms ease;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button:focus-visible {
+  outline: 2px solid rgba(197, 165, 107, 0.6);
+  outline-offset: 4px;
+}
+
+body[data-mobile-ui="true"] .m-app__tabbar button:active i,
+body[data-mobile-ui="true"] .m-app__tabbar button.active i {
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.25), rgba(197, 165, 107, 0.12));
+  border-color: rgba(197, 165, 107, 0.6);
+  box-shadow:
+    0 0 12px rgba(197, 165, 107, 0.45),
+    inset 0 0 10px rgba(197, 165, 107, 0.2);
+}
+
+@keyframes m-tab-lift {
+  0% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(-1px);
+  }
+}
+
+body[data-mobile-ui="true"] .m-card {
+  background: var(--m-color-surface);
+  border-radius: var(--m-radius-l);
+  padding: var(--m-space-l);
+  box-shadow: var(--m-shadow-card);
+  border: 1px solid var(--m-color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-space-s);
+  color: var(--m-color-text);
+}
+
+body[data-mobile-ui="true"] .m-card p {
+  color: var(--m-color-text-muted);
+  line-height: 1.5;
+}
+
+/* Mobile Section Adaptations */
+/* =================================================================
+   HERO + CTA STACK
+   Tightens headline scale and stacks CTAs vertically while the
+   background art remains immersive.
+   ================================================================= */
+body[data-mobile-ui="true"] .hero {
+  min-height: 100vh;
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--m-space-xl));
+  padding-bottom: calc(var(--m-tab-bar-height) + env(safe-area-inset-bottom, 0px) + var(--m-space-l));
+}
+
+body[data-mobile-ui="true"] .hero::before {
+  background:
+    var(--bg-hero) center/cover no-repeat;
+}
+
+body[data-mobile-ui="true"] .hero-serpent {
+  display: none;
+}
+
+body[data-mobile-ui="true"] .content-section {
+  padding: var(--m-space-l) var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .section-title {
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+}
+
+body[data-mobile-ui="true"] .section-subtitle {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Hero Section Mobile */
+body[data-mobile-ui="true"] .hero-title {
+  font-size: 2.4rem;
+  line-height: 1.15;
+  max-width: 90%;
+}
+
+body[data-mobile-ui="true"] .hero-subtitle {
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+body[data-mobile-ui="true"] .hero-tagline {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  max-width: 90%;
+}
+
+body[data-mobile-ui="true"] .hero-content {
+  padding: 0 var(--m-space-s);
+}
+
+body[data-mobile-ui="true"] .hero-ctas {
+  flex-direction: column;
+  width: 100%;
+  gap: var(--m-space-s);
+}
+
+body[data-mobile-ui="true"] .m-touch-target {
+  min-height: calc(var(--m-tap-size) + 4px);
+  padding: 0 var(--m-space-s);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body[data-mobile-ui="true"] .hero-cta {
+  width: 100%;
+  justify-content: center;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  min-height: calc(var(--m-tap-size) + 4px);
+}
+
+/* =================================================================
+   ABOUT SECTION
+   Keeps the illuminated card vibe but shrinks typography so the
+   story fits without scrolling mid-sentence.
+   ================================================================= */
+body[data-mobile-ui="true"] .about-illuminated-card {
+  padding: var(--m-space-l);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body[data-mobile-ui="true"] .about-section {
+  background:
+    radial-gradient(62% 74% at 52% 20%, var(--house-glow-3), transparent 70%),
+    linear-gradient(var(--about-overlay), var(--about-overlay)),
+    var(--bg-about) center/cover no-repeat;
+  background-blend-mode: screen, normal, normal;
+}
+
+body[data-mobile-ui="true"] .statement-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Skills Section Mobile */
+/* =================================================================
+   SKILLS SECTION
+   Vials, labels, and copy are recentred so each card feels like
+   its own trading card on narrow screens.
+   ================================================================= */
+body[data-mobile-ui="true"] .skills-grid {
+  grid-template-columns: 1fr;
+  gap: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .skills-section {
+  background:
+    radial-gradient(60% 72% at 50% 18%, var(--house-glow-4), transparent 72%),
+    linear-gradient(var(--skills-overlay), var(--skills-overlay)),
+    var(--bg-skills) center/cover no-repeat;
+  background-blend-mode: screen, normal, normal;
+  background-attachment: scroll;
+}
+
+body[data-mobile-ui="true"] .skill-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: var(--m-space-l);
+  border-radius: var(--m-radius-l);
+  border: 1px solid rgba(197, 165, 107, 0.32);
+  background: linear-gradient(135deg, var(--house-glass-1, rgba(32, 42, 38, 0.65)) 0%, var(--house-glass-2, rgba(18, 24, 22, 0.45)) 100%);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body[data-mobile-ui="true"] .skill-card .skill-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: center;
+  text-align: center;
+}
+
+body[data-mobile-ui="true"] .skill-card .skill-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: var(--m-space-s);
+}
+
+body[data-mobile-ui="true"] .skill-card .skill-icon {
+  font-size: 1.6rem;
+  color: var(--gold, #c5a56b);
+}
+
+body[data-mobile-ui="true"] .skill-card .skill-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  color: var(--gold, #c5a56b);
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+body[data-mobile-ui="true"] .skill-card .skill-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e8eae7;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  padding-top: 20px;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+body[data-mobile-ui="true"] .skill-card .potion-vial-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: -45px;
+  margin-bottom: -35px;
+  width: 100%;
+}
+
+body[data-mobile-ui="true"] .skill-card .potion-vial {
+  position: relative;
+  width: min(100%, 340px);
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-glass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25), rgba(10, 14, 12, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 6px 14px rgba(255, 255, 255, 0.32),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.55),
+    0 6px 14px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-glass::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 999px;
+  background: rgba(8, 12, 11, 0.45);
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-glass::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 10px;
+  right: 10px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.35), transparent 55%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-liquid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: calc(var(--fill-percent, 0%));
+  max-width: 100%;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg,
+      var(--potion-color-1, rgba(126, 186, 148, 0.9)) 0%,
+      var(--potion-color-2, rgba(94, 152, 121, 0.85)) 55%,
+      var(--potion-color-3, rgba(12, 59, 46, 1)) 100%);
+  box-shadow:
+    inset 0 2px 10px rgba(255, 255, 255, 0.35),
+    inset 0 -6px 14px rgba(0, 0, 0, 0.5),
+    0 0 20px var(--house-accent-light, rgba(126, 186, 148, 0.35));
+  overflow: hidden;
+  animation: mobile-liquid-glow 7s ease-in-out infinite;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-liquid::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 12px;
+  height: 6px;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0));
+  opacity: 0.65;
+  animation: mobile-surface-ripple 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-liquid::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.2) 55%,
+      transparent 90%);
+  opacity: 0.65;
+  animation: mobile-fizz-pop 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-liquid .mobile-vial-bubble {
+  position: absolute;
+  top: var(--bubble-top, 50%);
+  left: var(--bubble-left, 50%);
+  width: var(--bubble-size, 6px);
+  height: var(--bubble-size, 6px);
+  margin-top: calc(var(--bubble-size, 6px) / -2);
+  margin-left: calc(var(--bubble-size, 6px) / -2);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.65),
+      rgba(255, 255, 255, 0.05));
+  box-shadow: 0 0 8px var(--house-accent-light, rgba(126, 186, 148, 0.45));
+  mix-blend-mode: screen;
+  opacity: 0.35;
+  animation: mobile-bubble-wander var(--bubble-duration, 6.5s) ease-in-out infinite alternate;
+  animation-delay: var(--bubble-delay, 0s);
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-liquid .mobile-vial-bubble:nth-child(odd) {
+  filter: blur(0.3px);
+  opacity: 0.45;
+}
+
+body[data-mobile-ui="true"] .skill-card .vial-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--house-badge-border);
+  background: var(--house-badge-bg);
+  color: var(--gold);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+body[data-mobile-ui="true"] .skill-card .steam-particle,
+body[data-mobile-ui="true"] .skill-card .vapor-wisp,
+body[data-mobile-ui="true"] .skill-card .steam-sparkle {
+  display: none !important;
+}
+
+@keyframes mobile-liquid-glow {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+
+  50% {
+    filter: brightness(1.08) saturate(1.05);
+  }
+}
+
+@keyframes mobile-surface-ripple {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+
+  40% {
+    transform: scaleX(0.92);
+    opacity: 0.4;
+  }
+}
+
+@keyframes mobile-fizz-pop {
+  0%,
+  100% {
+    transform: scale(0.7);
+    opacity: 0.35;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  60% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+}
+
+@keyframes mobile-bubble-wander {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0);
+    opacity: 0.25;
+  }
+
+  25% {
+    transform: translate(-50%, -50%) translate(var(--bubble-drift-x1, 1px), var(--bubble-drift-y1, -2px));
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translate(var(--bubble-drift-x2, -1px), var(--bubble-drift-y2, 2px));
+    opacity: 0.55;
+  }
+
+  75% {
+    transform: translate(-50%, -50%) translate(var(--bubble-drift-x3, 2px), var(--bubble-drift-y3, -1px));
+  }
+
+  100% {
+    transform: translate(-50%, -50%) translate(var(--bubble-drift-x4, -1px), var(--bubble-drift-y4, 1px));
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-mobile-ui="true"] .skill-card .vial-liquid,
+  body[data-mobile-ui="true"] .skill-card .vial-liquid::before,
+  body[data-mobile-ui="true"] .skill-card .vial-liquid::after,
+  body[data-mobile-ui="true"] .skill-card .vial-liquid .mobile-vial-bubble {
+    animation: none !important;
+  }
+}
+
+/* Projects Section Mobile */
+/* =================================================================
+   PROJECTS SECTION
+   Single-column cards with stacked CTAs + tag grid for better tap
+   targets and quick scanning.
+   ================================================================= */
+body[data-mobile-ui="true"] .projects-grid {
+  grid-template-columns: 1fr;
+  gap: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .projects-section {
+  background:
+    radial-gradient(58% 70% at 48% 16%, var(--house-glow-5), transparent 70%),
+    linear-gradient(var(--projects-overlay), var(--projects-overlay)),
+    var(--bg-projects) center/cover no-repeat;
+  background-blend-mode: screen, normal, normal;
+}
+
+body[data-mobile-ui="true"] .project-card {
+  padding: var(--m-space-l);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body[data-mobile-ui="true"] .project-title {
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+body[data-mobile-ui="true"] .project-description {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+body[data-mobile-ui="true"] .project-tags {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--m-space-xs);
+  width: 100%;
+}
+
+body[data-mobile-ui="true"] .project-tag {
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: var(--m-radius-m);
+  border: 1px solid rgba(197, 165, 107, 0.35);
+  background: rgba(6, 12, 10, 0.55);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+body[data-mobile-ui="true"] .project-links {
+  flex-direction: column;
+  gap: var(--m-space-s);
+  width: 100%;
+}
+
+body[data-mobile-ui="true"] .project-link {
+  width: 100%;
+  justify-content: center;
+  border-radius: var(--m-radius-l);
+  padding: 0.85rem var(--m-space-l);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* Contact Form Mobile */
+
+body[data-mobile-ui="true"] .contact-section {
+  background:
+    radial-gradient(65% 55% at 50% 15%, rgba(126, 186, 148, 0.2), transparent 70%),
+    linear-gradient(var(--contact-overlay), var(--contact-overlay)),
+    var(--bg-contact) center/cover no-repeat;
+  background-blend-mode: screen, normal, normal;
+}
+
+/* =================================================================
+   CONTACT SECTION
+   Widens inputs, adds more breathing room, and keeps the owl CTA
+   grounded at the bottom.
+   ================================================================= */
+body[data-mobile-ui="true"] .form-row {
+  flex-direction: column;
+  gap: var(--m-space-s);
+}
+
+body[data-mobile-ui="true"] .contact-container {
+  padding: calc(var(--m-space-xl) + var(--m-space-m)) var(--m-space-m) var(--m-space-xl);
+  border-radius: calc(var(--m-radius-l) + 6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+body[data-mobile-ui="true"] .contact-container input,
+body[data-mobile-ui="true"] .contact-container textarea,
+body[data-mobile-ui="true"] .contact-container button {
+  min-height: calc(var(--m-tap-size) + 6px);
+  font-size: 1rem;
+}
+
+body[data-mobile-ui="true"] .contact-container form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .contact-container .form-group {
+  margin-bottom: 0;
+}
+
+body[data-mobile-ui="true"] .contact-container textarea.form-textarea {
+  min-height: 210px;
+  padding-top: 1.4rem;
+  line-height: 1.65;
+}
+
+body[data-mobile-ui="true"] .contact-container,
+body[data-mobile-ui="true"] .contact-container .form-input,
+body[data-mobile-ui="true"] .contact-container .form-textarea {
+  backdrop-filter: blur(4px);
+}
+
+body[data-mobile-ui="true"] .contact-container .char-counter {
+  font-size: 0.85rem;
+  margin-top: var(--m-space-2xs);
+  align-self: flex-end;
+}
+
+body[data-mobile-ui="true"] .about-illuminated-card:focus-within,
+body[data-mobile-ui="true"] .skill-card:focus-within,
+body[data-mobile-ui="true"] .project-card:focus-within,
+body[data-mobile-ui="true"] .contact-container:focus-within {
+  outline: 2px solid rgba(197, 165, 107, 0.6);
+  outline-offset: 4px;
+}
+
+body[data-mobile-ui="true"] .about-illuminated-card:active,
+body[data-mobile-ui="true"] .skill-card:active,
+body[data-mobile-ui="true"] .project-card:active,
+body[data-mobile-ui="true"] .contact-container:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer Mobile */
+/* =================================================================
+   FOOTER STACK
+   Reflows legal + contact info and leaves buffer above the tab bar
+   to prevent overlap with the persistent navigation.
+   ================================================================= */
+body[data-mobile-ui="true"] .footer {
+  padding: var(--m-space-xl) var(--m-space-m);
+  padding-bottom: calc(var(--m-tab-bar-height) + env(safe-area-inset-bottom, 0px) + var(--m-space-2xl) + 20px);
+  margin-bottom: var(--m-space-m);
+}
+
+body[data-mobile-ui="true"] .footer-grid {
+  grid-template-columns: 1fr;
+  gap: var(--m-space-l);
+  text-align: center;
+}
+
+body[data-mobile-ui="true"] .footer-brand,
+body[data-mobile-ui="true"] .footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-space-2xs);
+  align-items: center;
+}
+
+body[data-mobile-ui="true"] .footer-logo {
+  font-size: 1.2rem;
+  letter-spacing: 0.12em;
+}
+
+body[data-mobile-ui="true"] .footer-title {
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-mobile-ui="true"] .footer-tagline {
+  font-size: 0.9rem;
+  max-width: 320px;
+}
+
+body[data-mobile-ui="true"] .footer-bottom {
+  flex-direction: column;
+  gap: var(--m-space-m);
+  text-align: center;
+  width: 100%;
+  padding-top: var(--m-space-m);
+  border-top: 1px solid rgba(197, 165, 107, 0.25);
+}
+
+body[data-mobile-ui="true"] .footer-signoff {
+  width: 100%;
+  text-align: center;
+  gap: var(--m-space-2xs);
+}
+
+body[data-mobile-ui="true"] .footer-signoff__primary,
+body[data-mobile-ui="true"] .footer-signoff__crafted {
+  justify-content: center;
+}
+
+body[data-mobile-ui="true"] .footer-signoff__primary {
+  font-size: 1rem;
+}
+
+body[data-mobile-ui="true"] .footer-signoff__crafted {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+body[data-mobile-ui="true"] .footer-dot {
+  display: none;
+}
+
+body[data-mobile-ui="true"] .footer-credits {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-space-2xs);
+}
+
+/* Scroll Indicator Mobile */
+body[data-mobile-ui="true"] .scroll-indicator {
+  bottom: calc(var(--m-tab-bar-height) + env(safe-area-inset-bottom, 0px) + var(--m-space-l));
+}
+
+/* Sidebar adjustments for mobile */
+body[data-mobile-ui="true"] .sidebar-drawer.open {
+  transform: translateX(0);
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  body[data-mobile-ui="true"] *,
+  body[data-mobile-ui="true"] *::before,
+  body[data-mobile-ui="true"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

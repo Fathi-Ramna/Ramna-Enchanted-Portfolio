@@ -435,7 +435,7 @@
 /* Name - large decorative font */
 .profile-name {
     text-align: center;
-    font-family: 'Old London', 'Cinzel', 'UnifrakturMaguntia', serif;
+    font-family: 'Cinzel', 'Old London', 'UnifrakturMaguntia', serif;
     font-size: 2.3rem;
     color: var(--gold);
     text-shadow: 0 0 12px rgba(0, 0, 0, .65);

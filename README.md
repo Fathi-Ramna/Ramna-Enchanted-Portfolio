@@ -28,7 +28,7 @@ Explore all four Hogwarts house themes with full-page screenshots:
 
 **Latest improvements to the portfolio:**
 
-- **Immersive Mobile UI (`assets/css/mobile/mobile-app.css`)**  
+- **Immersive Mobile UI (`assets/css/mobile-app.css`)**  
   Introduced a bespoke “app shell” that mirrors high-end product UI:
   - Full-screen sidebar drawer with inline close button and reflowed profile card
   - Hero/About/Skills/Projects/Contact sections rebuilt with touch-friendly spacing, typography tokens, and stacked CTAs
@@ -123,7 +123,7 @@ Switch between four distinct Hogwarts house themes (Slytherin, Gryffindor, Raven
 - **HTML5** - Semantic structure and content
 - **CSS3** - Advanced styling with Flexbox, Grid, and animations
 - **Vanilla JavaScript (ES6+)** - All interactivity without external libraries
-- **Google Fonts** - Typography
+- **Self-hosted Google Fonts** - Typography
 - **Font Awesome** - Icons
 - **Icons8** - Additional icon resources
 
@@ -202,14 +202,16 @@ Follow these steps to get a local copy up and running.
 │   │   │   ├── gryffindor.css
 │   │   │   ├── ravenclaw.css
 │   │   │   └── hufflepuff.css
+│   │   ├── vendor/
+│   │   │   ├── fontawesome.min.css
+│   │   │   └── fonts.css
 │   │   ├── base.css
 │   │   ├── layout.css
 │   │   ├── sections.css
 │   │   ├── animations.css
 │   │   ├── cursor.css
 │   │   ├── responsive.css
-│   │   └── mobile/
-│   │       └── mobile-app.css   ← mobile-specific layer   
+│   │   └── mobile-app.css          ← mobile-specific layer   
 │   ├── js/
 │   │   ├── cursor.js
 │   │   ├── theme-switcher.js
@@ -240,7 +242,17 @@ Follow these steps to get a local copy up and running.
 │   │   └── wand2.png
 │   ├── fonts/
 │   │   ├── HarryPotter.ttf
-│   │   └── OFL.txt
+│   │   ├── OFL.txt
+│   │   ├── fontawesome/
+│   │   │   ├── fa-brands-400.{woff2,ttf}
+│   │   │   ├── fa-regular-400.{woff2,ttf}
+│   │   │   └── fa-solid-900.{woff2,ttf}
+│   │   └── google/
+│   │       ├── cinzel-{400,600,700}.ttf
+│   │       ├── cormorant-garamond-{400,600}.ttf
+│   │       ├── unifrakturmaguntia-400.ttf
+│   │       ├── old-london.ttf
+│   │       └── OldLondonAlternate.ttf
 │   └── files/
 │       └── Fathima_Ramna_Resume.pdf
 ├── index.html
@@ -434,7 +446,7 @@ Distributed under the MIT License. See `LICENSE` file for more information.
 ### Resources & Inspiration
 
 - **Fonts**
-  - Google Fonts for body and heading typography
+  - Locally hosted Google Fonts (Cinzel, Cormorant Garamond, UnifrakturMaguntia, Old London) for body and heading typography
   - "Harry P" font by Phoenix Phonts & GeM (licensed for free personal use)
 
 - **Icons & Graphics**

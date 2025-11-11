@@ -92,11 +92,11 @@
        Ravenclaw backgrounds feature night scenes and scholarly spaces
        ═════════════════════════════════════════════════════════════ */
 
-    --bg-hero: url('/assets/images/background/ravenclaw_common_room.png');
-    --bg-about: url('/assets/images/background/ravenclaw_scholars_private_study.png');
-    --bg-skills: url('/assets/images/background/ravenclaw_potions_classroom.png');
-    --bg-projects: url('/assets/images/background/ravenclaw_chamber_of_magical_artifacts.png');
-    --bg-contact: url('/assets/images/background/ravenclaw_the_owlery.png');
+    --bg-hero: url('../images/background/ravenclaw_common_room.png');
+    --bg-about: url('../images/background/ravenclaw_scholars_private_study.png');
+    --bg-skills: url('../images/background/ravenclaw_potions_classroom.png');
+    --bg-projects: url('../images/background/ravenclaw_chamber_of_magical_artifacts.png');
+    --bg-contact: url('../images/background/ravenclaw_the_owlery.png');
 
     /* ═════════════════════════════════════════════════════════════
        SECTION OVERLAY ADJUSTMENTS — Darkness Level Control
